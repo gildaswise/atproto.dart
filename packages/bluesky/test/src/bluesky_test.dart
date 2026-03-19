@@ -1,107 +1,151 @@
-// Copyright 2023 Shinya Kato. All rights reserved.
-// Redistribution and use in source and binary forms, with or without
-// modification, are permitted provided the conditions.
-
-// 📦 Package imports:
+// Package imports:
 import 'package:atproto/atproto.dart';
+import 'package:atproto_core/atproto_core.dart' as core;
 import 'package:test/test.dart';
 
-// 🌎 Project imports:
-import 'package:bluesky/src/actors/actors_service.dart';
+// Project imports:
+import 'package:bluesky/app_bsky_services.dart';
 import 'package:bluesky/src/bluesky.dart';
-import 'package:bluesky/src/feeds/feeds_service.dart';
-import 'package:bluesky/src/graphs/graphs_service.dart';
-import 'package:bluesky/src/notifications/notifications_service.dart';
-import 'package:bluesky/src/unspecced/unspecced_service.dart';
 
 void main() {
-  test('.actors', () {
-    final service = Bluesky.fromSession(Session(
-      did: 'aaaa',
-      handle: 'shinyakato.dev',
-      accessJwt: 'test',
-      refreshJwt: 'test',
-    )).actors;
+  group('.session', () {
+    test('fromSession', () {
+      final session = core.Session(
+        did: 'aaaa',
+        handle: 'bbbbb',
+        accessJwt: 'cccccc',
+        refreshJwt: 'ddddddd',
+      );
 
-    expect(service, isA<ActorsService>());
+      final atproto = ATProto.fromSession(session);
+
+      expect(atproto.session != null, isTrue);
+      expect(atproto.session, session);
+    });
+
+    test('anonymous', () {
+      final atproto = ATProto.anonymous();
+
+      expect(atproto.session == null, isTrue);
+    });
   });
 
-  test('.feeds', () {
-    final service = Bluesky.fromSession(Session(
-      did: 'aaaa',
-      handle: 'shinyakato.dev',
-      accessJwt: 'test',
-      refreshJwt: 'test',
-    )).feeds;
+  test('.actor', () {
+    final service = Bluesky.fromSession(
+      core.Session(
+        did: 'aaaa',
+        handle: 'shinyakato.dev',
+        accessJwt: 'test',
+        refreshJwt: 'test',
+      ),
+    ).actor;
 
-    expect(service, isA<FeedsService>());
+    expect(service, isA<ActorService>());
   });
 
-  test('.notifications', () {
-    final service = Bluesky.fromSession(Session(
-      did: 'aaaa',
-      handle: 'shinyakato.dev',
-      accessJwt: 'test',
-      refreshJwt: 'test',
-    )).notifications;
+  test('.feed', () {
+    final service = Bluesky.fromSession(
+      core.Session(
+        did: 'aaaa',
+        handle: 'shinyakato.dev',
+        accessJwt: 'test',
+        refreshJwt: 'test',
+      ),
+    ).feed;
 
-    expect(service, isA<NotificationsService>());
+    expect(service, isA<FeedService>());
   });
 
-  test('.graphs', () {
-    final service = Bluesky.fromSession(Session(
-      did: 'aaaa',
-      handle: 'shinyakato.dev',
-      accessJwt: 'test',
-      refreshJwt: 'test',
-    )).graphs;
+  test('.notification', () {
+    final service = Bluesky.fromSession(
+      core.Session(
+        did: 'aaaa',
+        handle: 'shinyakato.dev',
+        accessJwt: 'test',
+        refreshJwt: 'test',
+      ),
+    ).notification;
 
-    expect(service, isA<GraphsService>());
+    expect(service, isA<NotificationService>());
+  });
+
+  test('.graph', () {
+    final service = Bluesky.fromSession(
+      core.Session(
+        did: 'aaaa',
+        handle: 'shinyakato.dev',
+        accessJwt: 'test',
+        refreshJwt: 'test',
+      ),
+    ).graph;
+
+    expect(service, isA<GraphService>());
   });
 
   test('.unspecced', () {
-    final service = Bluesky.fromSession(Session(
-      did: 'aaaa',
-      handle: 'shinyakato.dev',
-      accessJwt: 'test',
-      refreshJwt: 'test',
-    )).unspecced;
+    final service = Bluesky.fromSession(
+      core.Session(
+        did: 'aaaa',
+        handle: 'shinyakato.dev',
+        accessJwt: 'test',
+        refreshJwt: 'test',
+      ),
+    ).unspecced;
 
     expect(service, isA<UnspeccedService>());
   });
 
-  test('.servers', () {
-    final service = Bluesky.anonymous().servers;
+  test('.bookmark', () {
+    final service = Bluesky.fromSession(
+      core.Session(
+        did: 'aaaa',
+        handle: 'shinyakato.dev',
+        accessJwt: 'test',
+        refreshJwt: 'test',
+      ),
+    ).bookmark;
 
-    expect(service, isA<ServersService>());
+    expect(service, isA<BookmarkService>());
   });
 
-  test('.identities', () {
-    final service = Bluesky.anonymous().identities;
+  test('.video', () {
+    final service = Bluesky.fromSession(
+      core.Session(
+        did: 'aaaa',
+        handle: 'shinyakato.dev',
+        accessJwt: 'test',
+        refreshJwt: 'test',
+      ),
+    ).video;
 
-    expect(service, isA<IdentitiesService>());
+    expect(service, isA<VideoService>());
   });
 
-  test('.repositories', () {
-    final service = Bluesky.anonymous().repositories;
+  group('.service', () {
+    test('case1', () {
+      final atproto = ATProto.anonymous();
 
-    expect(service, isA<RepositoriesService>());
+      expect(atproto.service, 'bsky.social');
+    });
+
+    test('case2', () {
+      final atproto = ATProto.anonymous(service: 'syu.is');
+
+      expect(atproto.service, 'syu.is');
+    });
   });
 
-  test('.moderation', () {
-    final service = Bluesky.fromSession(Session(
-      did: 'aaaa',
-      handle: 'shinyakato.dev',
-      accessJwt: 'test',
-      refreshJwt: 'test',
-    )).moderation;
+  group('.relayService', () {
+    test('case1', () {
+      final atproto = ATProto.anonymous();
 
-    expect(service, isA<ModerationService>());
-  });
+      expect(atproto.relayService, 'bsky.network');
+    });
 
-  test('.sync', () {
-    final service = Bluesky.anonymous().sync;
+    test('case2', () {
+      final atproto = ATProto.anonymous(relayService: 'bgs.syu.is');
 
-    expect(service, isA<SyncService>());
+      expect(atproto.relayService, 'bgs.syu.is');
+    });
   });
 }

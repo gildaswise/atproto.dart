@@ -1,71 +1,43 @@
-// Copyright 2023 Shinya Kato. All rights reserved.
-// Redistribution and use in source and binary forms, with or without
-// modification, are permitted provided the conditions.
+// Copyright (c) 2023-2025, Shinya Kato.
+// All rights reserved. Use of this source code is governed by a
+// BSD-style license that can be found in the LICENSE file.
 
-// 📦 Package imports:
-import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:xrpc/xrpc.dart';
-
-// 🌎 Project imports:
+// Project imports:
 import '../api/find_did.dart' as api;
 import 'byte_indices.dart';
 import 'facetable.dart';
 
-part 'entity.freezed.dart';
-part 'entity.g.dart';
+final class Entity implements Facetable {
+  final EntityType type;
+  final String value;
 
-@freezed
-class Entity with _$Entity implements Facetable {
-  // ignore: unused_element
-  const Entity._();
+  @override
+  final ByteIndices indices;
 
-  const factory Entity({
-    required EntityType type,
-    required String value,
-    required ByteIndices indices,
-  }) = _Entity;
-
-  factory Entity.fromJson(Map<String, Object?> json) => _$EntityFromJson(json);
+  const Entity({
+    required this.type,
+    required this.value,
+    required this.indices,
+  });
 
   /// Returns the facet representation of this entity as JSON.
-  ///
-  /// - [ignoreInvalidHandle]: If true, processing continues even if an invalid
-  ///                          handle is detected, and data from the invalid
-  ///                          handle is excluded from the result. If false, an
-  ///                          `InvalidRequestException` is thrown when an
-  ///                          invalid handle is detected.
-  Future<Map<String, dynamic>> toFacet({
-    bool ignoreInvalidHandle = true,
-  }) async {
+  Future<Map<String, dynamic>> toFacet({String? service}) async {
     final facet = <String, dynamic>{
-      'index': {
-        'byteStart': indices.start,
-        'byteEnd': indices.end,
-      },
-      'features': []
+      'index': {'byteStart': indices.start, 'byteEnd': indices.end},
+      'features': [],
     };
 
     switch (type) {
       case EntityType.handle:
         try {
-          final did = await api.findDID(
-            handle: value.substring(1),
-          );
+          final did = await api.findDID(handle: value, service: service);
 
           facet['features'].add({
             '\$type': 'app.bsky.richtext.facet#mention',
             'did': did.data['did'],
           });
-        } on InvalidRequestException {
-          //! Invalid handle.
-          if (ignoreInvalidHandle) {
-            return {};
-          }
-
-          rethrow;
-        } on Exception {
-          //! Network error or server error.
-          rethrow;
+        } catch (_) {
+          return {};
         }
 
         break;
@@ -76,6 +48,18 @@ class Entity with _$Entity implements Facetable {
         });
 
         break;
+      case EntityType.tag:
+        facet['features'].add({
+          '\$type': 'app.bsky.richtext.facet#tag',
+          'tag': value,
+        });
+
+        break;
+      case EntityType.markdownLink:
+        //* Raw markdown links don't generate facets.
+        //* The markdown is converted to `EntityType.link` when
+        //* `Formatter.format()` is executed.
+        return {};
     }
 
     return facet;
@@ -86,9 +70,9 @@ class Entity with _$Entity implements Facetable {
 
   /// Returns true if this entity is link, otherwise false.
   bool get isLink => type == EntityType.link;
+
+  /// Returns true if this entity is tag, otherwise false.
+  bool get isTag => type == EntityType.tag;
 }
 
-enum EntityType {
-  handle,
-  link,
-}
+enum EntityType { handle, link, markdownLink, tag }

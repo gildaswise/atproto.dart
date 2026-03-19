@@ -1,182 +1,331 @@
 <p align="center">
   <a href="https://github.com/myConsciousness/atproto.dart">
-    <img alt="bluesky" width="600px" src="https://raw.githubusercontent.com/myConsciousness/atproto.dart/main/resources/brands/atproto.003.png">
+    <img alt="bluesky" width="50%" height="auto" src="https://raw.githubusercontent.com/myConsciousness/atproto.dart/main/resources/pkg_logo.png">
   </a>
 </p>
 
 <p align="center">
-  <b>The Most Famous and Powerful Dart/Flutter Library for Bluesky Social 🎯</b>
+  <b>Complete Bluesky Social client library for Dart and Flutter</b>
 </p>
 
----
-
-[![GitHub Sponsor](https://img.shields.io/static/v1?label=Sponsor&message=%E2%9D%A4&logo=GitHub&color=ff69b4)](https://github.com/sponsors/myConsciousness)
-[![GitHub Sponsor](https://img.shields.io/static/v1?label=Maintainer&message=myConsciousness&logo=GitHub&color=00acee)](https://github.com/myConsciousness)
-
-[![pub package](https://img.shields.io/pub/v/bluesky.svg?logo=dart&logoColor=00b9fc)](https://pub.dartlang.org/packages/bluesky)
-[![Dart SDK Version](https://badgen.net/pub/sdk-version/bluesky)](https://pub.dev/packages/bluesky/)
-[![Test/Analyzer](https://github.com/myConsciousness/atproto.dart/actions/workflows/cicd.yml/badge.svg)](https://github.com/myConsciousness/atproto.dart/actions/workflows/cicd.yml)
-[![codecov](https://codecov.io/gh/myConsciousness/atproto.dart/branch/main/graph/badge.svg?token=J5GT1PF9Y3)](https://codecov.io/gh/myConsciousness/atproto.dart)
-[![Issues](https://img.shields.io/github/issues/myConsciousness/atproto.dart?logo=github&logoColor=white)](https://github.com/myConsciousness/atproto.dart/issues)
-[![Pull Requests](https://img.shields.io/github/issues-pr/myConsciousness/atproto.dart?logo=github&logoColor=white)](https://github.com/myConsciousness/atproto.dart/pulls)
-[![Stars](https://img.shields.io/github/stars/myConsciousness/atproto.dart?logo=github&logoColor=white)](https://github.com/myConsciousness/atproto.dart)
-[![Contributors](https://img.shields.io/github/contributors/myConsciousness/atproto.dart)](https://github.com/myConsciousness/atproto.dart/graphs/contributors)
-[![Last Commits](https://img.shields.io/github/last-commit/myConsciousness/atproto.dart?logo=git&logoColor=white)](https://github.com/myConsciousness/atproto.dart/commits/main)
-[![License](https://img.shields.io/github/license/myConsciousness/atproto.dart?logo=open-source-initiative&logoColor=green)](https://github.com/myConsciousness/atproto.dart/blob/main/LICENSE)
-[![Contributor Covenant](https://img.shields.io/badge/Contributor%20Covenant-2.1-4baaaa.svg)](https://github.com/myConsciousness/atproto.dart/blob/main/CODE_OF_CONDUCT.md)
-
----
-
 <!-- TOC -->
-
 - [1. Guide 🌎](#1-guide-)
   - [1.1. Features ⭐](#11-features-)
   - [1.2. Getting Started 💪](#12-getting-started-)
+    - [1.2.1. Install Library](#121-install-library)
+    - [1.2.2. Import](#122-import)
+    - [1.2.3. Implementation](#123-implementation)
   - [1.3. Supported Endpoints 👀](#13-supported-endpoints-)
   - [1.4. More Tips 🏄](#14-more-tips-)
-  - [1.5. Contribution 🏆](#15-contribution-)
-  - [1.6. Support ❤️](#16-support-️)
-  - [1.7. License 🔑](#17-license-)
-  - [1.8. More Information 🧐](#18-more-information-)
-
 <!-- /TOC -->
 
 # 1. Guide 🌎
 
-This library provides **the most productive way** to use the **_AT Protocol API_** and **_Bluesky API_** in Dart/Flutter apps.
+The `bluesky` package provides a comprehensive client library specifically designed for Bluesky Social, built on top of the AT Protocol. It combines full AT Protocol functionality with Bluesky-specific features, offering the most complete solution for building Bluesky applications.
 
-The library is **cross-platform** and is **already used in many applications**. See **[official showcase](https://atprotodart.com/showcase)** for more details.
+This package extends the `atproto` package with Bluesky-specific services including social feeds, notifications, user profiles, and chat functionality. It provides high-level abstractions for common Bluesky operations while maintaining access to all underlying AT Protocol features.
 
-**_Give a ⭐ on [GitHub repository](https://github.com/myConsciousness/atproto.dart) to activate this project!_**
+Use this package when building applications specifically for Bluesky Social. For general AT Protocol development or other AT Protocol services, consider using the `atproto` package directly. The `bluesky` package includes everything from `atproto` plus Bluesky-specific enhancements.
 
-![github_star](https://github.com/myConsciousness/atproto.dart/assets/13072231/c4a9b0b9-6ea4-42f1-823b-3b9e7cdb8b04)
-
-- **[Official Documents](https://atprotodart.com/docs/packages/bluesky)**
-- **[GitHub Repository](https://github.com/myConsciousness/atproto.dart)**
+- **[More Documents](https://atprotodart.com/docs/packages/bluesky)**
 
 ## 1.1. Features ⭐
 
-- ✅ **Zero Dependency**
-- ✅ Supports **Powerful Built-In Retry** using **[Exponential BackOff And Jitter](https://aws.amazon.com/jp/blogs/architecture/exponential-backoff-and-jitter/)**
-- ✅ Supports **[All Major Endpoints](https://atprotodart.com/docs/api_support_matrix#bluesky)** for [`app.bsky.*`](https://github.com/bluesky-social/atproto/tree/main/lexicons/app/bsky)
-- ✅ **Well Documented** and **Well Tested**
-- ✅ Supports **Powerful Firehose API**
-- ✅ **100% Null Safety**
-- ✅ **Built In [atproto](https://pub.dev/packages/atproto) Features**
+- **Complete Bluesky API Coverage** - Full support for `app.bsky.*` and `chat.bsky.*` endpoints  
+- **Social Feed Management** - Timeline, posts, likes, reposts, and feed algorithms  
+- **User Profiles & Social Graph** - Profile management, follows, blocks, and mutes  
+- **Real-time Notifications** - Push notifications and notification management  
+- **Chat & Messaging** - Direct messages and conversation management  
+- **Content Moderation** - Advanced moderation tools and content filtering  
+- **Ozone Moderation Tools** - Complete `tools.ozone.*` API for administrative operations  
+- **Media Support** - Image, video, and blob upload with processing  
+- **Built-in AT Protocol** - Includes all `atproto` package functionality  
+- **Advanced Authentication** - Session management and OAuth DPoP support  
+- **Cross-platform Ready** - Works with Dart, Flutter, and server applications
 
 ## 1.2. Getting Started 💪
 
-See **[example](https://github.com/myConsciousness/atproto.dart/blob/main/packages/bluesky/example/example.dart)** or **[official documents](https://atprotodart.com/docs/packages/bluesky)** from following links.
+### 1.2.1. Install Library
 
-- **[Install](https://atprotodart.com/docs/packages/bluesky/#install)**
-- **[Import](https://atprotodart.com/docs/packages/bluesky/#import)**
-- **[Instantiate `Bluesky`](https://atprotodart.com/docs/packages/bluesky/#instantiate-bluesky)**
-- **[Supported Services](https://atprotodart.com/docs/packages/bluesky/#supported-services)**
-- **[Let's Implement](https://atprotodart.com/docs/packages/bluesky/#lets-implement)**
+**With Dart:**
+
+```bash
+dart pub add bluesky
+```
+
+**Or With Flutter:**
+
+```bash
+flutter pub add bluesky
+```
+
+### 1.2.2. Import
+
+```dart
+import 'package:bluesky/bluesky.dart';
+```
+
+**For Ozone moderation tools:**
+
+```dart
+import 'package:bluesky/ozone.dart';
+```
+
+### 1.2.3. Implementation
+
+#### Basic Authentication and Setup
+
+```dart
+import 'package:bluesky/atproto.dart';
+import 'package:bluesky/bluesky.dart';
+import 'package:bluesky/core.dart';
+
+Future<void> main(List<String> args) async {
+  // Create a session with your Bluesky credentials
+  final session = await createSession(
+    service: 'bsky.social',
+    identifier: 'your.handle.bsky.social',
+    password: 'your-app-password',
+  );
+
+  // Initialize the Bluesky client
+  final bsky = Bluesky.fromSession(
+    session.data,
+    retryConfig: RetryConfig(
+      maxAttempts: 3,
+      jitter: Jitter(minInSeconds: 1, maxInSeconds: 3),
+    ),
+  );
+}
+```
+
+#### Social Feed Operations
+
+```dart
+import 'dart:io';
+
+import 'package:bluesky/app_bsky_embed_images.dart';
+import 'package:bluesky/app_bsky_feed_post.dart';
+import 'package:bluesky/atproto.dart';
+import 'package:bluesky/bluesky.dart';
+import 'package:bluesky/com_atproto_repo_strongref.dart';
+
+Future<void> main(List<String> args) async {
+  // Create a session with your Bluesky credentials
+  final session = await createSession(
+    service: 'bsky.social',
+    identifier: 'your.handle.bsky.social',
+    password: 'your-app-password',
+  );
+
+  // Initialize the Bluesky client
+  final bsky = Bluesky.fromSession(session.data);
+
+  // Get your home timeline
+  final timeline = await bsky.feed.getTimeline(limit: 50);
+
+  // Create a post
+  await bsky.feed.post.create(text: 'Hello Bluesky!');
+
+  // Create a post with media
+  final image = File('./cool_path.jpg').readAsBytesSync();
+  final imageBlob = await bsky.atproto.repo.uploadBlob(bytes: image);
+
+  final post = await bsky.feed.post.create(
+    text: 'Check out this image!',
+    embed: UFeedPostEmbed.embedImages(
+      data: EmbedImages(
+        images: [EmbedImagesImage(image: imageBlob.data.blob, alt: 'My image')],
+      ),
+    ),
+  );
+
+  // Like a post
+  await bsky.feed.like.create(
+    subject: RepoStrongRef(uri: post.data.uri, cid: post.data.cid),
+  );
+}
+```
+
+#### User Profiles and Social Graph
+
+```dart
+import 'package:bluesky/app_bsky_actor_defs.dart';
+import 'package:bluesky/atproto.dart';
+import 'package:bluesky/bluesky.dart';
+
+Future<void> main(List<String> args) async {
+  // Create a session with your Bluesky credentials
+  final session = await createSession(
+    service: 'bsky.social',
+    identifier: 'your.handle.bsky.social',
+    password: 'your-app-password',
+  );
+
+  // Initialize the Bluesky client
+  final bsky = Bluesky.fromSession(session.data);
+
+  // Get user profile
+  final profile = await bsky.actor.getProfile(actor: 'user.bsky.social');
+
+  // Follow a user
+  await bsky.graph.follow.create(subject: 'did:plc:example123');
+
+  // Get followers
+  final followers = await bsky.graph.getFollowers(
+    actor: 'user.bsky.social',
+    limit: 100,
+  );
+
+  // Update your profile
+  await bsky.actor.putPreferences(
+    preferences: [
+      UPreferences.adultContentPref(data: AdultContentPref(enabled: false)),
+    ],
+  );
+}
+```
+
+#### Chat and Messaging
+
+```dart
+import 'package:bluesky/atproto.dart';
+import 'package:bluesky/bluesky_chat.dart';
+import 'package:bluesky/chat_bsky_convo_defs.dart';
+
+Future<void> main(List<String> args) async {
+  // Create a session with your Bluesky credentials
+  final session = await createSession(
+    service: 'bsky.social',
+    identifier: 'your.handle.bsky.social',
+    password: 'your-app-password',
+  );
+
+  // Initialize chat client
+  final chat = BlueskyChat.fromSession(session.data);
+
+  // List conversations
+  final conversations = await chat.convo.listConvos();
+
+  // Send a message
+  await chat.convo.sendMessage(
+    convoId: 'conversation-id',
+    message: MessageInput(text: 'Hello there!'),
+  );
+}
+```
+
+#### Ozone Moderation Tools
+
+```dart
+import 'package:bluesky/atproto.dart';
+import 'package:bluesky/ozone.dart';
+
+Future<void> main(List<String> args) async {
+  // Create a session with your Bluesky credentials
+  final session = await createSession(
+    service: 'bsky.social',
+    identifier: 'your.handle.bsky.social',
+    password: 'your-app-password',
+  );
+
+  // Initialize Ozone client for moderation tools
+  final ozone = OzoneTool.fromSession(session.data);
+
+  // Query moderation events
+  final events = await ozone.moderation.queryEvents(limit: 50);
+
+  // Get moderation subjects
+  final subjects = await ozone.moderation.getSubjects();
+
+  // Access team management
+  final teamMembers = await ozone.team.listMembers();
+
+  // Server configuration
+  final serverConfig = await ozone.server.getConfig();
+}
+```
 
 ## 1.3. Supported Endpoints 👀
 
-See **[official documents](https://atprotodart.com/docs/api_support_matrix)** from following links.
+The `bluesky` package provides comprehensive coverage of both AT Protocol and Bluesky-specific services:
 
-- **[com.atproto.*](https://atprotodart.com/docs/api_support_matrix#atproto)**
-  - **[com.atproto.server.*](https://atprotodart.com/docs/api_support_matrix#servers-service)**
-  - **[com.atproto.identity.*](https://atprotodart.com/docs/api_support_matrix#servers-service)**
-  - **[com.atproto.repo.*](https://atprotodart.com/docs/api_support_matrix#repository-service)**
-  - **[com.atproto.moderation.*](https://atprotodart.com/docs/api_support_matrix#moderation-service)**
-  - **[com.atproto.sync.*](https://atprotodart.com/docs/api_support_matrix#sync-service)**
-- **[app.bsky.*](https://atprotodart.com/docs/api_support_matrix#bluesky)**
-  - **[app.bsky.actor.*](https://atprotodart.com/docs/api_support_matrix#actors-service)**
-  - **[app.bsky.feed.*](https://atprotodart.com/docs/api_support_matrix#feeds-service)**
-  - **[app.bsky.notification.*](https://atprotodart.com/docs/api_support_matrix#notifications-service)**
-  - **[app.bsky.graph.*](https://atprotodart.com/docs/api_support_matrix#graphs-service)**
-  - **[app.bsky.unspecced.*](https://atprotodart.com/docs/api_support_matrix#unspecced-service)**
+### Bluesky Social Services (`app.bsky.*`)
+
+#### Actor Service (`app.bsky.actor.*`)
+- **Profile Management** - Get and update user profiles, preferences, and settings
+- **Search** - Search for users and actors across the network
+
+#### Feed Service (`app.bsky.feed.*`)
+- **Timeline Operations** - Home timeline, author feeds, and custom algorithms
+- **Post Management** - Create, delete, and interact with posts
+- **Social Interactions** - Likes, reposts, and post threading
+- **Feed Generators** - Custom feed algorithms and discovery
+
+#### Graph Service (`app.bsky.graph.*`)
+- **Social Connections** - Follow, unfollow, block, and mute operations
+- **Relationship Queries** - Get followers, following, and relationship status
+- **List Management** - Create and manage user lists
+
+#### Notification Service (`app.bsky.notification.*`)
+- **Notification Management** - List, mark read, and manage notifications
+- **Push Notifications** - Register and manage push notification preferences
+
+#### Video Service (`app.bsky.video.*`)
+- **Video Upload** - Upload and process video content
+- **Video Management** - Manage video assets and metadata
+
+#### Labeler Service (`app.bsky.labeler.*`)
+- **Content Labeling** - Apply and manage content labels
+- **Moderation Integration** - Work with moderation services
+
+### Chat Services (`chat.bsky.*`)
+
+#### Conversation Service (`chat.bsky.convo.*`)
+- **Message Management** - Send, receive, and manage messages
+- **Conversation Operations** - Create, list, and manage conversations
+- **Chat Moderation** - Report and moderate chat content
+
+### Ozone Moderation Services (`tools.ozone.*`)
+
+#### Communication Service (`tools.ozone.communication.*`)
+- **Communication Management** - Handle moderation communications and templates
+
+#### Hosting Service (`tools.ozone.hosting.*`)
+- **Hosting Operations** - Manage hosting configurations and settings
+
+#### Moderation Service (`tools.ozone.moderation.*`)
+- **Event Management** - Query and manage moderation events
+- **Subject Operations** - Handle moderation subjects and actions
+- **Reporter Statistics** - Access reporting metrics and analytics
+
+#### Server Service (`tools.ozone.server.*`)
+- **Server Configuration** - Manage server settings and configurations
+- **Administrative Tools** - Server administration and monitoring
+
+#### Team Service (`tools.ozone.team.*`)
+- **Team Management** - Manage moderation team members and roles
+- **Permission Control** - Handle team permissions and access levels
+
+#### Additional Ozone Services
+- **Safelink Service** - URL safety and link verification
+- **Set Service** - Manage moderation rule sets and configurations
+- **Setting Service** - Administrative settings and preferences
+- **Signature Service** - Digital signatures and verification
+- **Verification Service** - Identity and content verification
+
+### AT Protocol Services (Inherited from `atproto`)
+
+All AT Protocol services from the `atproto` package are included:
+- **Server Service** - Session and account management
+- **Identity Service** - Handle and DID operations  
+- **Repository Service** - Record and data management
+- **Sync Service** - Real-time data synchronization
+- **Moderation Service** - Content reporting and moderation
+- **Label Service** - Content labeling and metadata
+
+**[Complete API Reference](https://atprotodart.com/docs/supported_api)**
 
 ## 1.4. More Tips 🏄
 
-See **[official documents](https://atprotodart.com/docs/packages/bluesky)** from following links.
-
-- **[Session Management](https://atprotodart.com/docs/packages/bluesky#session-management)**
-- **[App Password](https://atprotodart.com/docs/packages/bluesky#app-password)**
-- **[Standardized Names](https://atprotodart.com/docs/packages/bluesky#standardized-names)**
-- **[Other Than `bsky.social`](https://atprotodart.com/docs/packages/bluesky#other-than-bskysocial)**
-- **[De/Serialize](https://atprotodart.com/docs/packages/bluesky#deserialize)**
-- **[Thrown Exceptions](https://atprotodart.com/docs/packages/bluesky/#thrown-exceptions)**
-- **[Rate Limits](https://atprotodart.com/docs/packages/bluesky/#rate-limits)**
-- **[Union Types](https://atprotodart.com/docs/packages/bluesky/#union-types)**
-- **[Firehose API](https://atprotodart.com/docs/packages/bluesky/#firehose-api)**
-- **[Timeout Duration](https://atprotodart.com/docs/packages/bluesky/#timeout-duration)**
-- **[Advanced Built-In Retry](https://atprotodart.com/docs/packages/bluesky/#advanced-built-in-retry)**
-- **[Lexicon/Object IDs](https://atprotodart.com/docs/packages/bluesky/#lexiconobject-ids)**
-- **[Pagination](https://atprotodart.com/docs/packages/bluesky/#pagination)**
-- **[Advanced Pagination](https://atprotodart.com/docs/packages/bluesky/#advanced-pagination)**
-- **[Unspecced Inputs](https://atprotodart.com/docs/packages/bluesky/#unspecced-inputs)**
-
-## 1.5. Contribution 🏆
-
-If you would like to contribute to **bluesky**, please create an [issue](https://github.com/myConsciousness/atproto.dart/issues) or create a Pull Request.
-
-There are many ways to contribute to the OSS. For example, the following subjects can be considered:
-
-- There are request parameters or response fields that are not implemented.
-- Documentation is outdated or incomplete.
-- Have a better way or idea to achieve the functionality.
-- etc...
-
-You can see more details from resources below:
-
-- [Contributor Covenant Code of Conduct](https://github.com/myConsciousness/atproto.dart/blob/main/CODE_OF_CONDUCT.md)
-- [Contribution Guidelines](https://github.com/myConsciousness/atproto.dart/blob/main/CONTRIBUTING.md)
-- [Style Guide](https://github.com/myConsciousness/atproto.dart/blob/main/STYLEGUIDE.md)
-
-Or you can create a [discussion](https://github.com/myConsciousness/atproto.dart/discussions) if you like.
-
-**Feel free to join this development, diverse opinions make software better!**
-
-## 1.6. Support ❤️
-
-The simplest way to show us your support is by **giving the project a star** at [GitHub](https://github.com/myConsciousness/atproto.dart) and [Pub.dev](https://pub.dev/packages/bluesky).
-
-You can also support this project by **becoming a sponsor** on GitHub:
-
-<div align="left">
-  <p>
-    <a href="https://github.com/sponsors/myconsciousness">
-      <img src="https://cdn.ko-fi.com/cdn/kofi3.png?v=3" height="50" width="210" alt="myconsciousness" />
-    </a>
-  </p>
-</div>
-
-You can also show on your repository that your app is made with **bluesky** by using one of the following badges:
-
-[![Powered by bluesky](https://img.shields.io/badge/Powered%20by-bluesky-00acee.svg)](https://github.com/myConsciousness/atproto.dart)
-[![Powered by bluesky](https://img.shields.io/badge/Powered%20by-bluesky-00acee.svg?style=flat-square)](https://github.com/myConsciousness/atproto.dart)
-[![Powered by bluesky](https://img.shields.io/badge/Powered%20by-bluesky-00acee.svg?style=for-the-badge)](https://github.com/myConsciousness/atproto.dart)
-
-```license
-[![Powered by bluesky](https://img.shields.io/badge/Powered%20by-bluesky-00acee.svg)](https://github.com/myConsciousness/atproto.dart)
-[![Powered by bluesky](https://img.shields.io/badge/Powered%20by-bluesky-00acee.svg?style=flat-square)](https://github.com/myConsciousness/atproto.dart)
-[![Powered by bluesky](https://img.shields.io/badge/Powered%20by-bluesky-00acee.svg?style=for-the-badge)](https://github.com/myConsciousness/atproto.dart)
-```
-
-## 1.7. License 🔑
-
-All resources of **bluesky** is provided under the `BSD-3` license.
-
-```license
-Copyright 2023 Shinya Kato. All rights reserved.
-Redistribution and use in source and binary forms, with or without
-modification, are permitted provided the conditions.
-```
-
-> **Note**</br>
-> License notices in the source are strictly validated based on `.github/header-checker-lint.yml`. Please check [header-checker-lint.yml](https://github.com/myConsciousness/atproto.dart/tree/main/.github/header-checker-lint.yml) for the permitted standards.
-
-## 1.8. More Information 🧐
-
-**bluesky** was designed and implemented by **_Shinya Kato ([@myConsciousness](https://github.com/myConsciousness))_**.
-
-- [Creator Profile](https://github.com/myConsciousness)
-- [License](https://github.com/myConsciousness/atproto.dart/blob/main/LICENSE)
-- [API Document](https://pub.dev/documentation/bluesky/latest/bluesky/bluesky-library.html)
-- [Release Note](https://github.com/myConsciousness/atproto.dart/releases)
-- [Bug Report](https://github.com/myConsciousness/atproto.dart/issues)
+- **[Guide](https://atprotodart.com/docs/packages/bluesky/)**

@@ -6,9 +6,31 @@ const darkCodeTheme = require("prism-react-renderer/themes/dracula");
 
 /** @type {import('@docusaurus/types').Config} */
 const config = {
-  title: "atproto.dart",
-  tagline: "AT Protocol and Bluesky Social Things for Dart and Flutter",
+  title: "atproto.dart - AT Protocol SDK for Flutter & Dart",
+  tagline: "Build decentralized social apps with type-safe AT Protocol APIs",
   favicon: "img/favicon.ico",
+
+  // Custom fields for additional metadata
+  customFields: {
+    metadata: [
+      {
+        name: 'description',
+        content: 'Production-ready AT Protocol SDK for Flutter & Dart developers. Build decentralized social apps with type-safe APIs, comprehensive Bluesky integration, and battle-tested reliability.',
+      },
+      {
+        name: 'keywords',
+        content: 'AT Protocol, Bluesky, Flutter, Dart, SDK, decentralized, social media, API, type-safe, production-ready',
+      },
+      {
+        property: 'og:description',
+        content: 'Production-ready AT Protocol SDK for Flutter & Dart developers. Build decentralized social apps with type-safe APIs, comprehensive Bluesky integration, and battle-tested reliability.',
+      },
+      {
+        name: 'twitter:description',
+        content: 'Production-ready AT Protocol SDK for Flutter & Dart developers. Build decentralized social apps with type-safe APIs, comprehensive Bluesky integration, and battle-tested reliability.',
+      },
+    ],
+  },
 
   staticDirectories: ["public", "static"],
 
@@ -38,7 +60,7 @@ const config = {
   organizationName: "myConsciousness", // Usually your GitHub org/user name.
   projectName: "atproto.dart", // Usually your repo name.
 
-  onBrokenLinks: "throw",
+  onBrokenLinks: "warn",
   onBrokenMarkdownLinks: "warn",
 
   // Even if you don't use internalization, you can use this field to set useful
@@ -76,10 +98,6 @@ const config = {
     ({
       // Replace with your project's social card
       image: "img/social_card.png",
-      announcementBar: {
-        id: "announcementBar-2", // Increment on change
-        content: `⭐️ If you like atproto.dart, give it a star on <a target="_blank" rel="noopener noreferrer" href="https://github.com/myConsciousness/atproto.dart">GitHub</a> and follow <a target="_blank" rel="noopener noreferrer" href="https://bsky.app/profile/shinyakato.dev">Shinya Kato on Bluesky</a> ⭐️`,
-      },
       navbar: {
         title: "atproto.dart",
         logo: {
@@ -89,21 +107,25 @@ const config = {
         items: [
           {
             to: "/docs/intro",
-            label: "Docs",
+            label: "Get Started",
             position: "left",
           },
           {
             to: "/docs/packages/overview",
-            label: "Packages & Tools",
+            label: "Packages",
             position: "left",
           },
           {
-            to: "/docs/api_support_matrix",
-            label: "API Support",
+            to: "/docs/supported_api",
+            label: "API Reference",
             position: "left",
           },
-          { to: "showcase", label: "Showcase", position: "left" },
-          // { to: "/blog", label: "Blog", position: "left" },
+          {
+            to: "/docs/category/lexicons-matrix",
+            label: "Lexicons",
+            position: "left",
+          },
+          { to: "showcase", label: "Examples", position: "left" },
           {
             href: "https://github.com/myConsciousness/atproto.dart",
             label: "GitHub",
@@ -119,91 +141,49 @@ const config = {
         },
         links: [
           {
-            title: "Learn",
+            title: "Documentation",
             items: [
               {
-                label: "Introduction",
+                label: "Get Started",
                 to: "/docs/intro",
               },
               {
-                label: "Installation",
+                label: "Installation Guide",
                 to: "/docs/category/getting-started",
               },
               {
-                label: "Showcase",
+                label: "API Reference",
+                to: "/docs/supported_api",
+              },
+              {
+                label: "Examples",
                 to: "showcase",
               },
             ],
           },
           {
-            title: "Community",
+            title: "Resources",
             items: [
               {
-                label: "Dev Repository",
+                label: "GitHub Repository",
                 href: "https://github.com/myConsciousness/atproto.dart",
               },
               {
-                label: "Bluesky API Touchers",
-                href: "https://discord.gg/zWed6y3V",
-              },
-              {
-                label: "Issues",
-                href: "https://github.com/myConsciousness/atproto.dart/issues",
-              },
-              {
-                label: "Discussions",
-                href: "https://github.com/myConsciousness/atproto.dart/discussions",
-              },
-              {
-                label: "Code of Conduct",
-                href: "https://github.com/myConsciousness/atproto.dart/blob/main/CODE_OF_CONDUCT.md",
-              },
-            ],
-          },
-          {
-            title: "Contact",
-            items: [
-              {
-                label: "Bluesky Social",
-                href: "https://bsky.app/profile/shinyakato.dev",
-              },
-              {
-                label: "GitHub",
-                href: "https://github.com/myConsciousness",
-              },
-              {
-                label: "Discord",
-                href: "https://discordapp.com/users/919043517974720514",
-              },
-              {
-                label: "contact@shinyakato.dev",
-                href: "mailto:contact@shinyakato.dev",
-              },
-            ],
-          },
-          {
-            title: "More",
-            items: [
-              {
-                label: "AT Protocol Official",
+                label: "AT Protocol",
                 href: "https://atproto.com",
               },
               {
-                label: "Bluesky Social Official",
+                label: "Bluesky",
                 href: "https://blueskyweb.xyz",
               },
               {
-                label: "Shinya Kato Official",
-                href: "https://shinyakato.dev",
-              },
-              {
-                label: "DEV.to Articles",
-                to: "https://dev.to/shinyakato",
+                label: "Developer Community",
+                href: "https://discord.gg/zWed6y3V",
               },
             ],
           },
         ],
-        copyright: `Copyright © ${new Date().getFullYear()} Shinya Kato. Built with Docusaurus.`,
+        copyright: `© ${new Date().getFullYear()} Shinya Kato. Open source AT Protocol SDK for Flutter & Dart.`,
       },
       prism: {
         defaultLanguage: "dart",
@@ -214,6 +194,12 @@ const config = {
         defaultMode: "dark",
         disableSwitch: true,
         respectPrefersColorScheme: false,
+      },
+      algolia: {
+        appId: "RR6B4HADRC",
+        apiKey: "07098b9110ca17a40a07d24cd18374d7",
+        indexName: "atprotodart",
+        contextualSearch: true,
       },
     }),
   markdown: {

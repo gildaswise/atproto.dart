@@ -1,5 +1,906 @@
 # Release Note
 
+## v1.4.1
+
+- fix: optional jwt scope and auth identity. ([#2224](https://github.com/myConsciousness/atproto.dart/pull/2224))
+
+## v1.4.0
+
+- chore: Sync Lexicon Data.
+  - ([#2217](https://github.com/myConsciousness/atproto.dart/pull/2217))
+  - ([#2219](https://github.com/myConsciousness/atproto.dart/pull/2219))
+  - ([#2222](https://github.com/myConsciousness/atproto.dart/pull/2222))
+  - ([#2225](https://github.com/myConsciousness/atproto.dart/pull/2225))
+  - ([#2228](https://github.com/myConsciousness/atproto.dart/pull/2228))
+  - ([#2230](https://github.com/myConsciousness/atproto.dart/pull/2230))
+  - ([#2233](https://github.com/myConsciousness/atproto.dart/pull/2233))
+  - ([#2237](https://github.com/myConsciousness/atproto.dart/pull/2237))
+  - ([#2238](https://github.com/myConsciousness/atproto.dart/pull/2238))
+  - ([#2239](https://github.com/myConsciousness/atproto.dart/pull/2239))
+  - ([#2243](https://github.com/myConsciousness/atproto.dart/pull/2243))
+  - ([#2244](https://github.com/myConsciousness/atproto.dart/pull/2244))
+- feat: Support Draft service.
+
+## v1.3.0
+
+- chore: Sync Lexicon Data.
+  - ([#2188](https://github.com/myConsciousness/atproto.dart/pull/2188))
+  - ([#2190](https://github.com/myConsciousness/atproto.dart/pull/2190))
+  - ([#2195](https://github.com/myConsciousness/atproto.dart/pull/2195))
+  - ([#2197](https://github.com/myConsciousness/atproto.dart/pull/2197))
+  - ([#2203](https://github.com/myConsciousness/atproto.dart/pull/2203))
+  - ([#2205](https://github.com/myConsciousness/atproto.dart/pull/2205))
+  - ([#2208](https://github.com/myConsciousness/atproto.dart/pull/2208))
+  - ([#2210](https://github.com/myConsciousness/atproto.dart/pull/2210))
+  - ([#2213](https://github.com/myConsciousness/atproto.dart/pull/2213))
+- fix: errors on video service. ([#2215](https://github.com/myConsciousness/atproto.dart/pull/2215))
+- feat: support `AgeassuranceService` and `ContactService`.
+
+## v1.2.6
+
+- chore: Sync Lexicon Data.
+  - ([#2173](https://github.com/myConsciousness/atproto.dart/pull/2173))
+  - ([#2175](https://github.com/myConsciousness/atproto.dart/pull/2175))
+  - ([#2177](https://github.com/myConsciousness/atproto.dart/pull/2177))
+- fix: Codegen errors. ([#2182](https://github.com/myConsciousness/atproto.dart/pull/2182))
+
+## v1.2.5
+
+- chore: Sync Lexicon Data.
+  - ([#2165](https://github.com/myConsciousness/atproto.dart/pull/2165))
+  - ([#2163](https://github.com/myConsciousness/atproto.dart/pull/2163))
+  - ([#2168](https://github.com/myConsciousness/atproto.dart/pull/2168))
+- Fix typo causing crash in moderation code.
+  - ([#2170](https://github.com/myConsciousness/atproto.dart/pull/2170))
+
+## v1.2.4
+
+- **FIX**: Fixed type compatibility issues with AtUri parameters
+  - Corrected service method calls to properly handle AtUri objects instead of strings
+  - Fixed moderation test data to use string URIs instead of AtUri objects where appropriate
+  - Improved type safety in API parameter handling and mock data generation
+
+## v1.2.3
+
+- **IMPROVEMENT**: Enhanced union type classes with sealed class implementation
+  - Union type classes are now generated as `sealed` classes instead of `abstract` classes
+  - Enabled Dart's exhaustiveness checking for switch statements on union types
+  - Improved compile-time safety by ensuring all union cases are handled
+  - Prevents runtime errors from unhandled union variants through static analysis
+- **FIX**: Downgraded characters dependency from ^1.4.1 to ^1.4.0 for compatibility
+
+## v1.2.2
+
+- feat: Merged #2150 - Added pronouns field support to actor profiles
+  - Added `pronouns` field to `app.bsky.actor.defs#profileViewDetailed` for displaying user pronouns in detailed profile views
+  - Added `pronouns` field to `app.bsky.actor.profile` record for storing user pronouns in profile data
+  - Enhanced user profile customization with pronouns information support
+  - Synchronized with latest Bluesky lexicon updates for improved profile representation
+
+## v1.2.1
+
+- feat: Merged #2143 - Added onboarding suggested starter packs support
+  - Added `getOnboardingSuggestedStarterPacks` endpoint for retrieving suggested starter packs during onboarding
+  - Added `getOnboardingSuggestedStarterPacksSkeleton` endpoint for skeleton data of suggested starter packs
+  - Enhanced onboarding experience with curated starter pack recommendations
+  - New endpoints available via `UnspeccedService` for improved user onboarding flow
+
+## v1.2.0
+
+- feat: Merged #2137 - Added comprehensive Ozone moderation and administration services
+  - Added CommunicationService for `tools.ozone.communication.*` endpoints
+  - Added HostingService for `tools.ozone.hosting.*` endpoints  
+  - Added ModerationService for `tools.ozone.moderation.*` endpoints
+  - Added SafelinkService for `tools.ozone.safelink.*` endpoints
+  - Added ServerService for `tools.ozone.server.*` endpoints
+  - Added SetService for `tools.ozone.set.*` endpoints
+  - Added SettingService for `tools.ozone.setting.*` endpoints
+  - Added SignatureService for `tools.ozone.signature.*` endpoints
+  - Added TeamService for `tools.ozone.team.*` endpoints
+  - Added VerificationService for `tools.ozone.verification.*` endpoints
+  - Enhanced moderation and administrative capabilities for Bluesky applications
+- feat: Enhanced actor profile support
+  - Added `pronouns` field to `app.bsky.actor.defs#profileViewDetailed` and `app.bsky.actor.profile` record
+  - Added `website` field to `app.bsky.actor.defs#profileViewDetailed` and `app.bsky.actor.profile` record
+  - Improved user profile customization capabilities with pronouns and website information
+
+## v1.1.1
+
+- **MIGRATION**: Updated to use the consolidated `at_primitives` package for all AT Protocol primitive types.
+- **IMPROVEMENT**: Simplified dependency management by adopting unified primitive types from `at_primitives`.
+
+## v1.1.0
+
+- feat: Version bump to v1.1.0 to reflect significant new functionality
+  - Updated dependency to `atproto: ^1.1.0` for compatibility with latest AT Protocol features
+  - Minor version bump appropriate for major new OzoneTool capabilities
+
+## v1.0.11
+
+- feat: Added OzoneTool client for comprehensive `tools.ozone.*` API support
+  - New `OzoneTool` class provides access to all Ozone moderation and administrative services
+  - Includes Communication, Hosting, Moderation, Server, Team, and additional Ozone services
+  - Available via separate `package:bluesky/ozone.dart` import for modular usage
+  - Requires session-based authentication for secure administrative operations
+  - Complete API coverage for moderation events, team management, server configuration, and more
+- chore: Update source files automatically ([#2117](https://github.com/myConsciousness/atproto.dart/pull/2117))
+  - Added new `com.atproto.temp.dereferenceScope` endpoint for temporary scope dereferencing
+  - Added `tools.ozone.moderation.defs.revokeAccountCredentialsEvent` for account credential revocation
+  - Updated Ozone moderation event unions to include new revoke credentials event type
+  - Generated corresponding service methods, types, and documentation
+
+## v1.0.10
+
+- **BREAKING CHANGE**: Enhanced lexicon known values naming with proper camelCase convention
+  - Enum values now use consistent namespaced naming (e.g., `live` → `appBskyActorStatusLive`)
+  - Actor, feed, graph, and moderation enum values updated with improved naming
+  - Updated test cases to match new enum naming convention (e.g., `curatelist` → `appBskyGraphDefsCuratelist`)
+- feat: Added support for lexicon fragment-only values in code generation
+- feat: Enhanced lexicon generation with context-aware naming for better consistency
+- fix: Improved enum naming consistency across all Bluesky lexicon types
+
+## v1.0.9
+
+- chore: Sync Lexicon Data for Bookmark feature. ([#2105](https://github.com/myConsciousness/atproto.dart/pull/2105), [#2107](https://github.com/myConsciousness/atproto.dart/pull/2107))
+- feat: Add Bookmark feature support. ([#2108](https://github.com/myConsciousness/atproto.dart/pull/2108))
+
+## v1.0.8
+
+- chore: Sync Lexicon Data. ([#2100](https://github.com/myConsciousness/atproto.dart/pull/2100))
+
+## v1.0.7
+
+- fix: Drop `universal_io` for WASM compatibility.
+
+## v1.0.6
+
+- chore: fix `WARNING: The annotation 'JsonSerializable.new' can only be used on classes.`.
+- chore: fix `Links in README.md should be well formed Unable to parse 1 image link.`.
+
+## v1.0.5
+
+- Add service functions. Endpoints can be easily called as functions like `appBskyFeedGetTime`
+- Expose `ServiceContext` from `core` library.
+
+## v1.0.4
+
+- chore: Removed outdated processes.
+- fix: Use `@JsonSerializable(includeIfNull: false)` for lex gen objects.
+- Add accessors that are useful when using records.
+  - supports `get`, `list`, `create`, `put` and `delete` operations for each record.
+
+## v1.0.3
+
+- chore: Update source files automatically. ([##2081](https://github.com/myConsciousness/atproto.dart/pull/#2081))
+
+## v1.0.2
+
+- Fix SDK constraint to '">=3.8.0 <4.0.0"'.
+
+## v1.0.1
+
+- Improved firehose conversion process. Use `SyncSubscribeReposAdaptor` to convert byte data from `subscribeRepos`.
+- Now the endpoint argument `$unknown` cannot override a known field. ([#2068](https://github.com/myConsciousness/atproto.dart/pull/2068))
+- `RepoCommitHandler` is automatically generated based on Lexicon. ([#2072](https://github.com/myConsciousness/atproto.dart/pull/2072))
+
+## v1.0.0
+
+- Bump SDK constraint to '^3.8.0'.
+- Fully replaced with objects generated by lexicons.
+
+## v0.18.10
+
+- Add `ThreadFollowerRule` on `ThreadRule`. ([#1919](https://github.com/myConsciousness/atproto.dart/pull/1919))
+- Add `recId` on:
+  - `Actor`
+  - `SuggestedFollows`
+  - `SuggestionsSkeleton`
+- Add `threadContext` on `PostThreadViewRecord`
+- Add `contentMode` on:
+  - `FeedGeneratorView`
+  - `GeneratorRecord`
+- Add `postInteractionSettingsPref` on `Preference`.
+
+## v0.18.9
+
+- Add `postsWithVideo` on `FeedFilter`. ([#1895](https://github.com/myConsciousness/atproto.dart/pull/1895))
+
+## v0.18.8
+
+- Fix `leaveConvo` method on `ConvoService`.
+  - `400 Incorrect HTTP method (GET) expected POST`
+- Fix `UConvoMessageEmbed` object on `MessageInput`.
+- Refactor package structure.
+  - See the following packages:
+    - `chat_bsky_actor_declaration.dart`
+    - `chat_bsky_moderation_get_message_context.dart`
+    - `chat_bsky_moderation_get_actor_metadata.dart`
+    - `chat_bsky_convo_update_read.dart`
+    - `chat_bsky_convo_unmute_convo.dart`
+    - `chat_bsky_convo_send_message_batch.dart`
+    - `chat_bsky_convo_mute_convo.dart`
+    - `chat_bsky_convo_list_convos.dart`
+    - `chat_bsky_convo_leave_convo.dart`
+    - `chat_bsky_convo_get_messages.dart`
+    - `chat_bsky_convo_get_log.dart`
+    - `chat_bsky_convo_get_convo_for_members.dart`
+    - `chat_bsky_convo_defs.dart`
+    - `chat_bsky_actor_get_convo.dart`
+    - `chat_bsky_actor_defs.dart`
+    - `chat_bsky_actor_declaration.dart`
+- Add `starterpackJoined` on `NotificationReason` and `GroupedNotificationReason`.
+
+## v0.18.7
+
+- Add `reasons` parameter on `NotificationService.listNotification`. ([#1849](https://github.com/myConsciousness/atproto.dart/pull/1849))
+  - Removed `NotificationReasonFilter`.
+- Add `.getTrendingTopics` on `UnspeccedService`. ([#1850](https://github.com/myConsciousness/atproto.dart/pull/1850))
+
+## v0.18.6
+
+- Bump `xrpc`.
+
+## v0.18.5
+
+- Change the type of `starterPack` on `GetStarterPackOutput` from `StarterPackViewBasic` to `StarterPackView`.
+- Add `.referencelist` utility on `GraphService`. You can use it for creating starter packs.
+
+## v0.18.4
+
+- Add endpoints on `GraphService`.
+  - `starterpack`
+  - `getActorStarterPacks`
+  - `getStarterPack`
+  - `getStarterPacks`
+  - `searchStarterPacks`
+- Add an endpoint on `UnspeccedService`.
+  - `searchStarterPacksSkeleton`
+- Add `starterPacks` property on `ProfileAssociated`.
+- Add `joinedViaStarterPack` property on `ProfileRecord`.
+- Add `starterPackViewBasic` union on `EmbedViewRecordView`.
+- Add `joinedViaStarterPack` and `createdAt` parameters on `ActorService.profile`.
+- Expose `EmbedViewRecordViewRecord` from `bluesky.dart` package.
+
+## v0.18.3
+
+- Expose `JwtExtension`.
+
+## v0.18.2
+
+- Add `hotness` on `ThreadViewSortType`.
+
+## v0.18.1
+
+- Retry if a DPoP nonce error occurs during the execution of `OAuthClient.refresh`.
+- Add `restoreOAuthSession` function.
+
+## v0.18.0
+
+- Expose `atproto_oauth` package.
+- Add `fromOAuthSession` constructor on `Bluesky` and `BlueskyChat`.
+- Rename `AuthToken` to `Jwt`.
+  - Change type of `scope` from enum to `String`
+  - Rename `subject` to `sub`
+  - Rename `expiresAt` to `exp`
+  - Rename `issuedAt` to `iat`
+- Rename extended getters on `Session`
+  - From `accessToken` to `accessTokenJwt`
+  - From `refreshToken` to `refreshTokenJwt`
+
+## v0.17.1
+
+- Remove `ImageAspectRation` and expose `AspectRatio` from `bluesky/app_bsky_embed_defs.dart` package.
+- Expose `Nux` from `bluesky/app_bsky_actor_defs.dart`.
+- Add `.isFallback` on `SuggestedFollows`.
+- Expose `ReasonPin` and `SkeletonReasonPin` from `bluesky/app_bsky_feed_defs.dart`.
+- Add union `.pin` on `Reason` and `SkeletonReason`.
+- Add `includePins` parameter on `FeedService.getAuthorFeed`.
+- Add `UnspeccedService.getConfig`.
+- Add `opened` property on `ConvoView`.
+- Add `GraphService.muteThread` and `GraphService.unmuteThread`.
+- Add `.threadMuted` property on `PostViewer`.
+
+## v0.17.0
+
+- Add `relativeToDid` on `SuggestionsSkeleton` and `UnspeccedService.getSuggestionsSkeleton`.
+- Add `priority` on:
+  - `NotificationService.getUnreadCount`.
+  - `NotificationService.listNotifications` and `Notifications`.
+- Add `NotificationService.putPreferences`.
+- Add `.viewDetached` and `.labelerView` on `EmbedViewRecordView`.
+- Add `.quoteCount` on `Post`.
+- Add `embeddingDisabled` and `pinned` on `PostViewer`.
+- Add `FeedService.getQuotes`.
+- Add `hiddenReplies` on `FeedService.threadgate` and `ThreadgateRecord`.
+- Add `FeedService.postgate`.
+- Add `.quoteCount` on `EmbedViewRecordViewRecord`.
+- Add `.threadgate` on `PostThread`.
+
+## v0.16.15
+
+- Support known followers. ([#1789](https://github.com/myConsciousness/atproto.dart/pull/1789))
+  - Add property`.knownFollowers` on `ActorViewer`.
+  - Add `.getKnownFollowers` on `GraphService`.
+- Support pinned post. ([#1790](https://github.com/myConsciousness/atproto.dart/pull/1790))
+  - Add property `.pinnedPost` on `ActorProfile` and `ProfileRecord`.
+  - Add parameter `pinnedPost` on `ActorService.profile`.
+- Add union `video` on `EmbedView`. ([#1791](https://github.com/myConsciousness/atproto.dart/pull/1791))
+
+## v0.16.14
+
+- Optimize video features. ([#1788](https://github.com/myConsciousness/atproto.dart/pull/1788))
+
+## v0.16.13
+
+- Add `VideoService`. ([#1783](https://github.com/myConsciousness/atproto.dart/pull/1783))
+- Add `EmbedVideo` and `EmbedVideoView` objects. ([#1783](https://github.com/myConsciousness/atproto.dart/pull/1783))
+
+## v0.16.12
+
+- Fixed a bug that prevented `RepoService.deleteRecord` from working.
+
+## v0.16.11
+
+- Fixed a bug that prevented `RepoService.deleteRecord` from working.
+
+## v0.16.10
+
+- Bump `atproto_core`.
+
+## v0.16.9
+
+- Expose `.atprotoPdsEndpoint` from as an extension of `Session`. You can get specific pds endpoint based on did document.
+
+## v0.16.8
+
+- Expose `.accessToken` and `.refreshToken` as an extension from `Session`.
+
+## v0.16.7
+
+- Change the type `.collection` property from `String` to `NSID` on `AtUri`. You need to do `.collection.toString()` when you want a string of collection. ([#1551](https://github.com/myConsciousness/atproto.dart/issues/1551))
+- Merge `bluesky_chat` features. ([#1552](https://github.com/myConsciousness/atproto.dart/pull/1552))
+- The package was refactored as follows.
+  - `package:bluesky/bluesky.dart` => bluesky features
+  - `package:bluesky/bluesky_chat.dart` => chat features
+  - `package:bluesky/atproto.dart` => atproto features
+  - `package:bluesky/core.dart` => core features
+- atproto-related services should be used via the `.atproto` property on `Bluesky` object.
+
+## v0.16.6
+
+- The `service` is automatically resolved from the DID Document of the given `Session`. ([#1543](https://github.com/myConsciousness/atproto.dart/pull/1543))
+  - If no authentication is performed and no `Session` is passed, the default `bsky.social` is used.
+  - If the user passes a specific `service`, it always respects the value of the user's `service`.
+  - If something wrong happens for some reason, it uses `bsky.social` as default.
+
+## v0.16.5
+
+- Fixed a bug that prevented toJson on freezed objects from `atproto_core`.
+
+## v0.16.4
+
+- Minor improvement for `.getModerationPrefs`. No need to aware.
+
+## v0.16.3
+
+- Minor improvement for `.getLabelerHeaders`. No need to aware.
+
+## v0.16.2
+
+- Add default labeler did for `.getLabelerHeaders`. No need to aware.
+
+## v0.16.1
+
+- Fixed moderation `.getLabelDefinitions` method. Now it works even if users don't have LabelersPref in their preferences.
+
+## v0.16.0
+
+- Add `.active` and `.status` properties on `Session` and `CurrentSession` objects. ([#1516](https://github.com/myConsciousness/atproto.dart/pull/1516))
+- Move `BlobConverter`, `Blob`, `BlobRef` from `atproto` package to `atproto_core`.
+- Add `.active` and `.status` properties on `Repo` object. ([#1517](https://github.com/myConsciousness/atproto.dart/issues/1517))
+- Add `.getRepoStatus` method on `SyncService`. ([#1517](https://github.com/myConsciousness/atproto.dart/issues/1517))
+- Applied naming convention based on lexicons on following objects.
+  - `SubscribedRepoCommit` -> `Commit`
+  - `SubscribedRepoIdentity` -> `Identity`
+  - `SubscribedRepoHandle` -> `Handle`
+  - `SubscribedRepoMigrate` -> `Migrate`
+  - `SubscribedRepoTombstone` -> `Tombstone`
+  - `SubscribedRepoInfo` -> `Info`
+  - `Account` -> `CreateAccountOutput`
+- Add `account` event on `SyncService.subscribeRepos`. ([#1517](https://github.com/myConsciousness/atproto.dart/issues/1517))
+
+## v0.15.27
+
+- Don't include Auth headers in `.headers`.
+
+## v0.15.26
+
+- Bump `atproto_core`. Add auth scope `com.atproto.appPassPrivileged`. ([#1501](https://github.com/myConsciousness/atproto.dart/issues/1501))
+- Add `.headers` property. Returns the merged headers with global headers and auth header.
+
+## v0.15.25
+
+- Removed deprecated methods from following services.
+  - `IdentityService`
+  - `LabelService`
+  - `RepoService`
+  - `ServerService`
+  - `SyncService`
+  - `ActorService`
+  - `FeedService`
+  - `GraphService`
+  - `NotificationService`
+  - `UnspeccedService`
+- Add `headers` parameters on GET endpoints. You can specify additional headers.
+- Add utilities on `ModerationUI` object.
+  - `filter`
+  - `blur`
+  - `alert`
+  - `inform`
+- Add `getLabelerHeaders` function.
+- Add `.getModerationPrefs` method on `Preferences` object as an extension.
+- Move `.getLabelDefinitions` to `LabelerService` as an extension.
+
+## v0.15.24
+
+- Add `privileged` input and property on `ServerService.createAppPassword`, `AppPassword`. ([#1494](https://github.com/myConsciousness/atproto.dart/issues/1494))
+
+## v0.15.23
+
+- Add `.getLabelDefinitions` function for moderation API.
+
+## v0.15.22
+
+- Merged the official algorithm of the moderation API. Exposed the following functions.
+  - `moderatePost`
+  - `moderateProfile`
+  - `moderateNotification`
+  - `moderateFeedGenerator`
+  - `moderateUserList`
+
+## v0.15.21
+
+- Add `.chat` property on `ProfileAssociated` object. ([#1448](https://github.com/myConsciousness/atproto.dart/issues/1448))
+
+## v0.15.20
+
+- Removed `lex_annotation`.
+- Removed deprecated properties on `Bluesky` object.
+
+## v0.15.19
+
+- Add `.grandparentAuthor` property on `Reply`. ([#1439](https://github.com/myConsciousness/atproto.dart/issues/1439))
+
+## v0.15.18
+
+- Add a pattern `SavedFeedsPrefV2` on `Preference`. ([#1420](https://github.com/myConsciousness/atproto.dart/issues/1420))
+  - `SavedFeedsPrefV2`
+  - `SavedFeed`
+
+## v0.15.17
+
+- Add `authFactorToken` parameter on `createSession`. ([#1412](https://github.com/myConsciousness/atproto.dart/issues/1412))
+- Add `emailAuthFactor` property on `Session`. ([#1412](https://github.com/myConsciousness/atproto.dart/issues/1412))
+- Add `emailAuthFactor` property on `CurrentSession`. ([#1412](https://github.com/myConsciousness/atproto.dart/issues/1412))
+- Add `emailAuthFactor` parameter on `updateEmail`. ([#1412](https://github.com/myConsciousness/atproto.dart/issues/1412))
+
+## v0.15.16
+
+- Removed `viewer` parameter from `searchActorsTypeahead`. ([#1407](https://github.com/myConsciousness/atproto.dart/issues/1407))
+- Add `getSuggestionsSkeleton` on `UnspeccedService`. ([#1407](https://github.com/myConsciousness/atproto.dart/issues/1407))
+
+## v0.15.15
+
+- Merge latest lexicon. ([#1403](https://github.com/myConsciousness/atproto.dart/issues/1403))
+  - Add `viewer` param on `ActorService.searchActorsTypeahead`
+  - Add `replyCount`, `repostCount`, `likeCount` on `EmbedViewRecordViewRecord`
+  - Add `acceptsInteractions` on `FeedService.generator` and `GeneratorRecord`
+  - Add `viewer` on `UnspeccedService.searchActorsSkeleton`
+  - Add parameters on `FeedService.searchPosts`
+    - `sort`
+    - `since`
+    - `until`
+    - `mentions`
+    - `author`
+    - `lang`
+    - `domain`
+    - `url`
+    - `tag`
+  - Add parameters on `FeedService.searchActorsSkeleton`
+    - `sort`
+    - `since`
+    - `until`
+    - `mentions`
+    - `author`
+    - `lang`
+    - `domain`
+    - `url`
+    - `tag`
+    - `viewer`
+  - Add `.sendInteractions` on `FeedService`
+  - Add `feedContext` property
+    - `FeedView`
+    - `SkeletonFeedView`
+  - Add `acceptsInteractions` on `FeedGeneratorView`
+
+## v0.15.14
+
+- Added global `.headers` on `Bluesky`. ([#1360](https://github.com/myConsciousness/atproto.dart/issues/1360))
+
+## v0.15.13
+
+- Added `labelerDid` on `ContentLabelPreference`. ([#1316](https://github.com/myConsciousness/atproto.dart/issues/1316))
+- Added `.associated` property on `Actor`, `ActorBasic`, `ActorProfile`. ([#1316](https://github.com/myConsciousness/atproto.dart/issues/1316))
+- Supported Labeler Service as `LabelerService`. ([#1316](https://github.com/myConsciousness/atproto.dart/issues/1316))
+  - Added `.labeler` on `Bluesky` object
+    - `.getServices`
+    - `.service`
+  - Added `.isLabelerService` and `.isNotLabelerService` on AT URI extension
+  - Added `LabelerServiceRecord` object
+  - Added `.onCreateLabelerService` and `.onDeleteLabelerService` on `RepoCommitAdaptor` object
+- Added `.labels` properties on `FeedGeneratorView`, `ListView`, `ListViewBasic` object.
+- Added `.labelersPref` on `Preference`.
+- Added `.treeViewEnabled` on `ThreadViewPreference`.
+
+## v0.15.12
+
+- Revert `show` element on `ContentLabelVisibility`. This element is the same with `ignore`. ([#1314](https://github.com/myConsciousness/atproto.dart/issues/1314))
+- Added `mergeFeedEnabled` property on `FeedViewPreference`. ([#1335](https://github.com/myConsciousness/atproto.dart/issues/1335))
+
+## v0.15.11
+
+- BugFix: `MutedWordPref` is now working correctly. ([#1312](https://github.com/myConsciousness/atproto.dart/issues/1312))
+
+## v0.15.10
+
+- Upgrade `at_uri`. ([#1300](https://github.com/myConsciousness/atproto.dart/issues/1300))
+
+## v0.15.9
+
+- Removed temp endpoints from `TempService`.
+  - `.importRepo`
+  - `.pushBlob`
+  - `.transferAccount`
+- Added `did` property on `ServerInfo` object. Returned from `ServerService.describeServer`. ([#1279](https://github.com/myConsciousness/atproto.dart/issues/1279))
+- Added `.getServiceAuth` on `ServerService`. ([#1280](https://github.com/myConsciousness/atproto.dart/issues/1280))
+- Added `.activateAccount` on `ServerService`. ([#1276](https://github.com/myConsciousness/atproto.dart/issues/1276))
+- Added `.deactivateAccount` on `ServerService`. ([#1278](https://github.com/myConsciousness/atproto.dart/issues/1278))
+- Added `.checkAccountStatus` on `ServerService`. ([#1277](https://github.com/myConsciousness/atproto.dart/issues/1277))
+- Added `.listMissingBlobs` on `RepoService`. ([#1275](https://github.com/myConsciousness/atproto.dart/issues/1275))
+- Added `.importRepo` on `RepoService`. ([#1274](https://github.com/myConsciousness/atproto.dart/issues/1274))
+- Added `.submitPlcOperation` on `IdentityService`. ([#1273](https://github.com/myConsciousness/atproto.dart/issues/1273))
+- Added `.signPlcOperation` on `IdentityService`. ([#1272](https://github.com/myConsciousness/atproto.dart/issues/1272))
+- Added `.getRecommendedDidCredentials` on `IdentityService`. ([#1270](https://github.com/myConsciousness/atproto.dart/issues/1270))
+- Added `.requestPlcOperationSignature` on `IdentityService`. ([#1271](https://github.com/myConsciousness/atproto.dart/issues/1271))
+- Bump SDK constraint to '^3.3.0'.
+- Added `MutedWordsPref` and `HiddenPostsPref`. Returned from `ActorService.getPreferences`. ([#1288](https://github.com/myConsciousness/atproto.dart/issues/1288))
+- Supported `identity` event on `.subscribeRepos`. ([#1289](https://github.com/myConsciousness/atproto.dart/issues/1289))
+
+## v0.15.8
+
+- Added `TempService`. You can use it like `bsky.temp`. ([#1238](https://github.com/myConsciousness/atproto.dart/issues/1238))
+  - `.checkSignupQueue`
+  - `.importRepo`
+  - `.pushBlob`
+  - `.requestPhoneVerification`
+  - `.transferAccount`
+
+## v0.15.7
+
+- Improved redundant error messages. Now it shows like `GET https://bsky.social/xrpc/com.atproto.identity.resolveHandle 400 Error: Params must have the property "handle"`. ([#1253](https://github.com/myConsciousness/atproto.dart/issues/1253))
+- Exposed `.service` and `.relayService` properties on `Bluesky`. ([#1254](https://github.com/myConsciousness/atproto.dart/issues/1254))
+- Added `.timelineIndex` on `SavedFeedsPreference`. ([#1251](https://github.com/myConsciousness/atproto.dart/issues/1251))
+- Added `parameters` arg and you can pass bytes to `body` arg on `.post` method. ([#1252](https://github.com/myConsciousness/atproto.dart/issues/1252))
+- BugFix: Made sure to check if the subscribeRepos blocks can be decoded. ([#1239](https://github.com/myConsciousness/atproto.dart/issues/1239))
+
+## v0.15.6
+
+- Removed `getTimelineSkeleton` from `UnspeccedService`. ([#1226](https://github.com/myConsciousness/atproto.dart/issues/1226))
+- Added `getTaggedSuggestions` on `UnspeccedService`. ([#1225](https://github.com/myConsciousness/atproto.dart/issues/1225))
+- Added `getRelationships` on `GraphService`. ([#1224](https://github.com/myConsciousness/atproto.dart/issues/1224))
+- Added `.interests` union on `Preference`. ([#1223](https://github.com/myConsciousness/atproto.dart/issues/1223))
+
+## v0.15.5
+
+- Added `.get` and `.post` methods on `Bluesky` object. ([#1217](https://github.com/myConsciousness/atproto.dart/issues/1217))
+- Added `bluesky/lex_namespaces` package. You can use these constants for `.get` and `.post` methods.
+
+## v0.15.4
+
+- Upgraded `atproto_core`. ([#1159](https://github.com/myConsciousness/atproto.dart/issues/1159))
+
+## v0.15.3
+
+- Removed `.show` element on `ContentLabelVisibility`. The value of `show` is internally converted to `ignore`. ([#1157](https://github.com/myConsciousness/atproto.dart/issues/1157))
+
+## v0.15.2
+
+- Minor improvement. ([#1146](https://github.com/myConsciousness/atproto.dart/issues/1146))
+
+## v0.15.1
+
+- Exposed `RepoServiceExtension`. ([#1137](https://github.com/myConsciousness/atproto.dart/issues/1137))
+
+## v0.15.0
+
+- Change the method name of each service to Lexicon's ID. Existing methods have been deprecated and should be replaced according to the deprecation message. ([#1127](https://github.com/myConsciousness/atproto.dart/issues/1127))
+- Add `seenAt` parameter on `listNotifications`.
+
+## v0.14.2
+
+- Support `nobody` option for threadgate.
+
+## v0.14.1
+
+- Fixed a bug in converting Threadgate records.
+
+## v0.14.0
+
+- Upgraded `atproto_core`. ([#1112](https://github.com/myConsciousness/atproto.dart/issues/1112))
+- Optimized internal process. ([#1114](https://github.com/myConsciousness/atproto.dart/issues/1114))
+- Removed `streamService` and added `relayService` instead. Defaults to `bsky.network`. ([#1116](https://github.com/myConsciousness/atproto.dart/issues/1116))
+- Renamed name of service objects. ([#1118](https://github.com/myConsciousness/atproto.dart/issues/1118))
+  - `IdentitiesService` to `IdentityService`
+  - `LabelsService` to `LabelService`
+  - `RepositoriesService` to `RepoService`
+  - `ServersService` to `ServerService`
+  - `ActorsService` to `ActorService`
+  - `FeedsService` to `FeedService`
+  - `GraphsService` to `GraphService`
+  - `NotificationsService` to `NotificationService`
+- Deprecated property names on `ATProto` and `Bluesky`. ([#1118](https://github.com/myConsciousness/atproto.dart/issues/1118))
+  - `.servers`: Use `.server` instead
+  - `.identities`: Use `.identity` instead
+  - `.repositories`: Use `.repo` instead
+  - `.labels`: Use `.label` instead
+  - `.actors`: Use `.actor` instead
+  - `.feeds`: Use `.feed` instead
+  - `.graphs`: Use `.graph` instead
+  - `.notifications`: Use `.notification` instead
+
+## v0.13.2
+
+- Upgraded `atproto` and `atproto_core`. ([#1102](https://github.com/myConsciousness/atproto.dart/issues/1102))
+
+## v0.13.1
+
+- Added `.toActor` method on `ActorBasic`. ([#1095](https://github.com/myConsciousness/atproto.dart/issues/1095))
+
+## v0.13.0
+
+- Changed types from `Actor` to `ActorBasic` on following objects. ([#1091](https://github.com/myConsciousness/atproto.dart/issues/1091))
+  - `ActorsTypeahead.actors`
+  - `Post.author`
+  - `EmbedViewRecordViewRecord.author`
+  - `ReasonRepost.by`
+- Add `.actorBasic` union option on `ModerationSubjectProfile`. ([#1091](https://github.com/myConsciousness/atproto.dart/issues/1091))
+
+## v0.12.4
+
+- Elevate !no-unauthenticated label to affect the entire account when on the profile. ([#1077](https://github.com/myConsciousness/atproto.dart/issues/1077))
+
+## v0.12.3
+
+- Apply automatic generation of moderation sources. ([#1040](https://github.com/myConsciousness/atproto.dart/issues/1040))
+- Add `seenAt` property on `Notifications` object. ([#1046](https://github.com/myConsciousness/atproto.dart/issues/1046))
+
+## v0.12.1
+
+- Add `!no-unauthenticated` imperative label. ([#1038](https://github.com/myConsciousness/atproto.dart/issues/1038))
+
+## v0.12.0
+
+- Removed all `.find*AsJson` and `.paginate*AsJson`. ([#1033](https://github.com/myConsciousness/atproto.dart/issues/1033))
+- Added `.threadgate` field on `Post` object. ([#1036](https://github.com/myConsciousness/atproto.dart/issues/1036))
+
+## v0.11.1
+
+- Added `postsAndAuthorThreads` on `FeedFilter`. ([#1029](https://github.com/myConsciousness/atproto.dart/issues/1029))
+- Added `.getModerateOptions` function. You can easily get options for `moderatePost` and `moderateProfile` based on user preferences. ([#1030](https://github.com/myConsciousness/atproto.dart/issues/1030))
+- Added `ignore` on `ContentLabelVisibility` and deprecated `show` element.
+
+## v0.11.0
+
+- Added moderation APIs and exposed `bluesky/moderation` package. See more [details](https://atprotodart.com/docs/packages/bluesky/#moderation-api). ([#1006](https://github.com/myConsciousness/atproto.dart/issues/1006))
+  - `.moderatePost`
+  - `.moderateProfile`
+
+## v0.10.8
+
+- Added `uri` on `ListItem`. ([#1026](https://github.com/myConsciousness/atproto.dart/issues/1026))
+
+## v0.10.7
+
+- Removed `entities` field on `PostRecord`. Instead of this field, `entities` is merged internally to `facets` field.
+
+## v0.10.6
+
+- Added deprecated `entities` field on `PostRecord`. ([#1020](https://github.com/myConsciousness/atproto.dart/issues/1020))
+  - `LegacyFacet`
+  - `TextSlice`
+
+## v0.10.5
+
+- Added `.isReplyDisabled` and `.isNotReplyDisabled` properties on `PostViewer`. ([#1019](https://github.com/myConsciousness/atproto.dart/issues/1019))
+
+## v0.10.4
+
+- Added `.findLinkPreview` function. ThiIts returns preview information for a given URL. ([#1009](https://github.com/myConsciousness/atproto.dart/issues/1009))
+
+## v0.10.3
+
+- Fixed a bug that occurred in [#1010](https://github.com/myConsciousness/atproto.dart/issues/1010). getCustomFeed behaves differently depending on whether or not an access token is given. ([#1012](https://github.com/myConsciousness/atproto.dart/issues/1012))
+
+## v0.10.2
+
+- Changed auth type from access to anonymous for `app.bsky.feed.getFeed`. ([#1010](https://github.com/myConsciousness/atproto.dart/issues/1010))
+
+## v0.10.1
+
+- Upgraded `atproto_core`. ([#999](https://github.com/myConsciousness/atproto.dart/issues/999))
+- Fixed a bug that service names were not specified correctly when using stream endpoints.
+- Added `.streamService` property on `ATProto`. Defaults to `bsky.network`.
+
+## v0.10.0
+
+- Added `.didDoc` on `CurrentSession`. ([#983](https://github.com/myConsciousness/atproto.dart/issues/983))
+- Upgraded `atproto_core`. ([#989](https://github.com/myConsciousness/atproto.dart/issues/989))
+
+## v0.9.3
+
+- Supported `com.atproto.labels.queryLabels` and `LabelsService`. ([#265](https://github.com/myConsciousness/atproto.dart/issues/265))
+- Supported `com.atproto.labels.subscribeLabels` on `LabelsService`. ([#340](https://github.com/myConsciousness/atproto.dart/issues/340))
+- Added `.deleteSession` function. ([#963](https://github.com/myConsciousness/atproto.dart/issues/963))
+- Supported `com.atproto.server.reserveSigningKey` on `ServersService`. ([#953](https://github.com/myConsciousness/atproto.dart/issues/953))
+  - `.createSigningKey`
+- Added `didDoc` field on `Session` and `Account` objects. ([#968](https://github.com/myConsciousness/atproto.dart/issues/968))
+
+## v0.9.2
+
+- Supported `com.atproto.sync.getBlob` on `SyncService`. ([#307](https://github.com/myConsciousness/atproto.dart/issues/307))
+  - `.findBlob`
+- Supported `com.atproto.sync.listBlobs` on `SyncService`. ([#314](https://github.com/myConsciousness/atproto.dart/issues/314))
+  - `.findBlobs`
+  - `.findBlobsAsJson`
+  - `.paginateBlobs`
+  - `.paginateBlobsAsJson`
+- Changed to use recommended `q` param internally on `ActorsService`. ([#849](https://github.com/myConsciousness/atproto.dart/issues/849))
+  - `.searchActors`
+  - `.searchTypeahead`
+- Supported `app.bsky.graph.getListBlocks` on `GraphsService`. ([#793](https://github.com/myConsciousness/atproto.dart/issues/793))
+  - `.findBlockLists`
+  - `.findBlockListsAsJson`
+  - `.paginateBlockLists`
+  - `.paginateBlockListsAsJson`
+- Added `blockingByList` on `ActorViewer`. ([#952](https://github.com/myConsciousness/atproto.dart/issues/952))
+- Removed default constructor from `Bluesky`, and added `.session` property. ([#961](https://github.com/myConsciousness/atproto.dart/issues/961))
+
+## v0.9.1
+
+- Supported `app.bsky.feed.searchPosts` on `FeedsService`. ([#845](https://github.com/myConsciousness/atproto.dart/issues/845))
+  - `.searchPostsByQuery`
+  - `.searchPostsByQueryAsJson`
+  - `.paginatePostsByQuery`
+  - `.paginatePostsByQueryAsJson`
+- Supported `app.bsky.unspecced.searchPostsSkeleton` on `UnspeccedService`. ([#848](https://github.com/myConsciousness/atproto.dart/issues/848))
+  - `.searchPostsByQuerySkeleton`
+  - `.searchPostsByQuerySkeletonAsJson`
+  - `.paginatePostsByQuerySkeleton`
+  - `.paginatePostsByQuerySkeletonAsJson`
+- Supported `app.bsky.unspecced.searchActorsSkeleton` on `UnspeccedService`. ([#847](https://github.com/myConsciousness/atproto.dart/issues/847))
+  - `.searchActorsByQuerySkeleton`
+  - `.searchActorsByQuerySkeletonAsJson`
+  - `.paginateActorsByQuerySkeleton`
+  - `.paginateActorsByQuerySkeletonAsJson`
+- Supported `app.bsky.feed.threadgate` on `FeedsService`. ([#815](https://github.com/myConsciousness/atproto.dart/issues/815))
+  - `.createThreadgate`
+  - `ThreadRule`
+  - `ThreadMentionRule`
+  - `ThreadFollowingRule`
+  - `ThreadListRule`
+- Added `.onCreateThreadgate` and `.onDeleteThreadgate` events on `RepoCommitAdaptor`. Also added `ThreadgateRecord`.
+
+## v0.9.0
+
+- Added `rev` on `Repo` object. ([#885](https://github.com/myConsciousness/atproto.dart/issues/885))
+- Removed deprecated methods and object.
+  - `.refreshSession`: **Use function version instead.**
+  - `.findRepoCheckout`
+  - `.findRepoCheckoutAsJson`
+  - `.findRepoHead`
+  - `.findRepoHeadAsJson`
+
+## v0.8.24
+
+- Supported `com.atproto.server.requestEmailUpdate` on `ServersService`. ([#859](https://github.com/myConsciousness/atproto.dart/issues/859))
+  - `requestEmailUpdate`
+- Supported `com.atproto.server.requestEmailConfirmation` on `ServersService`. ([#858](https://github.com/myConsciousness/atproto.dart/issues/858))
+  - `requestEmailConfirmation`
+- Supported `com.atproto.server.confirmEmail` on `ServersService`. ([#855](https://github.com/myConsciousness/atproto.dart/issues/855))
+  - `requestEmailConfirmation`
+- Supported `com.atproto.server.updateEmail` on `ServersService`. ([#860](https://github.com/myConsciousness/atproto.dart/issues/860))
+  - `updateEmail`
+- Deprecated `app.bsky.unspecced.getPopular`. Find a feed generator alternative. ([#835](https://github.com/myConsciousness/atproto.dart/issues/835))
+  - `.findPopularFeed`
+  - `.findPopularFeedAsJson`
+  - `.paginatePopularFeed`
+  - `.paginatePopularFeedAsJson`
+- Removed `app.bsky.unspecced.applyLabels` from `UnspeccedService`. ([#846](https://github.com/myConsciousness/atproto.dart/issues/846))
+
+## v0.8.23
+
+- Supported hashtag on `FacetFeature.tag` and `FacetTag`. Also added `tags` parameter to `.createPost` on `FeedsService`. ([#839](https://github.com/myConsciousness/atproto.dart/issues/839))
+
+## v0.8.22
+
+- Supported actor preferences `#feedViewPref` and `#threadViewPref`. ([#831](https://github.com/myConsciousness/atproto.dart/issues/831))
+  - `Preference.feedView`
+  - `Preference.threadView`
+
+## v0.8.21
+
+- Dropped `includeReasons` param from methods on `Notifications`. Instead, pass `NotificationReasonFilter` object as an argument. ([#826](https://github.com/myConsciousness/atproto.dart/issues/826))
+  - `.group`
+  - `.groupByHour`
+  - `.groupByMinute`
+
+## v0.8.20
+
+- Added `.groupByHour` and `.groupByMinute` on `Notifications` object. You can adjust the unit of grouping in hours or minutes when grouping notifications. ([#821](https://github.com/myConsciousness/atproto.dart/issues/821))
+
+## v0.8.19
+
+- Upgraded `xrpc` package. Fixed field names for rate limit.
+
+## v0.8.18
+
+- Added `.createModeratedList` and `.createCuratedList` on `GraphsService`. And now `purpose` param for `.createList` is required. ([#814](https://github.com/myConsciousness/atproto.dart/issues/814))
+- Supported `app.bsky.feed.getListFeed` on `FeedsService`. ([#813](https://github.com/myConsciousness/atproto.dart/issues/813))
+  - `.findListFeed`
+  - `.findListFeedAsJson`
+  - `.paginateListFeed`
+  - `.paginateListFeedAsJson`
+
+## v0.8.17
+
+- Added `blocked` property on `ListViewer`. Also you can easily check with `.isBlocked` and `.isNotBlocked` properties. ([#792](https://github.com/myConsciousness/atproto.dart/issues/#792))
+- Upgraded `at_uri`. ([#797](https://github.com/myConsciousness/atproto.dart/issues/797))
+- Supported `app.bsky.graph.getSuggestedFollowsByActor` on `GraphsService`. ([#800](https://github.com/myConsciousness/atproto.dart/issues/800))
+  - `.findSuggestedFollows`
+  - `.findSuggestedFollowsAsJson`
+
+## v0.8.16
+
+- Added `.accessToken` and `.refreshToken` properties on `Session` object. You can get decoded token objects based on JWT tokens. Also you can decode JWT token with `decodeJwt` function. ([#787](https://github.com/myConsciousness/atproto.dart/issues/787))
+
+## v0.8.15
+
+- `viewer` on `Actor` object is **NOT** nullable. Fixed to set default objects if JSON is empty. ([#782](https://github.com/myConsciousness/atproto.dart/issues/#782))
+
+## v0.8.14
+
+- `viewer` on `Actor` object is nullable. ([#779](https://github.com/myConsciousness/atproto.dart/issues/#779))
+
+## v0.8.13
+
+- Improved union type to always return Unknown type if conversion to a specific type fails. With this fix, an exception/error is no longer thrown when converting json to a specific type for union. ([#775](https://github.com/myConsciousness/atproto.dart/issues/775))
+
+## v0.8.12
+
+- Supported `Preference.personalDetails`. Also added `PersonalDetailsPreference`. ([#768](https://github.com/myConsciousness/atproto.dart/issues/768))
+- Added `.toStrongRef` methods on `RepoCommitCreate` and `RepoCommitUpdate`. ([#771](https://github.com/myConsciousness/atproto.dart/issues/771))
+
+## v0.8.11
+
+- Added utility to retrieve profile records for authenticated user on `ActorsService`. ([#684](https://github.com/myConsciousness/atproto.dart/issues/684))
+  - `.findProfileRecord`
+  - `.findProfileRecordAsJson`
+- Supported `AspectRatio` for images. You can use this property from embed `Image` object. ([#753](https://github.com/myConsciousness/atproto.dart/issues/753))
+
+## v0.8.10
+
+- Added `uris` field on `GroupedNotification`. You can get a post uri related to Notification with `uri` property. ([#747](https://github.com/myConsciousness/atproto.dart/issues/747))
+
 ## v0.8.9
 
 - Added `record` field on `GroupedNotification`. ([#745](https://github.com/myConsciousness/atproto.dart/issues/745))

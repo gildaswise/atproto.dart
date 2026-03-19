@@ -4,51 +4,57 @@ import styles from "./styles.module.css";
 
 const FeatureList = [
   {
-    title: "Very Powerful and Easy",
+    title: "Build Faster with Production-Ready Components",
     Svg: require("@site/static/img/developer.svg").default,
     description: (
       <>
-        All packages in <code>atproto.dart</code> are very powerful and very
-        easy to use. In particular, <code>atproto</code> and{" "}
-        <code>bluesky</code>, wrapping the AT Protocol and Bluesky APIs, support
-        all major endpoints and incorporate advanced retry algorithms for
-        temporary network failures and etc.
+        Skip the boilerplate and focus on your app's unique features. Our{" "}
+        <strong>battle-tested packages</strong> power many Flutter applications
+        in production, giving you{" "}
+        <strong>reliable AT Protocol and Bluesky integration</strong> from day
+        one. Get comprehensive API coverage with <code>atproto</code>,{" "}
+        <code>bluesky</code>, and <code>bluesky_text</code> for advanced text
+        processing.
       </>
     ),
   },
   {
-    title: "100% Null Safety",
+    title: "Write Confident Code with Complete Type Safety",
     Svg: require("@site/static/img/null_safety.svg").default,
     description: (
       <>
-        All packages in <code>atproto.dart</code> is developed using the Dart
-        language, which provides strong support for Null Safety. Because of
-        this, <code>NullPointerException</code> will never occur in all packages
-        of <code>atproto.dart</code>. You do not need to worry about this
-        exception in your Dart or Flutter apps.{" "}
+        Eliminate runtime crashes before they happen. Every package is{" "}
+        <strong>100% null safe</strong>, leveraging Dart's robust type system
+        to catch errors at compile time. Your app{" "}
+        <strong>will never crash from null pointer exceptions</strong>, giving
+        you confidence in production deployments.
       </>
     ),
   },
   {
-    title: "Well Documented with Snippets",
-    Svg: require("@site/static/img/document.svg").default,
+    title: "Integrate Effortlessly into Your Flutter Workflow",
+    Svg: require("@site/static/img/seamless.svg").default,
     description: (
       <>
-        All packages in <code>atproto.dart</code> are very well documented.
-        Extensive documentation and sample snippets are available, including how
-        to install each package and how to implement it in Dart and Flutter
-        apps.
+        Start building immediately with Flutter-native design patterns. Our
+        packages follow Dart conventions you already know, enabling{" "}
+        <strong>seamless integration without learning curves</strong>. Build
+        powerful AT Protocol features{" "}
+        <strong>even without deep protocol knowledge</strong> – we handle the
+        complexity for you.
       </>
     ),
   },
   {
-    title: "Well Tested and Stable",
+    title: "Deploy with Confidence Using Proven Stability",
     Svg: require("@site/static/img/secure.svg").default,
     description: (
       <>
-        All packages in <code>atproto.dart</code> have numerous test codes to
-        ensure that the program works reliably, safely and stable above all.
-        Testing is automated as CI/CD, with a highly sustainable test design.
+        Ship reliable apps backed by comprehensive testing. Every release
+        passes extensive unit and integration tests covering real-world
+        scenarios. Our packages{" "}
+        <strong>deliver consistent, high-quality performance</strong> that your
+        users can depend on.
       </>
     ),
   },

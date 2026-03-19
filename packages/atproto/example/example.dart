@@ -1,13 +1,12 @@
-// Copyright 2023 Shinya Kato. All rights reserved.
-// Redistribution and use in source and binary forms, with or without
-// modification, are permitted provided the conditions.
+import 'package:atproto/atproto.dart';
+import 'package:atproto/core.dart';
+import 'package:atproto/firehose.dart' as firehose;
 
-import 'package:atproto/atproto.dart' as atp;
-
+/// https://atprotodart.com/docs/packages/atproto
 Future<void> main() async {
   try {
     //! First you need to establish session with ATP server.
-    final session = await atp.createSession(
+    final session = await createSession(
       service: 'SERVICE_NAME', //! The default is `bsky.social`
       identifier: 'YOUR_HANDLE_OR_EMAIL', //! Like `shinyakato.bsky.social`
       password: 'YOUR_PASSWORD',
@@ -15,17 +14,20 @@ Future<void> main() async {
 
     print(session);
 
-    final atproto = atp.ATProto.fromSession(
+    final atproto = ATProto.fromSession(
       session.data,
+
+      //! The default is `bsky.social`, or resolve dynamically based on session
+      service: 'SERVICE_NAME',
+
+      //! The default is `bsky.network`
+      relayService: 'STREAM_SERVICE_NAME',
 
       //! Automatic retry is available when server error or network error occurs
       //! when communicating with the API.
-      retryConfig: atp.RetryConfig(
+      retryConfig: RetryConfig(
         maxAttempts: 5,
-        jitter: atp.Jitter(
-          minInSeconds: 2,
-          maxInSeconds: 5,
-        ),
+        jitter: Jitter(minInSeconds: 2, maxInSeconds: 5),
         onExecute: (event) => print(
           'Retry after ${event.intervalInSeconds} seconds...'
           '[${event.retryCount} times]',
@@ -37,37 +39,34 @@ Future<void> main() async {
     );
 
     //! Create a record to specific service.
-    final createdRecord = await atproto.repositories.createRecord(
-      collection: atp.NSID.create(
-        'feed.bsky.app',
-        'post',
-      ),
+    final createdRecord = await atproto.repo.createRecord(
+      repo: session.data.did,
+      collection: 'app.bsky.feed.post',
       record: {
         'text': 'Hello, Bluesky!',
         "createdAt": DateTime.now().toUtc().toIso8601String(),
       },
     );
 
+    final recordUri = createdRecord.data.uri;
+
     //! And delete it.
-    await atproto.repositories.deleteRecord(
-      uri: createdRecord.data.uri,
+    await atproto.repo.deleteRecord(
+      repo: recordUri.hostname,
+      collection: recordUri.collection.toString(),
+      rkey: recordUri.rkey,
     );
 
     //! You can use Stream API easily.
-    final subscription = await atproto.sync.subscribeRepoUpdates();
+    final subscription = await atproto.sync.subscribeRepos();
     subscription.data.stream.listen((event) {
-      event.when(
-        commit: print,
-        handle: print,
-        migrate: print,
-        tombstone: print,
-        info: print,
-        unknown: print,
-      );
+      final repos = const firehose.SyncSubscribeReposAdaptor().execute(event);
+
+      print(repos);
     });
-  } on atp.UnauthorizedException catch (e) {
+  } on UnauthorizedException catch (e) {
     print(e);
-  } on atp.XRPCException catch (e) {
+  } on XRPCException catch (e) {
     print(e);
   }
 }

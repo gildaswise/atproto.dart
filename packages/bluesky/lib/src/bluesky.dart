@@ -1,174 +1,259 @@
-// Copyright 2023 Shinya Kato. All rights reserved.
-// Redistribution and use in source and binary forms, with or without
-// modification, are permitted provided the conditions.
+// Copyright (c) 2023-2025, Shinya Kato.
+// All rights reserved. Use of this source code is governed by a
+// BSD-style license that can be found in the LICENSE file.
 
-// 📦 Package imports:
+// Package imports:
 import 'package:atproto/atproto.dart' as atp;
 import 'package:atproto_core/atproto_core.dart' as core;
+import 'package:atproto_core/atproto_oauth.dart' as oauth;
 
-// 🌎 Project imports:
-import 'actors/actors_service.dart';
-import 'bluesky_service.dart';
-import 'feeds/feeds_service.dart';
-import 'graphs/graphs_service.dart';
-import 'notifications/notifications_service.dart';
-import 'unspecced/unspecced_service.dart';
+// Project imports:
+import '../app_bsky_services.dart';
+import 'services/app/bsky/video_service.dart';
 
+/// Provides `app.bsky.*` services.
 sealed class Bluesky {
   /// Returns the new instance of [Bluesky].
-  factory Bluesky({
-    required String did,
-    required String accessJwt,
-    core.Protocol protocol = core.defaultProtocol,
-    String service = core.defaultService,
-    Duration timeout = core.defaultTimeout,
-    core.RetryConfig? retryConfig,
-    final core.GetClient? mockedGetClient,
-    final core.PostClient? mockedPostClient,
-  }) =>
-      _Bluesky(
-        did: did,
-        accessJwt: accessJwt,
-        protocol: protocol,
-        service: service,
-        timeout: timeout,
-        retryConfig: retryConfig,
-        mockedGetClient: mockedGetClient,
-        mockedPostClient: mockedPostClient,
-      );
+  factory Bluesky.fromSession(
+    final core.Session session, {
+    final Map<String, String>? headers,
+    final core.Protocol? protocol,
+    final String? service,
+    final String? relayService,
+    final Duration? timeout,
+    final core.RetryConfig? retryConfig,
+    final core.GetClient? getClient,
+    final core.PostClient? postClient,
+  }) => _Bluesky(
+    core.ServiceContext(
+      headers: headers,
+      protocol: protocol,
+      service: service,
+      relayService: relayService,
+      session: session,
+      timeout: timeout,
+      retryConfig: retryConfig,
+      getClient: getClient,
+      postClient: postClient,
+    ),
+    atp.ATProto.fromSession(
+      headers: headers,
+      session,
+      protocol: protocol,
+      service: service,
+      relayService: relayService,
+      timeout: timeout,
+      retryConfig: retryConfig,
+      getClient: getClient,
+      postClient: postClient,
+    ),
+  );
 
   /// Returns the new instance of [Bluesky].
-  factory Bluesky.fromSession(
-    final atp.Session session, {
-    core.Protocol protocol = core.defaultProtocol,
-    String service = core.defaultService,
-    Duration timeout = core.defaultTimeout,
-    core.RetryConfig? retryConfig,
-    final core.GetClient? mockedGetClient,
-    final core.PostClient? mockedPostClient,
-  }) =>
-      _Bluesky(
-        did: session.did,
-        accessJwt: session.accessJwt,
-        protocol: protocol,
-        service: service,
-        timeout: timeout,
-        retryConfig: retryConfig,
-        mockedGetClient: mockedGetClient,
-        mockedPostClient: mockedPostClient,
-      );
+  factory Bluesky.fromOAuthSession(
+    final oauth.OAuthSession session, {
+    final Map<String, String>? headers,
+    final core.Protocol? protocol,
+    final String? service,
+    final String? relayService,
+    final Duration? timeout,
+    final core.RetryConfig? retryConfig,
+    final core.GetClient? getClient,
+    final core.PostClient? postClient,
+  }) => _Bluesky(
+    core.ServiceContext(
+      headers: headers,
+      protocol: protocol,
+      service: service,
+      relayService: relayService,
+      oAuthSession: session,
+      timeout: timeout,
+      retryConfig: retryConfig,
+      getClient: getClient,
+      postClient: postClient,
+    ),
+    atp.ATProto.fromOAuthSession(
+      headers: headers,
+      session,
+      protocol: protocol,
+      service: service,
+      relayService: relayService,
+      timeout: timeout,
+      retryConfig: retryConfig,
+      getClient: getClient,
+      postClient: postClient,
+    ),
+  );
 
   /// Returns the new instance of [Bluesky] as anonymous.
   factory Bluesky.anonymous({
-    core.Protocol protocol = core.defaultProtocol,
-    String service = core.defaultService,
-    Duration timeout = core.defaultTimeout,
-    core.RetryConfig? retryConfig,
-    final core.GetClient? mockedGetClient,
-    final core.PostClient? mockedPostClient,
-  }) =>
-      _Bluesky(
-        did: '',
-        accessJwt: '',
-        protocol: protocol,
-        service: service,
-        timeout: timeout,
-        retryConfig: retryConfig,
-        mockedGetClient: mockedGetClient,
-        mockedPostClient: mockedPostClient,
-      );
+    final Map<String, String>? headers,
+    final core.Protocol? protocol,
+    final String? service,
+    final String? relayService,
+    final Duration? timeout,
+    final core.RetryConfig? retryConfig,
+    final core.GetClient? getClient,
+    final core.PostClient? postClient,
+  }) => _Bluesky(
+    core.ServiceContext(
+      headers: headers,
+      protocol: protocol,
+      service: service,
+      relayService: relayService,
+      timeout: timeout,
+      retryConfig: retryConfig,
+      getClient: getClient,
+      postClient: postClient,
+    ),
+    atp.ATProto.anonymous(
+      headers: headers,
+      protocol: protocol,
+      service: service,
+      relayService: relayService,
+      timeout: timeout,
+      retryConfig: retryConfig,
+      getClient: getClient,
+      postClient: postClient,
+    ),
+  );
 
-  /// Returns the actors service.
-  ActorsService get actors;
+  /// Returns the global headers without auth header.
+  Map<String, String> get headers;
 
-  /// Returns the feeds service.
-  FeedsService get feeds;
+  /// Returns the current session.
+  ///
+  /// Set only if an instance of this object was created in
+  /// [Bluesky.fromSession], otherwise null.
+  core.Session? get session;
 
-  /// Returns the notifications service.
-  NotificationsService get notifications;
+  /// Returns the current OAuth session.
+  ///
+  /// Set only if an instance of this object was created in
+  /// [Bluesky.fromOAuthSession], otherwise null.
+  oauth.OAuthSession? get oAuthSession;
 
-  /// Returns the graphs service.
-  GraphsService get graphs;
+  /// Returns the current service.
+  /// Defaults to `bsky.social`.
+  String get service;
+
+  /// Returns the current replay service.
+  /// Defaults to `bsky.network`.
+  String get relayService;
+
+  /// Returns atproto features.
+  atp.ATProto get atproto;
+
+  /// Returns the actor service.
+  /// This service represents `app.bsky.actor.*`.
+  ActorService get actor;
+
+  /// Returns the ageassurance service.
+  /// This service represents `app.bsky.ageassurance.*`.
+  AgeassuranceService get ageassurance;
+
+  /// Returns the feed service.
+  /// This service represents `app.bsky.feed.*`.
+  FeedService get feed;
+
+  /// Returns the notification service.
+  /// This service represents `app.bsky.notification.*`.
+  NotificationService get notification;
+
+  /// Returns the graph service.
+  /// This service represents `app.bsky.graph.*`.
+  GraphService get graph;
 
   /// Returns the unspecced service.
+  /// This service represents `app.bsky.unspecced.*`.
   UnspeccedService get unspecced;
 
-  /// Returns the servers service.
-  atp.ServersService get servers;
+  /// Returns the labeler service.
+  /// This service represents `app.bsky.labeler.*`.
+  LabelerService get labeler;
 
-  /// Returns the identities service.
-  atp.IdentitiesService get identities;
+  /// Returns the video service.
+  /// This service represents `app.bsky.video.*`.
+  VideoServiceImpl get video;
 
-  /// Returns the repositories service.
-  atp.RepositoriesService get repositories;
+  /// Returns the bookmark service.
+  /// This service represents `app.bsky.bookmark.*`.
+  BookmarkService get bookmark;
 
-  /// Returns the moderation service.
-  atp.ModerationService get moderation;
+  /// Returns the contact service.
+  /// This service represents `app.bsky.contact.*`.
+  ContactService get contact;
 
-  /// Returns the sync service.
-  atp.SyncService get sync;
+  /// Returns the draft service.
+  /// This service represents `app.bsky.draft.*`.
+  DraftService get draft;
 }
 
 final class _Bluesky implements Bluesky {
-  /// Returns the new instance of [_Bluesky].
-  _Bluesky({
-    required String did,
-    required String accessJwt,
-    required core.Protocol protocol,
-    required String service,
-    required Duration timeout,
-    core.RetryConfig? retryConfig,
-    final core.GetClient? mockedGetClient,
-    final core.PostClient? mockedPostClient,
-  }) : _service = BlueskyService(
-          atproto: atp.ATProto(
-            did: did,
-            accessJwt: accessJwt,
-            protocol: protocol,
-            service: service,
-            timeout: timeout,
-            retryConfig: retryConfig,
-          ),
-          protocol: protocol,
-          service: service,
-          context: core.ClientContext(
-            accessJwt: accessJwt,
-            timeout: timeout,
-            retryConfig: retryConfig,
-          ),
-          mockedGetClient: mockedGetClient,
-          mockedPostClient: mockedPostClient,
-        );
+  _Bluesky(final core.ServiceContext ctx, this.atproto)
+    : actor = ActorService(ctx),
+      ageassurance = AgeassuranceService(ctx),
+      feed = FeedService(ctx),
+      notification = NotificationService(ctx),
+      graph = GraphService(ctx),
+      unspecced = UnspeccedService(ctx),
+      labeler = LabelerService(ctx),
+      video = VideoServiceImpl(ctx),
+      bookmark = BookmarkService(ctx),
+      contact = ContactService(ctx),
+      draft = DraftService(ctx),
+      _ctx = ctx;
 
-  final BlueskyService _service;
+  final core.ServiceContext _ctx;
 
   @override
-  ActorsService get actors => _service.actors;
+  Map<String, String> get headers => _ctx.headers;
 
   @override
-  FeedsService get feeds => _service.feeds;
+  core.Session? get session => _ctx.session;
 
   @override
-  NotificationsService get notifications => _service.notifications;
+  oauth.OAuthSession? get oAuthSession => _ctx.oAuthSession;
 
   @override
-  GraphsService get graphs => _service.graphs;
+  String get service => _ctx.service;
 
   @override
-  UnspeccedService get unspecced => _service.unspecced;
+  String get relayService => _ctx.relayService;
 
   @override
-  atp.ServersService get servers => _service.servers;
+  final atp.ATProto atproto;
 
   @override
-  atp.IdentitiesService get identities => _service.identities;
+  final ActorService actor;
 
   @override
-  atp.RepositoriesService get repositories => _service.repositories;
+  final AgeassuranceService ageassurance;
 
   @override
-  atp.ModerationService get moderation => _service.moderation;
+  final FeedService feed;
 
   @override
-  atp.SyncService get sync => _service.sync;
+  final NotificationService notification;
+
+  @override
+  final GraphService graph;
+
+  @override
+  final UnspeccedService unspecced;
+
+  @override
+  final LabelerService labeler;
+
+  @override
+  final VideoServiceImpl video;
+
+  @override
+  final BookmarkService bookmark;
+
+  @override
+  final ContactService contact;
+
+  @override
+  final DraftService draft;
 }

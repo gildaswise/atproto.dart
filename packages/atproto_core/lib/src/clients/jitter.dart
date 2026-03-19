@@ -1,13 +1,10 @@
-// Copyright 2023 Shinya Kato. All rights reserved.
-// Redistribution and use in source and binary forms, with or without
-// modification, are permitted provided the conditions.
+// Copyright (c) 2023-2025, Shinya Kato.
+// All rights reserved. Use of this source code is governed by a
+// BSD-style license that can be found in the LICENSE file.
 
 final class Jitter {
   /// Returns the new instance of [Jitter].
-  Jitter({
-    this.minInSeconds = 0,
-    required this.maxInSeconds,
-  }) {
+  Jitter({this.minInSeconds = 0, required this.maxInSeconds}) {
     if (minInSeconds < 0) {
       throw ArgumentError.value(
         minInSeconds,
@@ -25,9 +22,7 @@ final class Jitter {
     }
 
     if (maxInSeconds < minInSeconds) {
-      throw ArgumentError(
-        'minInSeconds must not be greater than maxInSeconds',
-      );
+      throw ArgumentError('minInSeconds must not be greater than maxInSeconds');
     }
   }
 

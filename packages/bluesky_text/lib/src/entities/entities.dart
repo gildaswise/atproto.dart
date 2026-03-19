@@ -1,11 +1,11 @@
-// Copyright 2023 Shinya Kato. All rights reserved.
-// Redistribution and use in source and binary forms, with or without
-// modification, are permitted provided the conditions.
+// Copyright (c) 2023-2025, Shinya Kato.
+// All rights reserved. Use of this source code is governed by a
+// BSD-style license that can be found in the LICENSE file.
 
-// 🎯 Dart imports:
+// Dart imports:
 import 'dart:collection';
 
-// 🌎 Project imports:
+// Project imports:
 import 'entity.dart';
 
 class Entities extends UnmodifiableListView<Entity> {
@@ -13,23 +13,9 @@ class Entities extends UnmodifiableListView<Entity> {
   Entities(super.source);
 
   /// Returns the collection of facet.
-  ///
-  /// ## Parameters
-  ///
-  /// - [ignoreInvalidHandle]: If true, processing continues even if an invalid
-  ///                          handle is detected, and data from the invalid
-  ///                          handle is excluded from the result. If false, an
-  ///                          `InvalidRequestException` is thrown when an
-  ///                          invalid handle is detected.
-  Future<List<Map<String, dynamic>>> toFacets({
-    bool ignoreInvalidHandle = true,
-  }) async {
+  Future<List<Map<String, dynamic>>> toFacets({String? service}) async {
     final facets = await Future.wait(
-      map(
-        (entity) => entity.toFacet(
-          ignoreInvalidHandle: ignoreInvalidHandle,
-        ),
-      ),
+      map((entity) => entity.toFacet(service: service)),
     );
 
     return facets..removeWhere((e) => e.isEmpty);

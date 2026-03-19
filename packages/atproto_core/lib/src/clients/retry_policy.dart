@@ -1,30 +1,17 @@
-// Copyright 2023 Shinya Kato. All rights reserved.
-// Redistribution and use in source and binary forms, with or without
-// modification, are permitted provided the conditions.
+// Copyright (c) 2023-2025, Shinya Kato.
+// All rights reserved. Use of this source code is governed by a
+// BSD-style license that can be found in the LICENSE file.
 
-// 🎯 Dart imports:
+// Dart imports:
 import 'dart:math' as math;
 
-// 🌎 Project imports:
+// Project imports:
 import 'retry_config.dart';
 import 'retry_event.dart';
 
-sealed class RetryPolicy {
+final class RetryPolicy {
   /// Returns the new instance of [RetryPolicy].
-  factory RetryPolicy(
-    final RetryConfig? retryConfig,
-  ) =>
-      _RetryPolicy(retryConfig);
-
-  /// Returns true if the retry should be performed, otherwise false.
-  bool shouldRetry(final int retryCount);
-
-  Future wait(final int retryCount);
-}
-
-final class _RetryPolicy implements RetryPolicy {
-  /// Returns the new instance of [_RetryPolicy].
-  const _RetryPolicy(RetryConfig? retryConfig) : _retryConfig = retryConfig;
+  const RetryPolicy(RetryConfig? retryConfig) : _retryConfig = retryConfig;
 
   /// The random generator.
   static final _random = math.Random();
@@ -32,7 +19,6 @@ final class _RetryPolicy implements RetryPolicy {
   /// The configuration of retry.
   final RetryConfig? _retryConfig;
 
-  @override
   bool shouldRetry(final int retryCount) {
     _checkRetryCount(retryCount);
 
@@ -43,7 +29,6 @@ final class _RetryPolicy implements RetryPolicy {
     return _retryConfig!.maxAttempts > retryCount;
   }
 
-  @override
   Future wait(final int retryCount) async {
     _checkRetryCount(retryCount);
 
@@ -54,15 +39,10 @@ final class _RetryPolicy implements RetryPolicy {
     final int intervalInSeconds = _computeWaitIntervals(retryCount - 1);
 
     await _retryConfig!.onExecute?.call(
-      RetryEvent(
-        retryCount: retryCount,
-        intervalInSeconds: intervalInSeconds,
-      ),
+      RetryEvent(retryCount: retryCount, intervalInSeconds: intervalInSeconds),
     );
 
-    return await Future.delayed(
-      Duration(seconds: intervalInSeconds),
-    );
+    return await Future.delayed(Duration(seconds: intervalInSeconds));
   }
 
   void _checkRetryCount(final int retryCount) {
@@ -86,5 +66,5 @@ final class _RetryPolicy implements RetryPolicy {
 
   int get _jitter =>
       _random.nextInt(_retryConfig!.jitter.maxInSeconds) +
-      _retryConfig!.jitter.minInSeconds;
+      _retryConfig.jitter.minInSeconds;
 }

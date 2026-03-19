@@ -1,11 +1,7 @@
-// Copyright 2023 Shinya Kato. All rights reserved.
-// Redistribution and use in source and binary forms, with or without
-// modification, are permitted provided the conditions.
-
-// 📦 Package imports:
+// Package imports:
 import 'package:test/test.dart';
 
-// 🌎 Project imports:
+// Project imports:
 import 'package:atproto_core/src/clients/jitter.dart';
 
 void main() {
@@ -26,27 +22,21 @@ void main() {
   test('when minInSeconds is less than 0', () {
     expect(
       () => Jitter(minInSeconds: -1, maxInSeconds: 5),
-      throwsA(
-        isA<ArgumentError>(),
-      ),
+      throwsA(isA<ArgumentError>()),
     );
   });
 
   test('when maxInSeconds is less than 0', () {
     expect(
       () => Jitter(minInSeconds: 0, maxInSeconds: -1),
-      throwsA(
-        isA<ArgumentError>(),
-      ),
+      throwsA(isA<ArgumentError>()),
     );
   });
 
   test('when maxInSeconds is less than minInSeconds', () {
     expect(
       () => Jitter(minInSeconds: 2, maxInSeconds: 1),
-      throwsA(
-        isA<ArgumentError>(),
-      ),
+      throwsA(isA<ArgumentError>()),
     );
   });
 }

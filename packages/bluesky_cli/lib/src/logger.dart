@@ -1,8 +1,8 @@
-// Copyright 2023 Shinya Kato. All rights reserved.
-// Redistribution and use in source and binary forms, with or without
-// modification, are permitted provided the conditions.
+// Copyright (c) 2023-2025, Shinya Kato.
+// All rights reserved. Use of this source code is governed by a
+// BSD-style license that can be found in the LICENSE file.
 
-// 📦 Package imports:
+// Package imports:
 import 'package:ansi_styles/ansi_styles.dart';
 import 'package:cli_util/cli_logging.dart';
 
@@ -42,9 +42,9 @@ class BskyLogger with _DelegateLogger {
     Logger logger, {
     String indentation = '',
     String childIndentation = '  ',
-  })  : _logger = logger,
-        _indentation = indentation,
-        _childIndentation = childIndentation;
+  }) : _logger = logger,
+       _indentation = indentation,
+       _childIndentation = childIndentation;
 
   @override
   final Logger _logger;
@@ -66,10 +66,12 @@ class BskyLogger with _DelegateLogger {
   }
 
   void warning(String message, {bool label = true, bool dryRun = false}) {
-    final labelColor =
-        dryRun ? dryRunWarningLabelColor : dryRunWarningMessageColor;
-    final messageColor =
-        dryRun ? dryRunWarningMessageColor : warningMessageColor;
+    final labelColor = dryRun
+        ? dryRunWarningLabelColor
+        : dryRunWarningMessageColor;
+    final messageColor = dryRun
+        ? dryRunWarningMessageColor
+        : warningMessageColor;
     if (label) {
       stdout('$warningLabel${labelColor(':')} $message');
     } else {

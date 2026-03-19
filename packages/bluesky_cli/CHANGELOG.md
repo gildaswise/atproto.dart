@@ -1,5 +1,61 @@
 # Release Note
 
+## v0.4.7
+
+- Bump dependencies.
+
+## v0.4.6
+
+- Bump `at_uri`. ([#1551](https://github.com/myConsciousness/atproto.dart/issues/1551))
+
+## v0.4.5
+
+- Upgrade `at_uri`. ([#1300](https://github.com/myConsciousness/atproto.dart/issues/1300))
+
+## v0.4.4
+
+- Bump SDK constraint to '^3.3.0'.
+
+## v0.4.3
+
+- Upgraded dependencies. ([#1146](https://github.com/myConsciousness/atproto.dart/issues/1146))
+
+## v0.4.2
+
+- Add `--reply` option on `post` command. Pass the AT URI of the post to which you are replying as an argument. ([#1144](https://github.com/myConsciousness/atproto.dart/issues/1144))
+
+## v0.4.1
+
+- Upgraded dependencies. ([#1112](https://github.com/myConsciousness/atproto.dart/issues/1112))
+
+## v0.4.0
+
+- Upgraded dependencies.
+
+## v0.3.8
+
+- Supported `images` option on `post` command. You can specify the paths of images to be attached, separated by commas. ([#825](https://github.com/myConsciousness/atproto.dart/issues/825))
+
+## v0.3.7
+
+- Supported hashtag detection. ([#839](https://github.com/myConsciousness/atproto.dart/issues/839))
+
+## v0.3.6
+
+- Added `list-feed` command. ([#813](https://github.com/myConsciousness/atproto.dart/issues/813))
+
+## v0.3.5
+
+- Added `suggested-follows` command. ([#800](https://github.com/myConsciousness/atproto.dart/issues/800))
+
+## v0.3.4
+
+- Upgraded `bluesky_text`.
+
+## v0.3.3
+
+- Upgraded `bluesky_text`.
+
 ## v0.3.2
 
 - Supported `actor-likes` command. ([#700](https://github.com/myConsciousness/atproto.dart/issues/700))

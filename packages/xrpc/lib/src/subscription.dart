@@ -1,11 +1,11 @@
-// Copyright 2023 Shinya Kato. All rights reserved.
-// Redistribution and use in source and binary forms, with or without
-// modification, are permitted provided the conditions.
+// Copyright (c) 2023-2025, Shinya Kato.
+// All rights reserved. Use of this source code is governed by a
+// BSD-style license that can be found in the LICENSE file.
 
-// 🎯 Dart imports:
+// Dart imports:
 import 'dart:async';
 
-// 📦 Package imports:
+// Package imports:
 import 'package:web_socket_channel/web_socket_channel.dart';
 
 final class Subscription<T> {
@@ -13,8 +13,8 @@ final class Subscription<T> {
   const Subscription({
     required WebSocketChannel channel,
     required StreamController<T> controller,
-  })  : _channel = channel,
-        _controller = controller;
+  }) : _channel = channel,
+       _controller = controller;
 
   /// Returns the stream.
   Stream<T> get stream => _controller.stream;

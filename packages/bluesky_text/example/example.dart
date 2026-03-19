@@ -1,10 +1,9 @@
-// Copyright 2023 Shinya Kato. All rights reserved.
-// Redistribution and use in source and binary forms, with or without
-// modification, are permitted provided the conditions.
-
 // ignore_for_file: lines_longer_than_80_chars
 
+import 'package:bluesky/app_bsky_richtext_facet.dart';
+import 'package:bluesky/atproto.dart';
 import 'package:bluesky/bluesky.dart' as bsky;
+import 'package:bluesky/core.dart';
 import 'package:bluesky_text/bluesky_text.dart';
 
 Future<void> main() async {
@@ -14,8 +13,6 @@ Future<void> main() async {
     'Visit 🚀 https://shinyakato.dev.',
   );
 
-  //! The character limit for Bluesky Social posts is 300 characters.
-  //! You need to split it before call some properties.
   if (text.isLengthLimitExceeded) {
     //! Let's split.
     final texts = text.split();
@@ -26,8 +23,6 @@ Future<void> main() async {
       print(text.entities);
     }
   } else {
-    //! If it is less than 300 characters, it can simply be parsed.
-
     // [{type: handle, value: @shinyakato.dev, indices: {start: 35, end: 50}},
     // {type: handle, value: @shinyakato.bsky.social, indices: {start: 55, end: 78}}]
     print(text.handles);
@@ -44,15 +39,15 @@ Future<void> main() async {
     final bluesky = bsky.Bluesky.fromSession(await _session);
     final facets = await text.entities.toFacets();
 
-    await bluesky.feeds.createPost(
+    await bluesky.feed.post.create(
       text: text.value,
-      facets: facets.map((e) => bsky.Facet.fromJson(e)).toList(),
+      facets: facets.map(RichtextFacet.fromJson).toList(),
     );
   }
 }
 
-Future<bsky.Session> get _session async {
-  final session = await bsky.createSession(
+Future<Session> get _session async {
+  final session = await createSession(
     service: 'SERVICE_NAME', //! The default is `bsky.social`
     identifier: 'YOUR_HANDLE_OR_EMAIL', //! Like `shinyakato.bsky.social`
     password: 'YOUR_PASSWORD',

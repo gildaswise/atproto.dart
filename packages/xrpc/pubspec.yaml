@@ -1,14 +1,16 @@
 name: xrpc
-description: Provide an HTTP client specialized for XRPC communication in AT Protocol.
-version: 0.3.1
+resolution: workspace
+description: Core library for XRPC communication. This is a wrapped HTTP client for AT Protocol.
+version: 1.0.3
 homepage: https://atprotodart.com
+documentation: https://atprotodart.com/docs/intro
 repository: https://github.com/myConsciousness/atproto.dart/tree/main/packages/xrpc
 issue_tracker: https://github.com/myConsciousness/atproto.dart/issues
 funding:
   - https://github.com/sponsors/myConsciousness
 
 environment:
-  sdk: ^3.0.0
+  sdk: ">=3.8.0 <4.0.0"
 
 topics:
   - atproto
@@ -17,22 +19,20 @@ topics:
   - xrpc
 
 dependencies:
-  http: ^1.1.0
-  meta: ^1.8.0
-  nsid: ^0.2.1
-  freezed_annotation: ^2.4.1
-  json_annotation: ^4.8.1
-  mime: ^1.0.4
-  web_socket_channel: ^2.4.0
-  universal_io: ^2.2.2
+  http: ^1.4.0
+  at_primitives: ^1.0.0
+  freezed_annotation: ^3.1.0
+  json_annotation: ^4.9.0
+  mime: ^2.0.0
+  web_socket_channel: ^3.0.3
 
 dev_dependencies:
-  lints: ^2.0.1
-  test: ^1.21.0
-  build_runner: ^2.4.6
-  json_serializable: ^6.7.1
-  freezed: ^2.4.2
-  import_sorter: ^4.6.0
-
-import_sorter:
-  emojis: true
+  lints: ^6.0.0
+  test: ^1.26.2
+  build_runner: ^2.5.4
+  json_serializable: ^6.9.5
+  freezed: ^3.2.0
+  import_sorter:
+    git:
+      url: https://github.com/myConsciousness/import_sorter.git
+      ref: fix/monorepo-pub-workspaces

@@ -1,5 +1,84 @@
 # Release Note
 
+## v1.0.3
+
+- **MIGRATION**: Updated to use the consolidated `at_primitives` package for AT Protocol primitive types.
+- **IMPROVEMENT**: Reduced dependency complexity by adopting unified primitive types.
+
+## v1.0.2
+
+- Fix SDK constraint to '">=3.8.0 <4.0.0"'.
+
+## v1.0.1
+
+- chore: optimized docs.
+
+## v1.0.0
+
+- Bump SDK constraint to '^3.8.0'.
+
+## v0.6.1
+
+- Use `web_socket_channel: ^3.0.0`.
+
+## v0.6.0
+
+- Add parameter `headerBuilder` on `query` and `procedure` functions.
+
+## v0.5.3
+
+- Just return the response when the status code is 409. ([#1783](https://github.com/myConsciousness/atproto.dart/issues/1783))
+
+## v0.5.2
+
+- Bump SDK constraint to '^3.3.0'.
+
+## v0.5.1
+
+- Improved redundant error messages. Now it shows like `GET https://bsky.social/xrpc/com.atproto.identity.resolveHandle 400 Error: Params must have the property "handle"`. ([#1253](https://github.com/myConsciousness/atproto.dart/issues/1253))
+- Added `parameters` arg on `.post` and `.procedure`. ([#1252](https://github.com/myConsciousness/atproto.dart/issues/1252))
+- Removed `.upload` from `xrpc`. You can upload from `.procedure` and pass bytes to `body`. ([#1252](https://github.com/myConsciousness/atproto.dart/issues/1252))
+
+## v0.5.0
+
+- Renamed types. ([#1217](https://github.com/myConsciousness/atproto.dart/issues/1217))
+  - From `To` to `ResponseDataBuilder`
+  - From `ResponseAdaptor` to `ResponseDataAdaptor`
+
+## v0.4.5
+
+- Upgrade `NSID`. ([#1159](https://github.com/myConsciousness/atproto.dart/issues/1159))
+
+## v0.4.4
+
+- Upgrade dependencies. ([#1146](https://github.com/myConsciousness/atproto.dart/issues/1146))
+
+## v0.4.3
+
+- Don't remove empty list.
+
+## v0.4.2
+
+- Upgraded `nsid`. ([#1112](https://github.com/myConsciousness/atproto.dart/issues/1112))
+
+## v0.4.1
+
+- Added `.post` function. ([#999](https://github.com/myConsciousness/atproto.dart/issues/999))
+- Use `bsky.network` as default when service is missing for `.subscribe` function.
+
+## v0.4.0
+
+- Added HTTP specific function and exposed as `http/http`. ([#989](https://github.com/myConsciousness/atproto.dart/issues/989))
+  - `.get`
+
+## v0.3.3
+
+- You can specify `Uint8List` as a type parameter.
+
+## v0.3.2
+
+- Fixed field names for rate limits.
+
 ## v0.3.1
 
 - Improved documents. ([#677](https://github.com/myConsciousness/atproto.dart/issues/677))

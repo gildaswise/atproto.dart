@@ -1,5 +1,0 @@
-dependency_overrides:
-  nsid:
-    path: ../nsid
-  xrpc:
-    path: ../xrpc

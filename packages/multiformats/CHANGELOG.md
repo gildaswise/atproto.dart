@@ -1,5 +1,25 @@
 # Release Note
 
+## v1.0.2
+
+- Fix SDK constraint to '">=3.8.0 <4.0.0"'.
+
+## v1.0.1
+
+- chore: optimized docs.
+
+## v1.0.0
+
+- Bump SDK constraint to '^3.8.0'.
+
+## v0.2.3
+
+- Bump SDK constraint to '^3.3.0'.
+
+## v0.2.2
+
+- Very minor change. ([#1112](https://github.com/myConsciousness/atproto.dart/issues/1112))
+
 ## v0.2.1
 
 - Improved documents. ([#677](https://github.com/myConsciousness/atproto.dart/issues/677))

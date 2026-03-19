@@ -1,20 +1,21 @@
-// Copyright 2023 Shinya Kato. All rights reserved.
-// Redistribution and use in source and binary forms, with or without
-// modification, are permitted provided the conditions.
+// Copyright (c) 2023-2025, Shinya Kato.
+// All rights reserved. Use of this source code is governed by a
+// BSD-style license that can be found in the LICENSE file.
 
-// 🎯 Dart imports:
+// Dart imports:
 import 'dart:async';
 import 'dart:io';
 
-// 📦 Package imports:
+// Package imports:
 import 'package:args/args.dart';
 import 'package:args/command_runner.dart';
 import 'package:cli_launcher/cli_launcher.dart';
 import 'package:cli_util/cli_logging.dart';
 
-// 🌎 Project imports:
+// Project imports:
 import './version.g.dart';
-import 'command/commands.dart';
+import 'commands/cardyb_command.dart';
+import 'commands/codegen/lex_commands.dart';
 import 'logger.dart';
 
 /// A class that can run Bsky commands.
@@ -24,14 +25,15 @@ import 'logger.dart';
 /// ```dart
 /// final bsky = BskyCommandRunner();
 ///
-/// await bsky.run(['show-timeline']);
+/// await bsky.run(['app-bsky-feed get-timeline']);
 /// ```
 class BskyCommandRunner extends CommandRunner<void> {
   BskyCommandRunner()
-      : super(
-          'bsky',
-          "A useful and powerful CLI tool to use Bluesky Social's APIs.",
-        ) {
+    : super(
+        'bsky',
+        "A powerful and extensible CLI tool for "
+            "interacting with Bluesky Social's APIs",
+      ) {
     argParser
       ..addOption(
         'identifier',
@@ -40,13 +42,12 @@ class BskyCommandRunner extends CommandRunner<void> {
       )
       ..addOption(
         'password',
-        help: 'Bluesky password for authentication.',
+        help: 'Password on Bluesky for authentication.',
         defaultsTo: Platform.environment['BLUESKY_PASSWORD'],
       )
       ..addOption(
         'service',
-        help: 'Name of the service sending the request. '
-            'Defaults to "bsky.social".',
+        help: 'Name of the service sending the request.',
         defaultsTo: null,
       )
       ..addFlag(
@@ -64,20 +65,9 @@ class BskyCommandRunner extends CommandRunner<void> {
         negatable: false,
         help: 'Enable to output request method and URI.',
       )
-      ..addFlag(
-        'verbose',
-        negatable: false,
-        help: 'Enable verbose logging.',
-      );
+      ..addFlag('verbose', negatable: false, help: 'Enable verbose logging.');
 
-    for (final command in [
-      ...commonCommands,
-      ...actorCommands,
-      ...feedCommands,
-      ...notificationCommands,
-      ...graphCommands,
-      ...unspeccedCommands,
-    ]) {
+    for (final command in [...lexCommands, CardybCommand()]) {
       addCommand(command);
     }
   }
@@ -87,10 +77,7 @@ class BskyCommandRunner extends CommandRunner<void> {
       await super.runCommand(topLevelResults);
 }
 
-FutureOr<void> entryPoint(
-  List<String> args,
-  LaunchContext context,
-) async {
+FutureOr<void> entryPoint(List<String> args, LaunchContext context) async {
   if (args.contains('--version') || args.contains('-v')) {
     final logger = BskyLogger(Logger.standard());
 

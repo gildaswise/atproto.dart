@@ -1,17 +1,17 @@
-// Copyright 2023 Shinya Kato. All rights reserved.
-// Redistribution and use in source and binary forms, with or without
-// modification, are permitted provided the conditions.
+// Copyright (c) 2023-2025, Shinya Kato.
+// All rights reserved. Use of this source code is governed by a
+// BSD-style license that can be found in the LICENSE file.
 
-// 🎯 Dart imports:
+// Dart imports:
 import 'dart:async';
 import 'dart:convert';
 import 'dart:io';
 
-// 📦 Package imports:
+// Package imports:
 import 'package:cli_util/cli_logging.dart';
 import 'package:xrpc/xrpc.dart';
 
-// 🌎 Project imports:
+// Project imports:
 import '../logger.dart';
 
 class Bsky extends _Bsky {
@@ -67,6 +67,10 @@ class Bsky extends _Bsky {
       }
 
       logger.error(_getJsonString(jsonEncode(e.response.data.toJson())));
+
+      exitCode = 1;
+    } catch (e) {
+      logger.error(e.toString());
 
       exitCode = 1;
     }

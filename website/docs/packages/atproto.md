@@ -4,30 +4,60 @@ title: atproto
 description: API wrapper for AT Protocol things.
 ---
 
-# atproto [![pub package](https://img.shields.io/pub/v/atproto.svg?logo=dart&logoColor=00b9fc)](https://pub.dartlang.org/packages/atproto) [![Dart SDK Version](https://badgen.net/pub/sdk-version/atproto)](https://pub.dev/packages/atproto/)
+# atproto [![pub package](https://img.shields.io/pub/v/atproto.svg?logo=dart&logoColor=00b9fc)](https://pub.dev/packages/atproto) [![Dart SDK Version](https://badgen.net/pub/sdk-version/atproto)](https://pub.dev/packages/atproto/)
 
-**[atproto](https://pub.dev/packages/atproto)** is a wrapper library that supports the endpoints defined in Lexicon for [`com.atproto.*`](https://github.com/bluesky-social/atproto/tree/main/lexicons/com/atproto).
+**atproto** is a comprehensive Dart/Flutter library that wraps all AT Protocol API endpoints defined in [`com.atproto.*`](https://github.com/bluesky-social/atproto/tree/main/lexicons/com/atproto) Lexicons.
 
-**All major endpoints of the AT Protocol API are supported**, making it easy to manipulate data independent of specific services. If you want to use the Bluesky API, use **[bluesky](https://pub.dev/packages/bluesky)** instead.
+This package focuses on core AT Protocol functionality, making it ideal for building applications that work with any AT Protocol service, not just Bluesky. All major endpoints are supported, enabling service-agnostic data manipulation and infrastructure development.
 
-- **[GitHub](https://github.com/myConsciousness/atproto.dart/tree/main/packages/atproto)**
+- **[GitHub Repository](https://github.com/myConsciousness/atproto.dart/tree/main/packages/atproto)**
+- **[API Documentation](https://pub.dev/documentation/atproto/latest/)**
+- **[Package Homepage](https://atprotodart.com)**
 
-:::info
-If you want to use Bluesky APIs, see **[bluesky](./bluesky.md)**!
+:::info **Package Selection Guide**
+**Use atproto for:**
+- Multi-service AT Protocol applications
+- Infrastructure tools and bridges
+- Core protocol functionality only (`com.atproto.*` endpoints)
+- Minimal dependency footprint
+
+**Use [bluesky](./bluesky.md) for:**
+- Bluesky-specific applications
+- Social features (feeds, follows, chat)
+- `app.bsky.*` and `chat.bsky.*` endpoints
+- All-in-one development experience
+
+💡 **Note:** The bluesky package includes all atproto functionality—you don't need both.
 :::
 
 ## Features ⭐
 
-- ✅ **Zero Dependency**
-- ✅ Supports **Powerful Built-In Retry** using **[Exponential BackOff And Jitter](https://aws.amazon.com/jp/blogs/architecture/exponential-backoff-and-jitter/)**
-- ✅ Supports **[All Major Endpoints](../api_support_matrix.md#atproto)** for [`com.atproto.*`](https://github.com/bluesky-social/atproto/tree/main/lexicons/com/atproto)
-- ✅ **Well Documented** and **Well Tested**
-- ✅ Supports **Powerful Firehose API**
-- ✅ **100% Null Safety**
-- ✅ **Applicable to services other than Bluesky**
+- ✅ **Zero External Dependencies** - Pure Dart implementation with minimal footprint
+- ✅ **Advanced Built-In Retry** using **[Exponential BackOff And Jitter](https://aws.amazon.com/blogs/architecture/exponential-backoff-and-jitter/)** algorithm
+- ✅ **Comprehensive API Coverage** - Supports **[All Major Endpoints](../supported_api.md#atproto)** for [`com.atproto.*`](https://github.com/bluesky-social/atproto/tree/main/lexicons/com/atproto)
+- ✅ **Multiple Authentication Methods** - Session-based auth, OAuth 2.0 with DPoP, and anonymous access
+- ✅ **Real-time Firehose API** - Stream live events from AT Protocol services
+- ✅ **Production Ready** - Well documented, thoroughly tested, and actively maintained
+- ✅ **Type Safe** - 100% null safety with comprehensive error handling
+- ✅ **Service Agnostic** - Works with any AT Protocol service, not just Bluesky
+- ✅ **Rate Limit Handling** - Built-in rate limit detection and management
+- ✅ **Union Type Support** - Handles complex AT Protocol data structures safely
 
 :::tip
-See **[API Supported Matrix](../api_support_matrix.md#atproto)** for a list of endpoints supported by **[atproto](https://pub.dev/packages/atproto)**.
+See **[API Supported Matrix](../supported_api.md#atproto)** for a list of endpoints supported by **[atproto](https://pub.dev/packages/atproto)**.
+:::
+
+:::info **Need Bluesky-Specific Features?**
+If you need social features like feeds, posts, follows, or chat functionality, consider using **[bluesky](./bluesky.md)** instead:
+
+- **Social Graph**: Follow/unfollow users, manage lists, handle blocks and mutes
+- **Feed Operations**: Create posts, like/repost content, manage timelines
+- **Chat Features**: Send messages, manage conversations, handle reactions
+- **Notifications**: Real-time updates and notification preferences
+- **Video Support**: Upload and manage video content
+- **Rich Content**: Handle images, external links, and rich text formatting
+
+The **[bluesky](./bluesky.md)** package includes all **atproto** functionality plus these Bluesky-specific features.
 :::
 
 ## Getting Started 💪
@@ -44,73 +74,135 @@ See the **[Install Package](../getting_started/install_package.md)** section for
 dart pub add atproto
 ```
 
-```bash
-dart pub get
-```
-
 **With Flutter:**
 
 ```bash
 flutter pub add atproto
 ```
 
-```bash
-flutter pub get
-```
+Both commands will automatically run `pub get` to fetch the package and its dependencies.
 
 ### Import
 
-Just by writing following one-line import, you can use all endpoints provided by **[atproto](https://pub.dev/packages/atproto)**.
+Import the main atproto library to access all AT Protocol endpoints:
 
 ```dart
 import 'package:atproto/atproto.dart';
 ```
 
-### Instantiate **_ATProto_**
+For OAuth authentication, also import:
 
-You need to use **[ATProto](https://pub.dev/documentation/atproto/latest/atproto/ATProto-class.html)** object to access most of the features supported by **[atproto](https://pub.dev/packages/atproto)**. And there are two ways to instantiate an **[ATProto](https://pub.dev/documentation/atproto/latest/atproto/ATProto-class.html)** object.
+```dart
+import 'package:atproto/atproto_oauth.dart';
+```
 
-As shown in the following example, the key point in instantiating **[ATProto](https://pub.dev/documentation/atproto/latest/atproto/ATProto-class.html)** object is **whether the endpoint you wish to use requires authentication**.
+For advanced Firehose functionality:
+
+```dart
+import 'package:atproto/firehose.dart';
+```
+
+### Create ATProto Instance
+
+The **[ATProto](https://pub.dev/documentation/atproto/latest/atproto/ATProto-class.html)** class is your main entry point for accessing AT Protocol services. There are three ways to create an instance depending on your authentication needs:
 
 :::tip
-See **[API Supported Matrix](../api_support_matrix.md#atproto)** for whether or not authentication is required for each endpoint.
+See **[API Supported Matrix](../supported_api.md#atproto)** for whether authentication is required for each endpoint.
 :::
 
-If authentication is required, first create a session with the ATP server using your credentials with the `.createSession` function.
+#### 1. Session-based Authentication (Recommended)
 
-The credentials passed to the `.createSession` function should be your handle or email address as `identifier` and your password or app password as `password`.
+For most applications, use session-based authentication with your handle/email and password:
 
-Your credentials will be sent safely and securely to the ATP server when you execute the `.createSession` function. And it will return a **[`Session`](https://pub.dev/documentation/atproto_core/latest/atproto_core/Session-class.html)** object with an access token once authentication is complete.
-
-You then do not need to be particularly aware of the contents of the retrieved Session object, just pass it to the `.fromSession` constructor of **[ATProto](https://pub.dev/documentation/atproto/latest/atproto/ATProto-class.html)** to safely and securely create an instance of the **[ATProto](https://pub.dev/documentation/atproto/latest/atproto/ATProto-class.html)** object.
-
-```dart title="Require Auth"
+```dart title="Session Authentication"
 import 'package:atproto/atproto.dart' as atp;
 
 Future<void> main() async {
-    // Let's authenticate here.
-    final session = await atp.createSession(
-        identifier: 'YOUR_HANDLE_OR_EMAIL', // Like "shinyakato.dev"
-        password: 'YOUR_PASSWORD',
-    );
+  // Create session with your credentials
+  final session = await atp.createSession(
+    identifier: 'your.handle.com', // Your handle or email
+    password: 'your-app-password',  // App password recommended
+  );
 
-    print(session);
-
-    // Just pass created session data.
-    final atproto = atp.ATProto.fromSession(
-        session.data,
-    );
+  // Create ATProto instance from session
+  final atproto = atp.ATProto.fromSession(session.data);
+  
+  // Now you can use authenticated endpoints
+  final profile = await atproto.repo.getRecord(
+    repo: session.data.did,
+    collection: 'app.bsky.actor.profile',
+    rkey: 'self',
+  );
 }
 ```
 
-Or, it's very easy if authentication is not required , simply use the `.anonymous()` constructor.
+#### 2. OAuth Authentication
 
-```dart title="Not Require Auth"
+For applications requiring OAuth 2.0 with DPoP:
+
+```dart title="OAuth Authentication"
+import 'package:atproto/atproto.dart' as atp;
+import 'package:atproto/atproto_oauth.dart' as oauth;
+
+Future<void> main() async {
+  // Use your client metadata
+  final metadata = await getClientMetadata(
+    'https://atprotodart.com/oauth/bluesky/atprotodart/client-metadata.json',
+  );
+
+  final oauth = OAuthClient(metadata);
+
+  final (authUrl, ctx) = await oauth.authorize('shinyakato.dev');
+  print(authUrl);
+  print(ctx);
+
+  // Make user visit url
+  // final callback = await FlutterWebAuth2.authenticate(
+  //   url: authorizationUrl,
+  //   callbackUrlScheme: 'https',
+  // );
+
+  final session = await oauth.callback(
+    // callback url
+    'https://atprotodart.com/oauth/bluesky/auth.html?iss=xxxx&state=xxxxxxx&code=xxxxxxx',
+    ctx,
+  );
+  print(session.accessToken);
+  print(session.$dPoPNonce); // Updated with every request
+  print(session.$publicKey);
+  print(session.$privateKey);
+
+  // You can restore OAuthSession from stored keys
+  final restoredSession = restoreOAuthSession(
+    accessToken: session.accessToken,
+    refreshToken: session.refreshToken,
+    publicKey: session.$publicKey,
+    privateKey: session.$privateKey,
+  );
+
+  // If you want to refresh session
+  // final refreshed = await oauth.refresh(bsky.oAuthSession!);
+
+  // Create ATProto instance from OAuth session
+  final atproto = atp.ATProto.fromOAuthSession(session);
+}
+```
+
+#### 3. Anonymous Access
+
+For public endpoints that don't require authentication:
+
+```dart title="Anonymous Access"
 import 'package:atproto/atproto.dart';
 
 Future<void> main() async {
-    // Just call anonymous constructor.
-    final atproto = ATProto.anonymous();
+  // Create anonymous instance
+  final atproto = ATProto.anonymous();
+  
+  // Use public endpoints
+  final did = await atproto.identity.resolveHandle(
+    handle: 'bsky.app',
+  );
 }
 ```
 
@@ -120,33 +212,82 @@ See **[Session Management](#session-management)** for more details about authent
 
 ### Supported Services
 
-**[atproto](https://pub.dev/packages/atproto)** supports following services.
+**[atproto](https://pub.dev/packages/atproto)** provides access to all core AT Protocol services through dedicated service classes:
 
-| Property                                                                                           | Class                                                                                                      | Lexicon                                                                                                           |
-| -------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------- |
-| **[servers](https://pub.dev/documentation/atproto/latest/atproto/ATProto/servers.html)**           | [ServersService](https://pub.dev/documentation/atproto/latest/atproto/ServersService-class.html)           | [`com.atproto.server.*`](https://github.com/bluesky-social/atproto/tree/main/lexicons/com/atproto/server)         |
-| **[identities](https://pub.dev/documentation/atproto/latest/atproto/ATProto/identities.html)**     | [IdentitiesService](https://pub.dev/documentation/atproto/latest/atproto/IdentitiesService-class.html)     | [`com.atproto.identity.*`](https://github.com/bluesky-social/atproto/tree/main/lexicons/com/atproto/identity)     |
-| **[repositories](https://pub.dev/documentation/atproto/latest/atproto/ATProto/repositories.html)** | [RepositoriesService](https://pub.dev/documentation/atproto/latest/atproto/RepositoriesService-class.html) | [`com.atproto.repo.*`](https://github.com/bluesky-social/atproto/tree/main/lexicons/com/atproto/repo)             |
-| **[moderation](https://pub.dev/documentation/atproto/latest/atproto/ATProto/moderation.html)**     | [ModerationService](https://pub.dev/documentation/atproto/latest/atproto/ModerationService-class.html)     | [`com.atproto.moderation.*`](https://github.com/bluesky-social/atproto/tree/main/lexicons/com/atproto/moderation) |
-| **[sync](https://pub.dev/documentation/atproto/latest/atproto/ATProto/sync.html)**                 | [SyncService](https://pub.dev/documentation/atproto/latest/atproto/SyncService-class.html)                 | [`com.atproto.sync.*`](https://github.com/bluesky-social/atproto/tree/main/lexicons/com/atproto/sync)             |
+| Property | Class | Lexicon | Description |
+| -------- | ----- | ------- | ----------- |
+| **[server](https://pub.dev/documentation/atproto/latest/atproto/ATProto/server.html)** | [ServerService](https://pub.dev/documentation/atproto/latest/atproto/ServerService-class.html) | [`com.atproto.server.*`](https://github.com/bluesky-social/atproto/tree/main/lexicons/com/atproto/server) | Account management, sessions, app passwords |
+| **[identity](https://pub.dev/documentation/atproto/latest/atproto/ATProto/identity.html)** | [IdentityService](https://pub.dev/documentation/atproto/latest/atproto/IdentityService-class.html) | [`com.atproto.identity.*`](https://github.com/bluesky-social/atproto/tree/main/lexicons/com/atproto/identity) | Handle resolution, DID operations |
+| **[repo](https://pub.dev/documentation/atproto/latest/atproto/ATProto/repo.html)** | [RepoService](https://pub.dev/documentation/atproto/latest/atproto/RepoService-class.html) | [`com.atproto.repo.*`](https://github.com/bluesky-social/atproto/tree/main/lexicons/com/atproto/repo) | Record CRUD operations, blob uploads |
+| **[moderation](https://pub.dev/documentation/atproto/latest/atproto/ATProto/moderation.html)** | [ModerationService](https://pub.dev/documentation/atproto/latest/atproto/ModerationService-class.html) | [`com.atproto.moderation.*`](https://github.com/bluesky-social/atproto/tree/main/lexicons/com/atproto/moderation) | Content reporting and moderation |
+| **[sync](https://pub.dev/documentation/atproto/latest/atproto/ATProto/sync.html)** | [SyncService](https://pub.dev/documentation/atproto/latest/atproto/SyncService-class.html) | [`com.atproto.sync.*`](https://github.com/bluesky-social/atproto/tree/main/lexicons/com/atproto/sync) | Repository synchronization, Firehose API |
+| **[label](https://pub.dev/documentation/atproto/latest/atproto/ATProto/label.html)** | [LabelService](https://pub.dev/documentation/atproto/latest/atproto/LabelService-class.html) | [`com.atproto.label.*`](https://github.com/bluesky-social/atproto/tree/main/lexicons/com/atproto/label) | Content labeling and queries |
+| **[temp](https://pub.dev/documentation/atproto/latest/atproto/ATProto/temp.html)** | [TempService](https://pub.dev/documentation/atproto/latest/atproto/TempService-class.html) | [`com.atproto.temp.*`](https://github.com/bluesky-social/atproto/tree/main/lexicons/com/atproto/temp) | Temporary/experimental endpoints |
 
-Once an instance of the **[ATProto](https://pub.dev/documentation/atproto/latest/atproto/ATProto-class.html)** object has been created, service endpoints can be used by accessing the `property` corresponding to each service as follows.
+#### Service Usage Examples
+
+Once you have an ATProto instance, access endpoints through their corresponding service properties:
 
 ```dart
-import 'package:atproto/atproto.dart';
+import 'package:atproto/atproto.dart' as atp;
 
 Future<void> main() async {
-  final atproto = ATProto.anonymous();
+  final atproto = atp.ATProto.anonymous();
 
-  // Use `findDID` in `IdentitiesService`.
-  final did = await atproto.identities.findDID(
-    handle: 'shinyakato.dev',
+  // Identity Service - Resolve handles to DIDs
+  final didResult = await atproto.identity.resolveHandle(
+    handle: 'bsky.app',
   );
+  print('DID: ${didResult.data.did}');
+
+  // Server Service - Get server information
+  final serverInfo = await atproto.server.describeServer();
+  print('Server: ${serverInfo.data.availableUserDomains}');
+
+  // Label Service - Query content labels
+  final labels = await atproto.label.queryLabels(
+    uriPatterns: ['at://did:plc:example'],
+  );
+  print('Labels found: ${labels.data.labels.length}');
+}
+```
+
+For authenticated operations:
+
+```dart
+import 'package:atproto/atproto.dart' as atp;
+
+Future<void> main() async {
+  final session = await atp.createSession(
+    identifier: 'your.handle.com',
+    password: 'your-app-password',
+  );
+  
+  final atproto = atp.ATProto.fromSession(session.data);
+
+  // Repo Service - Create a record
+  final record = await atproto.repo.createRecord(
+    repo: session.data.did,
+    collection: 'app.bsky.feed.post',
+    record: {
+      'text': 'Hello from AT Protocol!',
+      'createdAt': DateTime.now().toUtc().toIso8601String(),
+    },
+  );
+  
+  // Repo Service - List your records
+  final records = await atproto.repo.listRecords(
+    repo: session.data.did,
+    collection: 'app.bsky.feed.post',
+  );
+  
+  print('Created record: ${record.data.uri}');
+  print('Total posts: ${records.data.records.length}');
 }
 ```
 
 :::tip
-See **[API Supported Matrix](../api_support_matrix.md#atproto)** for a list of endpoints supported by **[atproto](https://pub.dev/packages/atproto)**.
+See **[API Supported Matrix](../supported_api.md#atproto)** for a list of endpoints supported by **[atproto](https://pub.dev/packages/atproto)**.
 :::
 
 ### Let's Implement
@@ -167,11 +308,9 @@ Future<void> main() async {
   final atproto = atp.ATProto.fromSession(session.data);
 
   // Create a record to specific service like Bluesky.
-  final strongRef = await atproto.repositories.createRecord(
-    collection: atp.NSID.create(
-      'feed.bsky.app',
-      'post',
-    ),
+  final strongRef = await atproto.repo.createRecord(
+    repo: session.data.did,
+    collection: 'app.bsky.feed.post',
     record: {
       'text': 'Hello, Bluesky!',
       "createdAt": DateTime.now().toUtc().toIso8601String(),
@@ -179,164 +318,160 @@ Future<void> main() async {
   );
 
   // And delete it.
-  await atproto.repositories.deleteRecord(
-    uri: strongRef.data.uri,
+  final uri = AtUri(strongRef.data.uri);
+  await atproto.repo.deleteRecord(
+    repo: uri.hostname,
+    collection: uri.collection.toString(),
+    rkey: uri.rkey,
   );
 }
 ```
 
 :::tip
-See **[API Support Matrix](../api_support_matrix.md#atprotoo)** for all supported endpoints.
+See **[API Support Matrix](../supported_api.md#atproto)** for all supported endpoints.
 :::
 
 ## More Tips 🏄
 
 ### Session Management
 
-When using the AT Protocol API, there are endpoints that requires user authentication, and an access token created when a user is authenticated is represented as a **[`Session`](https://pub.dev/documentation/atproto_core/latest/atproto_core/Session-class.html)**.
-Okay, the most important factor here is **_how to create a session_**.
+AT Protocol uses session-based authentication for secure API access. A **[`Session`](https://pub.dev/documentation/atproto_core/latest/atproto_core/Session-class.html)** contains access tokens and user information needed for authenticated requests.
 
-First, use the `.createSession` function to create the most primitive session as follows.
+#### Creating a Session
+
+Use the `createSession` function to authenticate with your credentials:
 
 ```dart
 import 'package:atproto/atproto.dart' as atp;
 
 Future<void> main() async {
-  final session = await atp.createSession(
-    identifier: 'HANDLE_OR_EMAIL', // Like shinyakato.dev
-    password: 'PASSWORD', // App Password is recommended
-  );
+  try {
+    final session = await atp.createSession(
+      identifier: 'your.handle.com', // Handle or email
+      password: 'your-app-password',  // App password recommended
+      service: 'bsky.social',         // Optional: specify service
+    );
 
-  print(session);
+    print('Authenticated as: ${session.data.handle}');
+    print('DID: ${session.data.did}');
+    
+  } catch (e) {
+    print('Authentication failed: $e');
+  }
 }
 ```
 
-Then you can create **[ATProto](https://pub.dev/documentation/atproto/latest/atproto/ATProto-class.html)** object from authenticated session.
+#### Using Sessions
+
+Once you have a session, create an ATProto instance to make authenticated requests:
 
 ```dart
 import 'package:atproto/atproto.dart' as atp;
 
 Future<void> main() async {
   final session = await atp.createSession(
-    identifier: 'HANDLE_OR_EMAIL', // Like shinyakato.dev
-    password: 'PASSWORD', // App Password is recommended
+    identifier: 'your.handle.com',
+    password: 'your-app-password',
   );
 
-  print(session);
-
-  // You can create ATProto object from authenticated session.
+  // Create authenticated ATProto instance
   final atproto = atp.ATProto.fromSession(session.data);
 
-  // Do something with atproto
-  final did = await atproto.identities.findDID(handle: session.data.handle);
+  // Now you can use authenticated endpoints
+  final profile = await atproto.repo.getRecord(
+    repo: session.data.did,
+    collection: 'app.bsky.actor.profile',
+    rkey: 'self',
+  );
 }
 ```
 
-:::tip
-A **[`Session`](https://pub.dev/documentation/atproto_core/latest/atproto_core/Session-class.html)** can be created by using the `.createSession` function, as in the example above.
-But the problem is that an access token has an expiration time, and an access token created from `.createSession` is **_only valid for 120 minutes_**.
-In other words, once you have created a Session with `.createSession`, you must re-create the Session again using `.createSession` again **_within the 120 minutes of validity_**.
+#### Session Refresh
 
-However, instead of using `.createSession` every 120 minutes, there is a way to get an access token with a longer expiration time.
-That is, by using the `.refreshSession` function with **[`Session`](https://pub.dev/documentation/atproto_core/latest/atproto_core/Session-class.html)** information created from `.createSession`, the access token obtained from the `.refreshSession` function is **_valid for 90 days_**.
+Sessions have expiration times. You can refresh sessions manually:
 
 ```dart
-import 'package:atproto/atproto.dart' as atp;
+final session = await atp.createSession(
+  identifier: 'your.handle.com',
+  password: 'your-app-password',
+);
 
-Future<void> main() async {
-  // Valid for 120 minutes only.
-  final session = await atp.createSession(
-    identifier: 'HANDLE_OR_EMAIL',
-    password: 'PASSWORD',
-  );
+final refreshedSession = await refreshSession(
+  refreshJwt: session.data.refreshJwt,
+);
 
-  // Valid for 90 days.
-  final refreshedSession = await atp.refreshSession(
-    refreshJwt: session.data.refreshJwt,
-  );
+final atproto = atp.ATProto.fromSession(refreshedSession.data);
 
-  // You can create ATProto object from authenticated session.
-  final atproto = atp.ATProto.fromSession(refreshedSession.data);
-
-  // Do something with atproto
-  final did = await atproto.identities.findDID(handle: session.data.handle);
-}
+final result = await atproto.repo.listRecords(
+  repo: session.data.did,
+  collection: 'app.bsky.feed.post',
+);
 ```
 
-The following matrix organizes the information so far.
-
-| Function              | Expiration Time |
-| --------------------- | --------------- |
-| **`.createSession`**  | 120 minutes     |
-| **`.refreshSession`** | 90 days         |
-:::
-
-### App Password
+### App Passwords
 
 :::info
-App passwords have most of the same abilities as the user's account password, however they're **_restricted_** from **destructive actions such as account deletion or account migration**. They are also **_restricted_** from **creating additional app passwords**.
-App passwords are of the form `xxxx-xxxx-xxxx-xxxx`.
+**App passwords are the recommended authentication method** for third-party applications. They provide most account capabilities while being restricted from destructive actions like account deletion or migration.
 
-So, it's **_strongly recommended_** that App Password be used for login in AT Protocol's services.
+App passwords:
+- Have the format `xxxx-xxxx-xxxx-xxxx` (16 characters with dashes)
+- Cannot delete or migrate accounts
+- Cannot create additional app passwords
+- Can be revoked individually without affecting other app passwords
+- Are safer than using your main account password
 :::
 
-Given the above reason, a possible use case is for the application to determine if the password given by the user is an App Password.
-With **[atproto](https://pub.dev/packages/atproto)**, you can easily determine if a password is in App Password format by using the `.isValidAppPassword` function.
+#### Creating App Passwords
+
+1. Go to your AT Protocol service settings (e.g., Bluesky Settings)
+2. Navigate to "App Passwords" or "Privacy and Security"
+3. Click "Add App Password"
+4. Give it a descriptive name (e.g., "My Dart App")
+5. Copy the generated password immediately (you won't see it again)
+
+#### Validating App Passwords
+
+You can validate if a password follows the app password format:
 
 ```dart
-import 'package:atproto/atproto.dart' as atp;
+import 'package:atproto/core.dart' as core;
 
 Future<void> main() async {
-  atp.isValidAppPassword('xxxx-xxxx-xxxx-xxxx'); // => true
-  atp.isValidAppPassword('xxxxxxxxxxxxxxxxxxx'); // => false
+  // Valid app password format
+  print(core.isValidAppPassword('abcd-efgh-ijkl-mnop')); // => true
+  
+  // Invalid formats
+  print(core.isValidAppPassword('regular-password'));     // => false
+  print(core.isValidAppPassword('abcd-efgh-ijkl'));      // => false (too short)
+  print(core.isValidAppPassword('abcdefghijklmnop'));     // => false (no dashes)
 }
 ```
 
-### Standardized Names
-
-The methods corresponding to each endpoint accessible from **[atproto](https://pub.dev/packages/atproto)** are given a **_standardized prefix_** according to the characteristics of the endpoint.
-This way, you do not have to frantically search for the corresponding method for the endpoint you want to use.
-You can always find the method you want to use by typing the prefix in the following table for each service object.
-
-| Prefix         | Description                                                                                             |
-| -------------- | ------------------------------------------------------------------------------------------------------- |
-| **.find**      | This prefix is attached to endpoints that reference post etc.                                           |
-| **.search**    | This prefix is attached to endpoints that perform extensive searches.                                   |
-| **.paginate**  | This prefix is attached to pagination available endpoints and provides utilities related to pagination. |
-| **.subscribe** | This prefix is attached to endpoints with high-performance streaming.                                   |
-| **.create**    | This prefix is attached to the endpoint performing the create state.                                    |
-| **.refresh**   | This prefix is attached to the endpoint performing the refresh state.                                   |
-| **.delete**    | This prefix is attached to the endpoint performing the delete state.                                    |
-| **.update**    | This prefix is attached to the endpoint performing the update state.                                    |
-| **.upload**    | This prefix is attached to the endpoint performing the upload contents.                                 |
-| **.request**   | This prefix is attached to the endpoint performing the request via email.                               |
-| **.notify**    | This prefix is attached to the endpoint used for the purpose of notifying the server of updates.        |
-
-:::tip
-For example, if you want to `create` a specific record using **[atproto](https://pub.dev/packages/atproto)**, you would type the following for the `RepositoriesService`.
+#### Best Practices
 
 ```dart
 import 'package:atproto/atproto.dart' as atp;
+import 'package:atproto/core.dart' as core;
 
-Future<void> main() async {
-  final session = await atp.createSession(
-    identifier: 'YOUR_HANDLE_OR_EMAIL',
-    password: 'YOUR_PASSWORD',
-  );
+Future<void> authenticateUser(String identifier, String password) async {
+  // Check if user provided an app password
+  if (!core.isValidAppPassword(password)) {
+    print('Warning: Consider using an app password for better security');
+  }
 
-  final atproto = atp.ATProto.fromSession(
-    session.data,
-  );
-
-  // See this line.
-  await atproto.repositories.create
+  try {
+    final session = await atp.createSession(
+      identifier: identifier,
+      password: password,
+    );
+    
+    print('Successfully authenticated with ${core.isValidAppPassword(password) ? 'app password' : 'main password'}');
+    
+  } catch (e) {
+    print('Authentication failed: $e');
+  }
 }
 ```
-
-As you can see, the above code is still incomplete, but you will get the following a collection of suggestions for `create` actions once you type `.create`.
-
-![create_suggestions](https://github.com/myConsciousness/atproto.dart/assets/13072231/e8d3521d-1e54-4786-ae6b-854606124da0)
-:::
 
 ### Other Than `bsky.social`
 
@@ -359,7 +494,7 @@ Future<void> main() async {
   final atproto = atp.ATProto.fromSession(
     session.data,
 
-    // Add this.
+    // Add this, or resolve dynamically based on session.
     service: 'boobee.blue',
   );
 }
@@ -378,7 +513,7 @@ Future<void> main() async {
   final atproto = ATProto.anonymous();
 
   // Just find the DID of `shinyakato.dev`
-  final did = await atproto.identities.findDID(
+  final did = await atproto.identity.resolveHandle(
     handle: 'shinyakato.dev',
   );
 }
@@ -417,7 +552,7 @@ Also, the following exceptions may be thrown due to temporary network failures.
 
 | Exception                                                                                        | Description                                                                | Retriable |
 | ------------------------------------------------------------------------------------------------ | -------------------------------------------------------------------------- | :-------: |
-| **[SocketException](https://api.dart.dev/stable/3.0.2/dart-io/SocketException-class.html)**      | Thrown when a socket operation fails.                                      |     ✅     |
+| **[SocketException](https://api.dart.dev/stable/3.0.2/dart-io/SocketException-class.html)**      | Thrown when a socket operation fails.                                      |      ❌     |
 | **[TimeoutException](https://api.dart.dev/stable/3.0.2/dart-async/TimeoutException-class.html)** | Thrown when a scheduled timeout happens while waiting for an async result. |     ✅     |
 
 :::info
@@ -443,14 +578,10 @@ Future<void> main() async {
 
   final atproto = atp.ATProto.fromSession(session.data);
 
-  final response = await atproto.repositories.createRecord(
-    collection: atp.NSID.create(
-      'app.bsky.feed',
-      'post',
-    ),
-    record: {
-      'text': 'Hello!',
-    },
+  final response = await atproto.repo.createRecord(
+    repo: session.data.did,
+    collection: 'app.bsky.feed.post',
+    record: {'text': 'Hello!'},
   );
 
   // This is rate limit!
@@ -520,108 +651,291 @@ That is, **[RateLimit](https://pub.dev/documentation/xrpc/latest/xrpc/RateLimit-
 
 ### Union Types
 
-Since AT Protocol's Lexicon supports the Union type, there are several endpoints where multiple JSONs of different structures are returned at once. However, since Dart does not currently support Union as a language specification, there have been difficulties in marshaling JSON for this Union structure.
+AT Protocol's Lexicon supports Union types, allowing endpoints to return different JSON structures based on context. Since Dart doesn't natively support Union types, **[atproto](https://pub.dev/packages/atproto)** uses **[freezed](https://pub.dev/packages/freezed)** to provide type-safe Union type handling.
 
-**[atproto](https://pub.dev/packages/atproto)** solves this problem neatly by using **[freezed](https://pub.dev/packages/freezed)** to represent a pseudo-Union type. Besides it's type safe. And all the Union types provided by these **[atproto](https://pub.dev/packages/atproto)** are `.when(...)` methods to handle them cleanly.
+#### Using .when() Method
 
-See, for example, **[Firehose API](#firehose-api)** in the next section.
-
-:::info
-All Union types provided by **[atproto](https://pub.dev/packages/atproto)** always have the property **`unknown`**. This is because Union types not supported by **[atproto](https://pub.dev/packages/atproto)** **cannot be converted** to specific model objects when returned from a particular endpoint.
-
-When an **`unknown`** event occurs, a raw JSON object that has not been marshalled into a specific model object is passed in the callback. This allows us to safely handle Union types with **[atproto](https://pub.dev/packages/atproto)** even if they are suddenly added officially, and also allows for more customization.
-:::
-
-:::tip
-Alternatively, you can handle these union objects more easily using **_[pattern matching](https://dart.dev/language/patterns)_** supported by Dart3.
-For example, if pattern matching is used, the processing of `.when` when using the **[Firehose API](#firehose-api)** is replaced.
-
-And all union objects have defined class names prefixed with **_`U`_**.
-So, if you want the Firehose API to handle only `Commit` and `Handle` events, you can use the **`USubscribedRepoCommit`** and **`USubscribedRepoHandle`** objects for pattern matching as follows.
+All Union types provide a `.when()` method for exhaustive pattern matching:
 
 ```dart
 import 'package:atproto/atproto.dart' as atp;
+import 'package:atproto/com_atproto_sync_subscriberepos.dart';
+import 'package:atproto/firehose.dart';
 
 Future<void> main() async {
   final atproto = atp.ATProto.anonymous();
-
-  final subscription = await atproto.sync.subscribeRepoUpdates();
+  final subscription = await atproto.sync.subscribeRepos();
 
   await for (final event in subscription.data.stream) {
-    // No need to use `.when` method.
-    switch (event) {
-      // Specify an union object prefixed with `U` as the case.
-      case atp.USubscribedRepoCommit():
-        print(event.data.ops);
-      case atp.USubscribedRepoHandle():
-        print(event.data.handle);
-    }
-  }
-}
-```
-:::
+    final repos = const SyncSubscribeReposAdaptor().execute(event);
 
-### Firehose API
-
-**[atproto](https://pub.dev/packages/atproto)** makes it easy to work with the powerful **`Firehose API`**.
-
-The **`Firehose API`** in AT Protocol allows you to get all events that occur on a specific service, such as `bsky.social`, **_in real time_**. This powerful and long-lived API can be used to calculate statistics using real-time data, develop interesting interactive BOTs, etc.
-
-Using **[atproto](https://pub.dev/packages/atproto)** to access the `Firehose API` is very simple, just execute the **[subscribeRepoUpdates](https://pub.dev/documentation/atproto/latest/atproto/SyncService/subscribeRepoUpdates.html)** method provided by the **[SyncService](https://pub.dev/documentation/atproto/latest/atproto/SyncService-class.html)** as shown in the following example. Also, user authentication is not required to access the `Firehose API`.
-
-```dart
-import 'package:atproto/atproto.dart';
-
-Future<void> main() async {
-  // Authentication is not required.
-  final atproto = ATProto.anonymous();
-
-  final subscription = await atproto.sync.subscribeRepoUpdates();
-
-  // Get events in real time.
-  await for (final event in subscription.data.stream) {
-    event.when(
-      // Occurs when account committed records, such as Post and Like in Bluesky.
-      commit: (data) {
-        // A single commit may contain multiple records.
-        for (final op in data.ops) {
-          switch (op.action) {
-            case RepoAction.create:
-            case RepoAction.update:
-              // Created/Updated AT URI and specific record.
-              print(op.uri);
-              print(op.record);
-
-              break;
-            case RepoAction.delete:
-              // Deleted AT URI.
-              print(op.uri);
-
-              break;
-          }
-        }
-      },
-
-      // Occurs when account changed handle.
-      handle: (data) {
-        // Updated handle.
-        print(data.handle);
-        print(data.did);
-      },
-
-      migrate: print,
-      tombstone: print,
-      info: print,
-      unknown: print,
+    repos.when(
+      commit: (data) => print('Commit: ${data.ops.length} operations'),
+      identity: (data) => print('Identity: ${data.did}'),
+      account: (data) => print('Account: ${data.did}'),
+      sync: (data) => print('Sync: ${data.did}'),
+      info: (data) => print('Info: ${data.name}'),
+      unknown: (data) => print('Unknown event: $data'),
     );
   }
 }
 ```
 
-The above example may seem a bit difficult, but the **[SubscribedRepo](https://pub.dev/documentation/atproto/latest/atproto/SubscribedRepo-class.html)** that can be retrieved in real-time from the Stream is of type **[Union](#union-types)**, so `.when(...)` method can be used to easily handle each event.
+#### Using Pattern Matching (Dart 3.0+)
+
+For modern Dart applications, use pattern matching with Union classes prefixed with `U`:
+
+```dart
+import 'package:atproto/atproto.dart' as atp;
+import 'package:atproto/com_atproto_sync_subscriberepos.dart';
+import 'package:atproto/firehose.dart';
+
+Future<void> main() async {
+  final atproto = atp.ATProto.anonymous();
+  final subscription = await atproto.sync.subscribeRepos();
+
+  await for (final event in subscription.data.stream) {
+    final repos = const SyncSubscribeReposAdaptor().execute(event);
+
+    switch (repos) {
+      case USyncSubscribeReposMessageCommit():
+        print('Commit with ${repos.data.ops.length} operations');
+
+        // Handle specific operations
+        for (final op in repos.data.ops) {
+          switch (op.action.knownValue) {
+            case KnownRepoOpAction.create:
+              print('Created: ${op.cid}');
+            case KnownRepoOpAction.update:
+              print('Updated: ${op.cid}');
+            case KnownRepoOpAction.delete:
+              print('Deleted: ${op.cid}');
+            default:
+              print('unknown op');
+          }
+        }
+
+      case USyncSubscribeReposMessageIdentity():
+        print('Identity changed: ${repos.data.handle} -> ${repos.data.did}');
+
+      default:
+        print('Other event type');
+    }
+  }
+}
+```
 
 :::info
-For more details about `Firehose API`,  you can check **[this article](https://dev.to/shinyakato/easily-use-firehose-api-on-bluesky-social-with-dart-and-flutter-mdk)**.
+**Unknown Event Handling**
+
+All Union types include an `unknown` case for forward compatibility. When AT Protocol introduces new event types, they'll be captured as `unknown` events with raw JSON data, ensuring your application continues to work without updates.
+:::
+
+## Related Packages
+
+### Need Bluesky Features?
+
+If you're building a Bluesky application, consider upgrading to **[bluesky](./bluesky.md)**:
+- Includes all **atproto** functionality
+- Adds social features (feeds, posts, likes, follows)
+- Chat functionality with conversation management
+- Video upload and management
+- Rich notification system
+
+### Text Processing
+
+For advanced text processing in Bluesky posts:
+- **[bluesky_text](./bluesky_text.md)** - Rich text analysis and facet generation
+
+### Package Overview
+
+See the **[Package Overview](./overview.md)** for a complete list of all available packages and their relationships.
+
+### Firehose API
+
+The **Firehose API** provides real-time access to all repository events across AT Protocol services. This powerful streaming API enables applications to monitor content creation, updates, deletions, and account changes as they happen.
+
+#### Basic Firehose Usage
+
+Access the Firehose through the `sync.subscribeRepos()` method. No authentication is required:
+
+```dart
+import 'package:atproto/atproto.dart' as atp;
+import 'package:atproto/com_atproto_sync_subscriberepos.dart';
+import 'package:atproto/firehose.dart';
+
+Future<void> main() async {
+  final atproto = atp.ATProto.anonymous();
+
+  // Subscribe to the firehose
+  final subscription = await atproto.sync.subscribeRepos();
+
+  print('Firehose connected! Listening for events...');
+
+  await for (final event in subscription.data.stream) {
+    final repos = const SyncSubscribeReposAdaptor().execute(event);
+
+    repos.whenOrNull(
+      commit: (data) {
+        print('Commit from ${data.repo}');
+        print('Operations: ${data.ops.length}');
+
+        for (final op in data.ops) {
+          if (op.action.isUnknown) continue;
+
+          switch (op.action.knownValue!) {
+            case KnownRepoOpAction.create:
+              print(' Created: $op');
+            case KnownRepoOpAction.update:
+              print(' Updated: $op');
+            case KnownRepoOpAction.delete:
+              print(' Deleted: $op');
+          }
+        }
+      },
+
+      info: (data) {
+        print(' Info message: ${data.name}');
+      },
+
+      unknown: (data) {
+        print(' Unknown event: $data');
+      },
+    );
+  }
+}
+```
+
+#### Filtering Firehose Events
+
+You can filter events by collection type or specific repositories:
+
+```dart
+import 'package:atproto/atproto.dart' as atp;
+import 'package:atproto/com_atproto_sync_subscriberepos.dart';
+import 'package:atproto/core.dart';
+import 'package:atproto/firehose.dart';
+
+Future<void> main() async {
+  final atproto = atp.ATProto.anonymous();
+
+  // Subscribe to the firehose
+  final subscription = await atproto.sync.subscribeRepos();
+
+  print('Firehose connected! Listening for events...');
+
+  await for (final event in subscription.data.stream) {
+    final repos = const SyncSubscribeReposAdaptor().execute(event);
+
+    repos.whenOrNull(
+      commit: (data) {
+        print('Commit from ${data.repo}');
+        print('Operations: ${data.ops.length}');
+
+        for (final op in data.ops) {
+          if (op.action.isUnknown) continue;
+
+          switch (op.action.knownValue!) {
+            case KnownRepoOpAction.create:
+              final uri = _getUri(data, op);
+
+              switch (uri.collection.toString()) {
+                case 'app.bsky.feed.post':
+                  print('📄 New post: $op');
+                case 'app.bsky.actor.profile':
+                  print('📄 New profile: $op');
+              }
+            case KnownRepoOpAction.update:
+              print(' Updated: $op');
+            case KnownRepoOpAction.delete:
+              print(' Deleted: $op');
+          }
+        }
+      },
+
+      info: (data) {
+        print(' Info message: ${data.name}');
+      },
+
+      unknown: (data) {
+        print(' Unknown event: $data');
+      },
+    );
+  }
+}
+
+AtUri _getUri(final Commit commit, final RepoOp op) {
+  return AtUri('at://${commit.repo}/${op.path}');
+}
+```
+
+#### Advanced Firehose Features
+
+For production applications, consider implementing error handling and reconnection logic:
+
+```dart
+import 'package:atproto/atproto.dart' as atp;
+import 'package:atproto/com_atproto_sync_subscriberepos.dart';
+import 'package:atproto/firehose.dart';
+
+Future<void> robustFirehose() async {
+  while (true) {
+    try {
+      final atproto = atp.ATProto.anonymous();
+      final subscription = await atproto.sync.subscribeRepos();
+
+      print('🔥 Firehose connected');
+
+      await for (final event in subscription.data.stream) {
+        final repos = const SyncSubscribeReposAdaptor().execute(event);
+
+        // Process events...
+        await processEvent(repos);
+      }
+    } catch (e) {
+      print('❌ Firehose error: $e');
+      print('🔄 Reconnecting in 5 seconds...');
+      await Future.delayed(Duration(seconds: 5));
+    }
+  }
+}
+
+Future<void> processEvent(USyncSubscribeReposMessage event) async {
+  // Your event processing logic here
+  event.whenOrNull(
+    commit: (data) async {
+      // Process commits
+      for (final op in data.ops) {
+        // Handle operations
+      }
+    },
+    identity: (data) async {
+      // Process identity changes
+    },
+    account: (data) async {
+      // Process account changes
+    },
+    sync: (data) async {
+      // Process sync events
+    },
+    info: (data) async {
+      // Process info messages
+    },
+    unknown: (data) async {
+      // Handle unknown events
+    },
+  );
+}
+```
+
+:::info
+**Performance Considerations**
+
+The Firehose can generate high volumes of events. For production applications:
+- Implement proper error handling and reconnection logic
+- Consider using a message queue for event processing
+- Filter events early to reduce processing overhead
+- Monitor memory usage and implement backpressure handling
 :::
 
 ### Timeout Duration
@@ -645,54 +959,107 @@ Future<void> main() async {
 
 ### Advanced Built-In Retry
 
-**[atproto](https://pub.dev/packages/atproto)** has **an advanced retry feature** using the **[Exponential BackOff And Jitter](https://aws.amazon.com/jp/blogs/architecture/exponential-backoff-and-jitter/)** algorithm.
+**[atproto](https://pub.dev/packages/atproto)** includes sophisticated retry logic using **[Exponential Backoff with Jitter](https://aws.amazon.com/blogs/architecture/exponential-backoff-and-jitter/)** to handle temporary network failures gracefully.
 
-The reason why retry processing is so important in API communication is because the nature of the process of communicating with external servers means that there is **_always_** the possibility of temporary errors, such as network failures. In the event of a network failure, rather than throwing an exception and terminating the process, waiting for a while and retrying the process will often work.
+#### Why Retry Logic Matters
 
-And the algorithm is also important when retrying. This is because if the retry algorithm is simply one that waits and retries every fixed period of time, multiple retry requests will be sent to the server simultaneously before the temporary network failure is resolved. This condition will cause the server, which is temporarily out of shape, to generate even more heat.
+Network communication is inherently unreliable. Temporary failures like network timeouts, server overload, or brief connectivity issues are common. Instead of immediately failing, intelligent retry logic can often resolve these issues automatically, providing a better user experience.
 
-The **[Exponential BackOff And Jitter](https://aws.amazon.com/jp/blogs/architecture/exponential-backoff-and-jitter/)** used by **[atproto](https://pub.dev/packages/atproto)** solves this problem. **[atproto](https://pub.dev/packages/atproto)** uses a sophisticated algorithm with random numbers to distribute the load on the server while improving the probability of success on retries.
+#### Exponential Backoff with Jitter
 
-:::note
-`Jitter` means random number.
-:::
+Simple retry mechanisms that wait fixed intervals can create "thundering herd" problems where multiple clients retry simultaneously, overwhelming recovering servers. **[atproto](https://pub.dev/packages/atproto)** uses exponential backoff with jitter (randomization) to:
 
-You can use this retry features as follows.
+- Gradually increase wait times between retries
+- Add randomness to prevent synchronized retry storms
+- Distribute load more evenly across time
+
+#### Configuring Retry Behavior
 
 ```dart
-import 'package:atproto/atproto.dart';
+import 'package:atproto/atproto.dart' as atp;
+import 'package:atproto/core.dart' as core;
 
 Future<void> main() async {
-  final atproto = ATProto.anonymous(
-    // Add this.
-    retryConfig: RetryConfig(
-      // Required.
-      // You can set count of attempts.
-      maxAttempts: 3,
+  final maxAttempts = 3;
 
-      // Optional.
-      // Jitter can be specified as you want.
-      jitter: Jitter(
-        maxInSeconds: 10,
-        minInSeconds: 5,
+  final atproto = atp.ATProto.anonymous(
+    retryConfig: core.RetryConfig(
+      // Maximum number of retry attempts
+      maxAttempts: maxAttempts,
+
+      // Jitter configuration for randomized delays
+      jitter: core.Jitter(
+        minInSeconds: 1, // Minimum delay
+        maxInSeconds: 5, // Maximum delay
       ),
 
-      // Optional.
-      // You can define the events that occur when Retry is executed.
-      onExecute: (event) => print(
-        'Retry after ${event.intervalInSeconds} seconds...'
-        '[${event.retryCount} times]',
-      ),
+      // Optional: Monitor retry events
+      onExecute: (event) {
+        print(
+          '🔄 Retry ${event.retryCount}/$maxAttempts '
+          'after ${event.intervalInSeconds}s delay',
+        );
+      },
     ),
   );
+
+  try {
+    // This request will automatically retry on temporary failures
+    final result = await atproto.identity.resolveHandle(handle: 'bsky.app');
+    print('✅ Success: ${result.data.did}');
+  } catch (e) {
+    print('❌ Failed after all retries: $e');
+  }
 }
 ```
 
-**Then it retries:**
+#### Automatic Retry Conditions
 
-- When the status code of the response returned from ATP server is **`5xx`**
-- When the network is temporarily lost and a **`SocketException`** is thrown
-- When communication times out temporarily and a **`TimeoutException`** is thrown
+The library automatically retries requests when encountering:
+
+| Condition | Description | Retriable |
+|-----------|-------------|-----------|
+| **5xx Server Errors** | Internal server errors, service unavailable | ✅ |
+| **SocketException** | Network connectivity issues |❌ |
+| **TimeoutException** | Request timeout exceeded | ✅ |
+| **4xx Client Errors** | Bad request, unauthorized, not found | ❌ |
+| **Rate Limit Exceeded** | 429 Too Many Requests | ❌* |
+
+*Rate limit errors are not retried automatically, but you can handle them using the [rate limit management](#rate-limits) features.
+
+#### Production Retry Configuration
+
+For production applications, consider these retry configurations:
+
+```dart
+import 'package:atproto/atproto.dart' as atp;
+import 'package:atproto/core.dart' as core;
+
+// Conservative retry for user-facing operations
+final userFacingClient = atp.ATProto.fromSession(
+  session,
+  retryConfig: core.RetryConfig(
+    maxAttempts: 2,
+    jitter: core.Jitter(minInSeconds: 1, maxInSeconds: 3),
+  ),
+);
+
+// Aggressive retry for background operations
+final backgroundClient = atp.ATProto.fromSession(
+  session,
+  retryConfig: core.RetryConfig(
+    maxAttempts: 5,
+    jitter: core.Jitter(minInSeconds: 2, maxInSeconds: 10),
+    onExecute: (event) => logger.info('Retrying background operation'),
+  ),
+);
+
+// No retry for time-sensitive operations
+final realTimeClient = atp.ATProto.fromSession(
+  session,
+  retryConfig: core.RetryConfig(maxAttempts: 1),
+);
+```
 
 ### Lexicon/Object IDs
 
@@ -712,7 +1079,7 @@ void main() {
 ```
 
 :::note
-These ID constants are automatically maintained when a new Lexicon is officially added. [See script](https://github.com/myConsciousness/atproto.dart/blob/main/bin/generate_lexicon_ids.dart).
+These ID constants are automatically maintained when a new Lexicon is officially added. [See script](https://github.com/myConsciousness/atproto.dart/blob/main/scripts/gen_lexicon_ids.dart).
 :::
 
 ### Pagination
@@ -735,12 +1102,9 @@ Future<void> main() async {
   String? nextCursor;
 
   do {
-    final records = await atproto.repositories.findRecords(
+    final records = await atproto.repo.listRecords(
       repo: 'shinyakato.dev',
-      collection: atp.NSID.create(
-        'graph.bsky.app',
-        'follow',
-      ),
+      collection: 'app.bsky.graph.follow',
       cursor: nextCursor, // If null, it is ignored.
     );
 
@@ -755,107 +1119,10 @@ Future<void> main() async {
 ```
 
 :::tip
-Endpoints that can be paged can be seen in **[this matrix](../api_support_matrix.md#atproto)**.
+Endpoints that can be paged can be seen in **[this matrix](../supported_api.md#atproto)**.
 :::
 
 This example is a very simple implementation, but it allows us to see pagination using **[atproto](https://pub.dev/packages/atproto)**.
 
 Whenever a method corresponding to a pagination-available endpoint is executed, the `cursor` is always present in the root of the response data, like `records.data.cursor` above.
 If the next page does not exist, `cursor` is basically `null`.
-
-### Advanced Pagination
-
-As you saw in the **[previous section](#pagination)**, AT Protocol pagination is standardized to occur on a `cursor` basis.
-Of course it's possible to do primitive paging using `cursor`, but **[atproto](https://pub.dev/packages/atproto)** makes it much easier to implement it.
-Using this method you can paging without having to be aware of the `cursor`.
-
-You can easily implement it as follows.
-
-```dart
-import 'package:atproto/atproto.dart' as atp;
-
-Future<void> main() async {
-  final session = await atp.createSession(
-    identifier: 'YOUR_HANDLE_OR_EMAIL',
-    password: 'YOUR_PASSWORD',
-  );
-
-  final atproto = atp.ATProto.fromSession(session.data);
-
-  // Get a pagination for `com.atproto.repo.listRecords`.
-  final pagination = atproto.repositories.paginateRecords(
-    repo: 'shinyakato.dev',
-    collection: atp.NSID.create(
-      'feed.bsky.app',
-      'like',
-    ),
-  );
-
-  // Until the next cursor runs out.
-  while (pagination.hasNext) {
-    // Get a next page.
-    final response = await pagination.next();
-
-    print(response);
-  }
-}
-```
-
-As you can see from the above code, you can get a pagination specific **[Pagination](https://pub.dev/documentation/atproto_core/latest/atproto_core/Pagination-class.html)** object by using the `.paginate` prefix method.
-Not only the above example, but any method prefixed with `.paginate` will **_always_** return a **[Pagination](https://pub.dev/documentation/atproto_core/latest/atproto_core/Pagination-class.html)** object.
-In other words, the methods of the `.paginate` prefix can be used to easily handle pagination in a common interface using the **[Pagination](https://pub.dev/documentation/atproto_core/latest/atproto_core/Pagination-class.html)** object.
-
-:::info
-Read **[this section](#standardized-names)** for an explanation of **_standardized names_**.
-:::
-
-The interface of the **[Pagination](https://pub.dev/documentation/atproto_core/latest/atproto_core/Pagination-class.html)** object is very simple, and paging can be performed simply with following operations.
-
-| Operation                                                                                                   | Description                                                                                                                                                                                                                 |
-| ----------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| **[hasNext](https://pub.dev/documentation/atproto_core/latest/atproto_core/Pagination/hasNext.html)**       | This property determines whether the next page exists. The criterion is the presence or absence of the next `cursor`, and `false` is returned if the next `cursor` does not exist. `True` is always returned for first run. |
-| **[hasNotNext](https://pub.dev/documentation/atproto_core/latest/atproto_core/Pagination/hasNotNext.html)** | This is a simple negation of the property `hasNext`.                                                                                                                                                                        |
-| **[next](https://pub.dev/documentation/atproto_core/latest/atproto_core/Pagination/next.html)**             | Return the next page asynchronously with the `cursor` indicating the next page.                                                                                                                                             |
-
-:::tip
-Paging can be done using the `hasNext` property and the `next` method as in the example above, or a series of processes can be implemented as a `Stream` with `.asStream` method.
-
-```dart
-await for (final response in pagination.asStream()) {
-  print(response);
-}
-```
-:::
-
-:::caution
-The **[rate limit](#rate-limits)** is **_not checked_** internally when using the `next` method of the **[Pagination](https://pub.dev/documentation/atproto_core/latest/atproto_core/Pagination-class.html)** object.
-This means that you need to check the **[rate limit](#rate-limits)** of the endpoint as follows for your application.
-
-```dart
-while (pagination.hasNext) {
-  final response = await pagination.next();
-  final rateLimit = response.rateLimit;
-
-  print(response);
-
-  if (rateLimit.isExceeded) {
-    await rateLimit.waitUntilReset();
-  }
-}
-```
-
-Or with `.asStream`.
-
-```dart
-await for (final response in pagination.asStream()) {
-  print(response);
-
-  final rateLimit = response.rateLimit;
-
-  if (rateLimit.isExceeded) {
-    await rateLimit.waitUntilReset();
-  }
-}
-```
-
-:::

@@ -1,35 +1,25 @@
-// Copyright 2023 Shinya Kato. All rights reserved.
-// Redistribution and use in source and binary forms, with or without
-// modification, are permitted provided the conditions.
-
 import 'package:bluesky/bluesky.dart';
+import 'package:bluesky/com_atproto_sync_subscriberepos.dart';
+
+import 'package:bluesky/firehose.dart' as firehose;
 
 Future<void> main(List<String> args) async {
   /* SNIPPET START */
 
-  final bluesky = Bluesky.anonymous();
-  final subscription = await bluesky.sync.subscribeRepoUpdates();
-
-  final repoCommitAdaptor = RepoCommitAdaptor(
-    onCreatePost: (data) {
-      print(data.uri);
-      print(data.record);
-    },
-    onDeleteFollow: (data) {
-      print(data.uri);
-    },
-  );
+  final bsky = Bluesky.anonymous();
+  final subscription = await bsky.atproto.sync.subscribeRepos();
 
   await for (final event in subscription.data.stream) {
-    event.when(
-      commit: repoCommitAdaptor.execute,
-      handle: print,
-      migrate: print,
-      tombstone: print,
-      info: print,
-      unknown: print,
-    );
-  }
+    final repos = const firehose.SyncSubscribeReposAdaptor().execute(event);
 
-  /* SNIPPET END */
+    if (repos.isCommit) {
+      const firehose.RepoCommitHandler(
+        onCreateFeedPost: print,
+        onUpdateActorProfile: print,
+        onDeleteGraphFollow: print,
+      ).execute(repos.commit!);
+    }
+  }
 }
+
+/* SNIPPET END */

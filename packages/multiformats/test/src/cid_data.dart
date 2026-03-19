@@ -1,7 +1,3 @@
-// Copyright 2023 Shinya Kato. All rights reserved.
-// Redistribution and use in source and binary forms, with or without
-// modification, are permitted provided the conditions.
-
 const stringCid = 'bafkreicks4diafps5lz5hjf5lflqbxkhevgdty4k66inqtw4brjyqcr6ou';
 const bytesCidDagPb = [
   1,
@@ -39,7 +35,7 @@ const bytesCidDagPb = [
   136,
   10,
   62,
-  117
+  117,
 ];
 
 const bytesCidDagCbor = [
@@ -78,5 +74,5 @@ const bytesCidDagCbor = [
   136,
   10,
   62,
-  117
+  117,
 ];

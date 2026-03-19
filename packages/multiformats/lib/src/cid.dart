@@ -1,16 +1,16 @@
-// Copyright 2023 Shinya Kato. All rights reserved.
-// Redistribution and use in source and binary forms, with or without
-// modification, are permitted provided the conditions.
+// Copyright (c) 2023-2025, Shinya Kato.
+// All rights reserved. Use of this source code is governed by a
+// BSD-style license that can be found in the LICENSE file.
 
-// 🎯 Dart imports:
+// Dart imports:
 import 'dart:convert';
 import 'dart:typed_data';
 
-// 📦 Package imports:
+// Package imports:
 import 'package:crypto/crypto.dart';
 import 'package:dart_multihash/dart_multihash.dart';
 
-// 🌎 Project imports:
+// Project imports:
 import 'base32.dart' as base32;
 
 /// Represents multicodecs types.
@@ -88,18 +88,14 @@ final class CID {
   factory CID.create(
     final String input, [
     final Multicodec codec = Multicodec.dagPb,
-  ]) =>
-      CID.fromList(_toV1(_toMultihash(input), codec));
+  ]) => CID.fromList(_toV1(_toMultihash(input), codec));
 
   /// Returns the new instance of [CID] based on string [cid].
-  factory CID.parse(final String cid) => CID(
-        _decode(_ensureStringFormat(cid)),
-      );
+  factory CID.parse(final String cid) => CID(_decode(_ensureStringFormat(cid)));
 
   /// Returns the new instance of [CID] based on list [bytes].
-  factory CID.fromList(final List<int> bytes) => CID(
-        _ensureBytesFormat(Uint8List.fromList(bytes)),
-      );
+  factory CID.fromList(final List<int> bytes) =>
+      CID(_ensureBytesFormat(Uint8List.fromList(bytes)));
 
   /// Returns the new instance of [CID] based on [json].
   factory CID.fromJson(final Map<String, dynamic> json) =>
@@ -123,18 +119,14 @@ final class CID {
   Multicodec get codec => Multicodec.valueOf(bytes[2]);
 
   /// Returns the JSON representation of this CID.
-  Map<String, dynamic> toJson() => {
-        _defaultJsonKey: _format(),
-      };
+  Map<String, dynamic> toJson() => {_defaultJsonKey: _format()};
 
   /// Returns the base32 encoded string representation of this [bytes].
   String _format() => 'b${_encode(bytes).replaceAll('=', '').toLowerCase()}';
 
   /// Returns the multihash representation of [input].
   static Uint8List _toMultihash(final String input) {
-    final digest = Uint8List.fromList(
-      sha256.convert(utf8.encode(input)).bytes,
-    );
+    final digest = Uint8List.fromList(sha256.convert(utf8.encode(input)).bytes);
 
     return Multihash.encode('sha2-256', digest).toBytes();
   }

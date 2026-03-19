@@ -1,180 +1,291 @@
 <p align="center">
   <a href="https://github.com/myConsciousness/atproto.dart">
-    <img alt="bluesky" width="600px" src="https://raw.githubusercontent.com/myConsciousness/atproto.dart/main/resources/brands/atproto.001.png">
+    <img alt="atproto.dart" width="600px" src="https://raw.githubusercontent.com/myConsciousness/atproto.dart/main/resources/main_logo.png">
   </a>
 </p>
 
-
 <p align="center">
-  <b>AT Protocol and Bluesky Social Things for Dart/Flutter 🎯</b>
+  <b>AT Protocol and Bluesky Social Things for Dart/Flutter</b>
 </p>
 
 ---
 
-[![GitHub Sponsor](https://img.shields.io/static/v1?label=Sponsor&message=%E2%9D%A4&logo=GitHub&color=ff69b4)](https://github.com/sponsors/myConsciousness)
-[![GitHub Sponsor](https://img.shields.io/static/v1?label=Maintainer&message=myConsciousness&logo=GitHub&color=00acee)](https://github.com/myConsciousness)
-[![melos](https://img.shields.io/badge/maintained%20with-melos-f700ff.svg?style=flat-square)](https://github.com/invertase/melos)
-[![Netlify Status](https://api.netlify.com/api/v1/badges/f088b033-6670-455e-baa2-1cbb9577ebaa/deploy-status)](https://app.netlify.com/sites/jade-haupia-45bdc2/deploys)
-
-[![Test/Analyzer](https://github.com/myConsciousness/atproto.dart/actions/workflows/cicd.yml/badge.svg)](https://github.com/myConsciousness/atproto.dart/actions/workflows/cicd.yml)
-[![codecov](https://codecov.io/gh/myConsciousness/atproto.dart/branch/main/graph/badge.svg?token=J5GT1PF9Y3)](https://codecov.io/gh/myConsciousness/atproto.dart)
-[![Issues](https://img.shields.io/github/issues/myConsciousness/atproto.dart?logo=github&logoColor=white)](https://github.com/myConsciousness/atproto.dart/issues)
-[![Pull Requests](https://img.shields.io/github/issues-pr/myConsciousness/atproto.dart?logo=github&logoColor=white)](https://github.com/myConsciousness/atproto.dart/pulls)
-[![Stars](https://img.shields.io/github/stars/myConsciousness/atproto.dart?logo=github&logoColor=white)](https://github.com/myConsciousness/atproto.dart)
-[![Contributors](https://img.shields.io/github/contributors/myConsciousness/atproto.dart)](https://github.com/myConsciousness/atproto.dart/graphs/contributors)
-[![Code size](https://img.shields.io/github/languages/code-size/myConsciousness/atproto.dart?logo=github&logoColor=white)](https://github.com/myConsciousness/atproto.dart)
-[![Last Commits](https://img.shields.io/github/last-commit/myConsciousness/atproto.dart?logo=git&logoColor=white)](https://github.com/myConsciousness/atproto.dart/commits/main)
+[![Test/Analyzer](https://github.com/myConsciousness/atproto.dart/actions/workflows/test.yml/badge.svg)](https://github.com/myConsciousness/atproto.dart/actions/workflows/test.yml)
 [![License](https://img.shields.io/github/license/myConsciousness/atproto.dart?logo=open-source-initiative&logoColor=green)](https://github.com/myConsciousness/atproto.dart/blob/main/LICENSE)
 [![Contributor Covenant](https://img.shields.io/badge/Contributor%20Covenant-2.1-4baaaa.svg)](https://github.com/myConsciousness/atproto.dart/blob/main/CODE_OF_CONDUCT.md)
+[![GitHub Sponsor](https://img.shields.io/static/v1?label=Sponsor&message=%E2%9D%A4&logo=GitHub&color=ff69b4)](https://github.com/sponsors/myConsciousness)
+[![melos](https://img.shields.io/badge/maintained%20with-melos-f700ff.svg?style=flat-square)](https://github.com/invertase/melos)
 
 ---
 
-<!-- TOC -->
+- [1. About atproto.dart 💪](#1-about-atprotodart-)
+- [2. Package Ecosystem 📦](#2-package-ecosystem-)
+  - [2.1. Core Libraries](#21-core-libraries)
+  - [2.2. Client Libraries](#22-client-libraries)
+  - [2.3. Utilities & Tools](#23-utilities--tools)
+  - [2.4. CLI Tool](#24-cli-tool)
+  - [2.5. GitHub Actions Workflow](#25-github-actions-workflow)
+- [3. Quick Start Guide 🚀](#3-quick-start-guide-)
+  - [3.1. Building a Bluesky Social App](#31-building-a-bluesky-social-app)
+  - [3.2. Building AT Protocol Services](#32-building-at-protocol-services)
+- [4. Project Development Setup 🛠️](#4-project-development-setup-️)
+  - [4.1. Prerequisites](#41-prerequisites)
+  - [4.2. Quick Setup](#42-quick-setup)
+  - [4.3. Development Commands](#43-development-commands)
+  - [4.4. Troubleshooting](#44-troubleshooting)
+  - [4.5. Contributing](#45-contributing)
+- [5. Who is using atproto.dart? 👀](#5-who-is-using-atprotodart-)
+- [6. Support](#6-support)
 
-- [1. Guide 🌎](#1-guide-)
-  - [1.1. Packages \& Tools](#11-packages--tools)
-    - [1.1.1. Dart \& Flutter](#111-dart--flutter)
-    - [1.1.2. Flutter](#112-flutter)
-    - [1.1.3. CLI](#113-cli)
-    - [1.1.4. GitHub Actions](#114-github-actions)
-  - [1.3. Melos Commands](#13-melos-commands)
-  - [1.4. Contribution 🏆](#14-contribution-)
-  - [1.5. Contributors ✨](#15-contributors-)
-  - [1.6. Support ❤️](#16-support-️)
-  - [1.7. License 🔑](#17-license-)
-  - [1.8. More Information 🧐](#18-more-information-)
+Welcome to **[atproto.dart](https://atprotodart.com)** 🦋
 
-<!-- /TOC -->
-# 1. Guide 🌎
+**The comprehensive Dart/Flutter SDK for the AT Protocol ecosystem** - empowering developers to build the next generation of decentralized social applications with Bluesky and beyond.
 
-The packages in this monorepo will **_minimize your learning time_** about AT Protocol and Bluesky things,
-and **_maximize your Dart/Flutter development productivity_** with  AT Protocol and Bluesky things.
+## 1. About atproto.dart 💪
 
-**_Give a ⭐ on [this repository](https://github.com/myConsciousness/atproto.dart) to activate a project!_**
+The AT Protocol represents a paradigm shift toward decentralized social networking, and [Bluesky](https://blueskyweb.xyz) is leading this transformation. As the ecosystem grows rapidly with millions of users and thousands of developers building innovative applications, the need for robust, well-designed development tools has never been greater.
 
-![github_star](https://github.com/myConsciousness/atproto.dart/assets/13072231/c4a9b0b9-6ea4-42f1-823b-3b9e7cdb8b04)
+**[atproto.dart](https://atprotodart.com)** is the most comprehensive and battle-tested SDK for AT Protocol development in Dart and Flutter. Whether you're building mobile apps, web applications, bots, or backend services, our SDK provides everything you need to integrate with the AT Protocol ecosystem efficiently and reliably.
 
-## 1.1. Packages & Tools
+### Why Choose atproto.dart?
 
-### 1.1.1. Dart & Flutter
+**For Mobile & Web Developers:**
+- Build cross-platform social apps with Flutter using production-ready AT Protocol integration
+- Access the complete Bluesky API including posts, feeds, profiles, messaging, and moderation
+- Leverage built-in OAuth DPoP authentication for secure user sessions
 
-| Name                                                                                                  |                                                                   pub.dev                                                                    | Description                                                                                                                                                   |
-| ----------------------------------------------------------------------------------------------------- | :------------------------------------------------------------------------------------------------------------------------------------------: | ------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| **[at_identifier](https://github.com/myConsciousness/atproto.dart/tree/main/packages/at_identifier)** | [![pub package](https://img.shields.io/pub/v/at_identifier.svg?logo=dart&logoColor=00b9fc)](https://pub.dartlang.org/packages/at_identifier) | Provide standard validation for identifier supported by AT Protocol to Dart/Flutter.                                                                          |
-| **[nsid](https://github.com/myConsciousness/atproto.dart/tree/main/packages/nsid)**                   |          [![pub package](https://img.shields.io/pub/v/nsid.svg?logo=dart&logoColor=00b9fc)](https://pub.dartlang.org/packages/nsid)          | Provide standard NSID object supported by AT Protocol to Dart/Flutter.                                                                                        |
-| **[at_uri](https://github.com/myConsciousness/atproto.dart/tree/main/packages/at_uri)**               |        [![pub package](https://img.shields.io/pub/v/at_uri.svg?logo=dart&logoColor=00b9fc)](https://pub.dartlang.org/packages/at_uri)        | Provide standard uri supported by AT Protocol to Dart/Flutter.                                                                                                |
-| **[xrpc](https://github.com/myConsciousness/atproto.dart/tree/main/packages/xrpc)**                   |          [![pub package](https://img.shields.io/pub/v/xrpc.svg?logo=dart&logoColor=00b9fc)](https://pub.dartlang.org/packages/xrpc)          | Provide an HTTP client specialized for XRPC communication in AT Protocol.                                                                                     |
-| **[multiformats](https://github.com/myConsciousness/atproto.dart/tree/main/packages/multiformats)**   |  [![pub package](https://img.shields.io/pub/v/multiformats.svg?logo=dart&logoColor=00b9fc)](https://pub.dartlang.org/packages/multiformats)  | Provide useful interfaces such a [CID](https://docs.ipfs.tech/concepts/content-addressing/) used by AT Protocol to Dart/Flutter.                              |
-| **[atproto_core](https://github.com/myConsciousness/atproto.dart/tree/main/packages/atproto_core)**   |  [![pub package](https://img.shields.io/pub/v/atproto_core.svg?logo=dart&logoColor=00b9fc)](https://pub.dartlang.org/packages/atproto_core)  | Provide core reusable and useful functionality for wrapping AT Protocol and related services.                                                                 |
-| **[lexicon](https://github.com/myConsciousness/atproto.dart/tree/main/packages/lexicon)**             |       [![pub package](https://img.shields.io/pub/v/lexicon.svg?logo=dart&logoColor=00b9fc)](https://pub.dartlang.org/packages/lexicon)       | Provide AT Protocol standard [lexicon](https://atproto.com/specs/lexicon) objects for Dart/Flutter.                                                           |
-| **[atproto](https://github.com/myConsciousness/atproto.dart/tree/main/packages/atproto)**             |       [![pub package](https://img.shields.io/pub/v/atproto.svg?logo=dart&logoColor=00b9fc)](https://pub.dartlang.org/packages/atproto)       | Provide the easiest and powerful way to use [com.atproto](https://github.com/bluesky-social/atproto/tree/main/lexicons/com/atproto) lexicons in Dart/Flutter. |
-| **[bluesky_text](https://github.com/myConsciousness/atproto.dart/tree/main/packages/bluesky_text)**   |  [![pub package](https://img.shields.io/pub/v/bluesky_text.svg?logo=dart&logoColor=00b9fc)](https://pub.dartlang.org/packages/bluesky_text)  | Provides the easiest and most powerful way to analyze the text on Bluesky Social.                                                                             |
-| **[bluesky](https://github.com/myConsciousness/atproto.dart/tree/main/packages/bluesky)**             |       [![pub package](https://img.shields.io/pub/v/bluesky.svg?logo=dart&logoColor=00b9fc)](https://pub.dartlang.org/packages/bluesky)       | Provide the easiest and powerful way to use [app.bsky](https://github.com/bluesky-social/atproto/tree/main/lexicons/app/bsky) lexicons in Dart/Flutter.       |
+**For Backend & Bot Developers:**
+- Create powerful automation tools and bots with comprehensive API coverage
+- Process real-time data streams using our optimized Firehose implementation
+- Build custom AT Protocol services and bridges to other platforms
+- Access Ozone moderation tools for administrative operations
 
-### 1.1.2. Flutter
+**For AT Protocol Enthusiasts:**
+- Work with all core AT Protocol primitives: DIDs, NSIDs, AT URIs, Lexicons, and XRPC
+- Contribute to the growing ecosystem of decentralized social applications
+- Access cutting-edge features as the protocol evolves
 
-| Name                                                                                                  |                                                                   pub.dev                                                                    | Description                                                                          |
-| ----------------------------------------------------------------------------------------------------- | :------------------------------------------------------------------------------------------------------------------------------------------: | ------------------------------------------------------------------------------------ |
-| **[bluesky_cards](https://github.com/myConsciousness/atproto.dart/tree/main/packages/bluesky_cards)** | [![pub package](https://img.shields.io/pub/v/bluesky_cards.svg?logo=dart&logoColor=00b9fc)](https://pub.dartlang.org/packages/bluesky_cards) | Provide a widget to output Bluesky Social's post content beautifully in Flutter app. |
+**Proven in Production:**
+Used by popular applications like SkyFeed, deck.blue, SkyThrow, and many others serving thousands of users daily. Our SDK is actively maintained, thoroughly tested, and designed for the demands of production applications.
 
-### 1.1.3. CLI
+## 2. Package Ecosystem 📦
 
-| Name                                                                                              |                                                                 pub.dev                                                                  | Description                                                         |
-| ------------------------------------------------------------------------------------------------- | :--------------------------------------------------------------------------------------------------------------------------------------: | ------------------------------------------------------------------- |
-| **[bluesky_cli](https://github.com/myConsciousness/atproto.dart/tree/main/packages/bluesky_cli)** | [![pub package](https://img.shields.io/pub/v/bluesky_cli.svg?logo=dart&logoColor=00b9fc)](https://pub.dartlang.org/packages/bluesky_cli) | CLI tool to easily use Bluesky Social's APIs from the command line. |
+The atproto.dart ecosystem is organized into focused packages that work together seamlessly. Choose the packages that match your project's needs, from low-level AT Protocol primitives to high-level client libraries.
 
-### 1.1.4. GitHub Actions
+### 2.1. Core Libraries
+*Foundation packages for AT Protocol primitives and data structures*
 
-| Name                                                                                                |                                                                                        Marketplace                                                                                        | Description                                                                    |
-| --------------------------------------------------------------------------------------------------- | :---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------: | ------------------------------------------------------------------------------ |
-| **[bluesky_post](https://github.com/myConsciousness/atproto.dart/tree/main/packages/bluesky_post)** | [![bluesky-post](https://img.shields.io/static/v1?label=actions&message=myConsciousness/bluesky-post&logo=GitHub&color=00acee)](https://github.com/marketplace/actions/send-bluesky-post) | Use this action to send a post to Bluesky Social from GitHub actions workflow. |
+| Package | Description | pub.dev | Docs |
+| ------- | ----------- | :-----: | :--: |
+| **[at_primitives](https://github.com/myConsciousness/atproto.dart/tree/main/packages/at_primitives)** | AT Protocol primitive types (identifiers, URIs, NSIDs) - unified package | [![pub package](https://img.shields.io/pub/v/at_primitives.svg?logo=dart&logoColor=00b9fc)](https://pub.dartlang.org/packages/at_primitives) | [README](https://github.com/myConsciousness/atproto.dart/tree/main/packages/at_primitives/README.md) |
+| **[xrpc](https://github.com/myConsciousness/atproto.dart/tree/main/packages/xrpc)** | [XRPC](https://atproto.com/specs/xrpc) HTTP client with built-in retry and error handling | [![pub package](https://img.shields.io/pub/v/xrpc.svg?logo=dart&logoColor=00b9fc)](https://pub.dartlang.org/packages/xrpc) | [README](https://github.com/myConsciousness/atproto.dart/tree/main/packages/xrpc/README.md) |
+| **[multiformats](https://github.com/myConsciousness/atproto.dart/tree/main/packages/multiformats)** | IPFS multiformats support for content addressing (CIDs, multihash, etc.) | [![pub package](https://img.shields.io/pub/v/multiformats.svg?logo=dart&logoColor=00b9fc)](https://pub.dartlang.org/packages/multiformats) | [README](https://github.com/myConsciousness/atproto.dart/tree/main/packages/multiformats/README.md) |
+| **[lexicon](https://github.com/myConsciousness/atproto.dart/tree/main/packages/lexicon)** | [Lexicon](https://atproto.com/guides/lexicon) schema parsing and validation | [![pub package](https://img.shields.io/pub/v/lexicon.svg?logo=dart&logoColor=00b9fc)](https://pub.dartlang.org/packages/lexicon) | [README](https://github.com/myConsciousness/atproto.dart/tree/main/packages/lexicon/README.md) |
+| **[atproto_core](https://github.com/myConsciousness/atproto.dart/tree/main/packages/atproto_core)** | Shared utilities and base functionality for AT Protocol clients | [![pub package](https://img.shields.io/pub/v/atproto_core.svg?logo=dart&logoColor=00b9fc)](https://pub.dartlang.org/packages/atproto_core) | [README](https://github.com/myConsciousness/atproto.dart/tree/main/packages/atproto_core/README.md) |
 
-## 1.3. Melos Commands
+### 2.2. Client Libraries
+*High-level API clients for AT Protocol services*
 
-This project consists of several packages and is managed using [Melos](https://github.com/invertase/melos).
+| Package | Description | pub.dev | Docs |
+| ------- | ----------- | :-----: | :--: |
+| **[atproto](https://github.com/myConsciousness/atproto.dart/tree/main/packages/atproto)** | Complete AT Protocol client (`com.atproto.*` endpoints) with Firehose support | [![pub package](https://img.shields.io/pub/v/atproto.svg?logo=dart&logoColor=00b9fc)](https://pub.dartlang.org/packages/atproto) | [README](https://github.com/myConsciousness/atproto.dart/tree/main/packages/atproto/README.md) / [GUIDE](https://atprotodart.com/docs/packages/atproto) |
+| **[bluesky](https://github.com/myConsciousness/atproto.dart/tree/main/packages/bluesky)** | Full-featured Bluesky client (`app.bsky.*`, `chat.bsky.*` + AT Protocol) | [![pub package](https://img.shields.io/pub/v/bluesky.svg?logo=dart&logoColor=00b9fc)](https://pub.dartlang.org/packages/bluesky) | [README](https://github.com/myConsciousness/atproto.dart/tree/main/packages/bluesky/README.md) / [GUIDE](https://atprotodart.com/docs/packages/bluesky) |
+| **[atproto_oauth](https://github.com/myConsciousness/atproto.dart/tree/main/packages/atproto_oauth)** | OAuth DPoP authentication client for secure user sessions | [![pub package](https://img.shields.io/pub/v/atproto_oauth.svg?logo=dart&logoColor=00b9fc)](https://pub.dartlang.org/packages/atproto_oauth) | [README](https://github.com/myConsciousness/atproto.dart/tree/main/packages/atproto_oauth/README.md) |
+| **[did_plc](https://github.com/myConsciousness/atproto.dart/tree/main/packages/did_plc)** | PLC Directory client for DID resolution and management | [![pub package](https://img.shields.io/pub/v/did_plc.svg?logo=dart&logoColor=00b9fc)](https://pub.dartlang.org/packages/did_plc) | [README](https://github.com/myConsciousness/atproto.dart/tree/main/packages/did_plc/README.md) |
 
-First you need to install [Melos](https://github.com/invertase/melos) with following command.
+### 2.3. Utilities & Tools
+*Specialized packages for text processing*
+
+| Package | Description | pub.dev | Docs |
+| ------- | ----------- | :-----: | :--: |
+| **[bluesky_text](https://github.com/myConsciousness/atproto.dart/tree/main/packages/bluesky_text)** | Rich text parsing for mentions, links, hashtags, and formatting | [![pub package](https://img.shields.io/pub/v/bluesky_text.svg?logo=dart&logoColor=00b9fc)](https://pub.dartlang.org/packages/bluesky_text) | [README](https://github.com/myConsciousness/atproto.dart/tree/main/packages/bluesky_text/README.md) / [GUIDE](https://atprotodart.com/docs/packages/bluesky_text) |
+
+### 2.4. CLI Tool
+
+| Tool                                                                                                                                            |                Install                 |                                                Docs                                                |
+| ----------------------------------------------------------------------------------------------------------------------------------------------- | :------------------------------------: | :------------------------------------------------------------------------------------------------: |
+| **[bluesky_cli](https://github.com/myConsciousness/atproto.dart/tree/main/packages/bluesky_cli)**: command line tool for `app.bsky.*` endpoints | `dart pub global activate bluesky_cli` | [README](https://github.com/myConsciousness/atproto.dart/tree/main/packages/bluesky_cli/README.md) |
+
+### 2.5. GitHub Actions Workflow
+
+| Workflow                                                                                                                        |                                                                                        Marketplace                                                                                        |                                     Docs                                      |
+| ------------------------------------------------------------------------------------------------------------------------------- | :---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------: | :---------------------------------------------------------------------------: |
+| **[bluesky-post](https://github.com/myConsciousness/bluesky-post)**: workflow for scheduled post to Bluesky from GitHub Actions | [![bluesky-post](https://img.shields.io/static/v1?label=actions&message=myConsciousness/bluesky-post&logo=GitHub&color=00acee)](https://github.com/marketplace/actions/send-bluesky-post) | [README](https://github.com/myConsciousness/bluesky-post/blob/main/README.md) |
+
+## 3. Quick Start Guide 🚀
+
+Get up and running with AT Protocol and Bluesky in minutes. Choose your use case below:
+
+### 3.1. Building a Bluesky Social App
+
+Perfect for creating mobile apps, web clients, or social features.
 
 ```bash
-dart pub global activate melos
+dart pub add bluesky
 ```
 
-Then, the Melos commands available for this project are:
+```dart
+import 'package:bluesky/atproto.dart';
+import 'package:bluesky/bluesky.dart';
 
-| Command                 | Description                                                                                                                        |
-| ----------------------- | ---------------------------------------------------------------------------------------------------------------------------------- |
-| **melos get**           | Run `pub get` command in this project.                                                                                             |
-| **melos analyze**       | Run `dart analyze` in all packages.                                                                                                |
-| **melos format**        | Run `dart format` in all packages.                                                                                                 |
-| **melos import_sorter** | Run `dart run import_sorter:main` in all packages.                                                                                 |
-| **melos build_runner**  | Run `build_runner` and `melos format` in all packages. You can generate `*.g.dart` and `*.freezed.dart` objects with this command. |
-| **melos test**          | Run all Dart & Flutter tests in this project.                                                                                      |
-| **melos test:dart**     | Run Dart tests for a specific package in this project.                                                                             |
-| **melos test:flutter**  | Run Flutter tests for a specific package in this project.                                                                          |
-| **melos publish_all**   | Run publish for all packages, create a git tag and push it to origin.                                                              |
+void main() async {
+  // Create authenticated session
+  final session = await createSession(
+    identifier: 'your-handle.bsky.social',
+    password: 'your-password',
+  );
 
-## 1.4. Contribution 🏆
+  final bsky = Bluesky.fromSession(session.data);
 
-If you would like to contribute to **atproto.dart**, please create an [issue](https://github.com/myConsciousness/atproto.dart/issues) or create a Pull Request.
+  // Post to Bluesky
+  await bsky.feed.post.create(text: 'Hello from atproto.dart!');
 
-There are many ways to contribute to the OSS. For example, the following subjects can be considered:
+  // Get your timeline
+  final timeline = await bsky.feed.getTimeline();
+  for (final post in timeline.data.feed) {
+    print('${post.post.author.displayName}: ${post.post.record}');
+  }
+}
+```
 
-- There are request parameters or response fields that are not implemented.
-- Documentation is outdated or incomplete.
-- Have a better way or idea to achieve the functionality.
-- etc...
+**Next Steps:**
+- [Complete Bluesky Guide](https://atprotodart.com/docs/packages/bluesky) - Authentication, posting, feeds, profiles
+- [Supported Bluesky APIs](https://atprotodart.com/docs/supported_api#bluesky) - All available endpoints
 
-You can see more details from resources below:
+### 3.2. Building AT Protocol Services
 
-- [Contributor Covenant Code of Conduct](https://github.com/myConsciousness/atproto.dart/blob/main/CODE_OF_CONDUCT.md)
-- [Contribution Guidelines](https://github.com/myConsciousness/atproto.dart/blob/main/CONTRIBUTING.md)
-- [Style Guide](https://github.com/myConsciousness/atproto.dart/blob/main/STYLEGUIDE.md)
+Ideal for bots, backend services, or custom AT Protocol implementations.
 
-Or you can create a [discussion](https://github.com/myConsciousness/atproto.dart/discussions) if you like.
+```bash
+dart pub add atproto
+```
 
-**Feel free to join this development, diverse opinions make software better!**
+```dart
+import 'package:atproto/atproto.dart';
+import 'package:atproto/firehose.dart';
+import 'package:atproto/com_atproto_sync_subscriberepos.dart';
 
-## 1.5. Contributors ✨
+void main() async {
+  final session = await createSession(
+    service: 'https://bsky.social',
+    identifier: 'your-handle.bsky.social',
+    password: 'your-password',
+  );
 
-Thanks goes to these wonderful people ([emoji key](https://allcontributors.org/docs/en/emoji-key)):
+  // Connect to any AT Protocol service
+  final atproto = ATProto.fromSession(session.data);
 
-<!-- ALL-CONTRIBUTORS-LIST:START - Do not remove or modify this section -->
-<!-- prettier-ignore-start -->
-<!-- markdownlint-disable -->
-<table>
-  <tbody>
-    <tr>
-      <td align="center" valign="top" width="20%"><a href="http://shinyakato.dev"><img src="https://avatars.githubusercontent.com/u/13072231?v=4?s=100" width="100px;" alt="Shinya Kato / 加藤 真也"/><br /><sub><b>Shinya Kato / 加藤 真也</b></sub></a><br /><a href="https://github.com/myConsciousness/atproto.dart/commits?author=myConsciousness" title="Code">💻</a> <a href="#content-myConsciousness" title="Content">🖋</a> <a href="https://github.com/myConsciousness/atproto.dart/issues?q=author%3AmyConsciousness" title="Bug reports">🐛</a> <a href="https://github.com/myConsciousness/atproto.dart/commits?author=myConsciousness" title="Documentation">📖</a> <a href="#data-myConsciousness" title="Data">🔣</a> <a href="#design-myConsciousness" title="Design">🎨</a> <a href="#example-myConsciousness" title="Examples">💡</a> <a href="#infra-myConsciousness" title="Infrastructure (Hosting, Build-Tools, etc)">🚇</a> <a href="#maintenance-myConsciousness" title="Maintenance">🚧</a> <a href="#projectManagement-myConsciousness" title="Project Management">📆</a> <a href="#promotion-myConsciousness" title="Promotion">📣</a> <a href="https://github.com/myConsciousness/atproto.dart/pulls?q=is%3Apr+reviewed-by%3AmyConsciousness" title="Reviewed Pull Requests">👀</a> <a href="#security-myConsciousness" title="Security">🛡️</a> <a href="#tool-myConsciousness" title="Tools">🔧</a> <a href="https://github.com/myConsciousness/atproto.dart/commits?author=myConsciousness" title="Tests">⚠️</a> <a href="#tutorial-myConsciousness" title="Tutorials">✅</a></td>
-      <td align="center" valign="top" width="20%"><a href="https://github.com/tacsotai"><img src="https://avatars.githubusercontent.com/u/80247372?v=4?s=100" width="100px;" alt="tacsotai"/><br /><sub><b>tacsotai</b></sub></a><br /><a href="#ideas-tacsotai" title="Ideas, Planning, & Feedback">🤔</a></td>
-      <td align="center" valign="top" width="20%"><a href="http://lukepighetti.com"><img src="https://avatars.githubusercontent.com/u/666539?v=4?s=100" width="100px;" alt="Luke Pighetti"/><br /><sub><b>Luke Pighetti</b></sub></a><br /><a href="#ideas-lukepighetti" title="Ideas, Planning, & Feedback">🤔</a> <a href="https://github.com/myConsciousness/atproto.dart/issues?q=author%3Alukepighetti" title="Bug reports">🐛</a></td>
-      <td align="center" valign="top" width="20%"><a href="https://twitter.com/__justplaying"><img src="https://avatars.githubusercontent.com/u/81575558?v=4?s=100" width="100px;" alt="Alice"/><br /><sub><b>Alice</b></sub></a><br /><a href="#ideas-aliceisjustplaying" title="Ideas, Planning, & Feedback">🤔</a> <a href="#platform-aliceisjustplaying" title="Packaging/porting to new platform">📦</a></td>
-      <td align="center" valign="top" width="20%"><a href="https://videah.net"><img src="https://avatars.githubusercontent.com/u/4761786?v=4?s=100" width="100px;" alt="videah"/><br /><sub><b>videah</b></sub></a><br /><a href="#ideas-videah" title="Ideas, Planning, & Feedback">🤔</a> <a href="https://github.com/myConsciousness/atproto.dart/issues?q=author%3Avideah" title="Bug reports">🐛</a> <a href="#platform-videah" title="Packaging/porting to new platform">📦</a> <a href="#question-videah" title="Answering Questions">💬</a> <a href="#userTesting-videah" title="User Testing">📓</a></td>
-    </tr>
-    <tr>
-      <td align="center" valign="top" width="20%"><a href="https://github.com/redsolver"><img src="https://avatars.githubusercontent.com/u/30355444?v=4?s=100" width="100px;" alt="redsolver"/><br /><sub><b>redsolver</b></sub></a><br /><a href="#ideas-redsolver" title="Ideas, Planning, & Feedback">🤔</a> <a href="https://github.com/myConsciousness/atproto.dart/issues?q=author%3Aredsolver" title="Bug reports">🐛</a> <a href="#question-redsolver" title="Answering Questions">💬</a></td>
-      <td align="center" valign="top" width="20%"><a href="http://shy.dev"><img src="https://avatars.githubusercontent.com/u/1316340?v=4?s=100" width="100px;" alt="Shy Ruparel"/><br /><sub><b>Shy Ruparel</b></sub></a><br /><a href="#ideas-Shy" title="Ideas, Planning, & Feedback">🤔</a></td>
-      <td align="center" valign="top" width="20%"><a href="http://ujj.space"><img src="https://avatars.githubusercontent.com/u/4410814?v=4?s=100" width="100px;" alt="Julien "uj" Abadji"/><br /><sub><b>Julien "uj" Abadji</b></sub></a><br /><a href="https://github.com/myConsciousness/atproto.dart/commits?author=Uinelj" title="Code">💻</a></td>
-      <td align="center" valign="top" width="20%"><a href="https://github.com/barineco"><img src="https://avatars.githubusercontent.com/u/142575857?v=4?s=100" width="100px;" alt="maughtchiner"/><br /><sub><b>maughtchiner</b></sub></a><br /><a href="#ideas-barineco" title="Ideas, Planning, & Feedback">🤔</a> <a href="#content-barineco" title="Content">🖋</a></td>
-      <td align="center" valign="top" width="20%"><a href="https://github.com/igz0"><img src="https://avatars.githubusercontent.com/u/37741728?v=4?s=100" width="100px;" alt="igz0"/><br /><sub><b>igz0</b></sub></a><br /><a href="#ideas-igz0" title="Ideas, Planning, & Feedback">🤔</a> <a href="#content-igz0" title="Content">🖋</a></td>
-    </tr>
-    <tr>
-      <td align="center" valign="top" width="20%"><a href="https://gildaswise.com"><img src="https://avatars.githubusercontent.com/u/1339236?v=4?s=100" width="100px;" alt="Gildásio Filho"/><br /><sub><b>Gildásio Filho</b></sub></a><br /><a href="https://github.com/myConsciousness/atproto.dart/commits?author=gildaswise" title="Code">💻</a> <a href="https://github.com/myConsciousness/atproto.dart/commits?author=gildaswise" title="Tests">⚠️</a> <a href="#ideas-gildaswise" title="Ideas, Planning, & Feedback">🤔</a></td>
-    </tr>
-  </tbody>
-</table>
+  // Create a record
+  await atproto.repo.createRecord(
+    repo: session.data.did,
+    collection: 'app.bsky.feed.post',
+    record: {
+      'text': 'Hello AT Protocol!',
+      'createdAt': DateTime.now().toUtc().toIso8601String(),
+    },
+  );
 
-<!-- markdownlint-restore -->
-<!-- prettier-ignore-end -->
+  final subscription = await atproto.sync.subscribeRepos();
 
-<!-- ALL-CONTRIBUTORS-LIST:END -->
+  // Listen to the Firehose for real-time updates
+  await for (final event in subscription.data.stream) {
+    final repos = const SyncSubscribeReposAdaptor().execute(event);
 
-This project follows the [all-contributors](https://github.com/all-contributors/all-contributors) specification. Contributions of any kind welcome!
+    repos.whenOrNull(
+      commit: (data) {
+        print('New commit: ${data.repo}');
+      },
+    );
+  }
+}
+```
 
-## 1.6. Support ❤️
+**Next Steps:**
+- [AT Protocol Guide](https://atprotodart.com/docs/packages/atproto) - Repository operations, Firehose, authentication
+- [Firehose Processing](https://atprotodart.com/docs/packages/atproto#firehose) - Real-time data stream handling
 
-The simplest way to show us your support is by **giving the project a star** at [GitHub](https://github.com/myConsciousness/atproto.dart) and [Pub.dev](https://pub.dev/packages/bluesky).
+## 4. Project Development Setup 🛠️
 
-You can also support this project by **becoming a sponsor** on GitHub:
+Contributing to atproto.dart or setting up the development environment? This project uses [Melos](https://github.com/invertase/melos) for efficient monorepo management across all packages.
+
+### 4.1. Prerequisites
+
+- **Dart SDK**: Version 3.8.0 or higher ([Install Dart](https://dart.dev/get-dart))
+- **Git**: For cloning and version control
+- **IDE**: VS Code, IntelliJ, or any Dart-compatible editor
+
+### 4.2. Quick Setup
+
+```bash
+# Clone the repository
+git clone https://github.com/myConsciousness/atproto.dart.git
+cd atproto.dart
+
+# Install Melos globally
+dart pub global activate melos
+
+# Set up all packages (dependencies, code generation, etc.)
+melos setup
+```
+
+The `melos setup` command handles everything: installing dependencies, running code generation, and preparing the development environment across all packages.
+
+### 4.3. Development Commands
+
+| Command | Description |
+| ------- | ----------- |
+| `melos setup` | Complete project setup - run this first! |
+| `melos get` | Install dependencies for all packages |
+| `melos analyze` | Run static analysis across all packages |
+| `melos test` | Execute all tests in the project |
+| `melos fmt` | Format code and organize imports |
+| `melos build` | Run code generation for all packages |
+| `melos gen` | Generate API clients from Lexicon schemas |
+
+### 4.4. Troubleshooting
+
+**Setup Issues:**
+- **"melos command not found"**: Ensure `~/.pub-cache/bin` is in your PATH, or run `dart pub global activate melos`
+- **Build failures**: Try `melos clean` followed by `melos setup` to reset the environment
+- **Version conflicts**: Ensure you're using Dart 3.8.0+ with `dart --version`
+
+**Development Issues:**
+- **Import errors**: Run `melos build` to regenerate code
+- **Test failures**: Check if you need to run `melos gen` to update generated API clients
+- **Dependency issues**: Use `melos get` to refresh all package dependencies
+
+**Need Help?**
+- 📖 [Contribution Guidelines](CONTRIBUTING.md) - Detailed development workflow
+- 🐛 [Issue Tracker](https://github.com/myConsciousness/atproto.dart/issues) - Report bugs or request features  
+- 💬 [Discussions](https://github.com/myConsciousness/atproto.dart/discussions) - Ask questions and share ideas
+- 🌐 [Documentation](https://atprotodart.com) - Complete guides and API references
+
+### 4.5. Contributing
+
+We welcome contributions! Whether you're fixing bugs, adding features, or improving documentation:
+
+1. **Fork** the repository and create a feature branch
+2. **Make your changes** following our coding standards (`melos fmt` helps!)
+3. **Add tests** for new functionality (`melos test` to verify)
+4. **Update documentation** if needed
+5. **Submit a pull request** with a clear description
+
+See our [Contribution Guidelines](CONTRIBUTING.md) for detailed information about the development process, coding standards, and how to submit changes.
+
+## 5. Who is using atproto.dart? 👀
+
+The following projects/services are using atproto.dart packages:
+
+- **[APOD BOT](https://bsky.app/profile/apod.shinyakato.dev)** (bot) maintained by [@shinyakato.dev](https://bsky.app/profile/shinyakato.dev)
+- **[SkyFeed](https://skyfeed.app)** (web) maintained by [@redsolver.dev](https://bsky.app/profile/redsolver.dev)
+- **[SkyBridge](https://skybridge.fly.dev)** (proxy) maintained by [@videah.net](https://bsky.app/profile/videah.net)
+- **[SkyClad](https://github.com/igz0/skyclad)** (mobile) maintained by [@igz0.bsky.social](https://bsky.app/profile/igz0.bsky.social)
+- **[deck.blue](https://deck.blue)** (web) maintained by [@deck.blue](https://bsky.app/profile/deck.blue)
+- **[SkyThrow](https://skythrow.com/)** (mobile) maintained by [@rukari.bsky.social](https://bsky.app/profile/rukari.bsky.social), [@hidea.bsky.social](https://bsky.app/profile/hidea.bsky.social)
+
+You can see more at [showcase](https://atprotodart.com/showcase), special thanks!
+
+## 6. Support
 
 <div align="left">
   <p>
@@ -183,26 +294,3 @@ You can also support this project by **becoming a sponsor** on GitHub:
     </a>
   </p>
 </div>
-
-## 1.7. License 🔑
-
-The source code provided in this monorepo is is provided under the `BSD-3` license.
-
-```license
-Copyright 2023 Shinya Kato. All rights reserved.
-Redistribution and use in source and binary forms, with or without
-modification, are permitted provided the conditions.
-```
-
-> **Note**</br>
-> License notices in the source are strictly validated based on `.github/header-checker-lint.yml`. Please check [header-checker-lint.yml](https://github.com/myConsciousness/atproto.dart/tree/main/.github/header-checker-lint.yml) for the permitted standards.
-
-## 1.8. More Information 🧐
-
-All resources in **atproto.dart** is maintained by **_Shinya Kato ([@myConsciousness](https://github.com/myConsciousness))_**.
-
-- [Creator Profile](https://github.com/myConsciousness)
-- [License](https://github.com/myConsciousness/atproto.dart/blob/main/LICENSE)
-- [API Document](https://pub.dev/documentation/bluesky/latest/bluesky/bluesky-library.html)
-- [Release Note](https://github.com/myConsciousness/atproto.dart/releases)
-- [Bug Report](https://github.com/myConsciousness/atproto.dart/issues)
